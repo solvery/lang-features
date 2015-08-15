@@ -1,5 +1,6 @@
 alert=console.log
-　　function Cat(name,color){
+
+function Cat(name,color){
 	　　　　this.name = name;
 	　　　　this.color = color;
 	　　　　this.type = "猫科动物";

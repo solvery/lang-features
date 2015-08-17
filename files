@@ -4,8 +4,10 @@
 ./bash/readme
 ./clojure/readme
 ./common_lisp/readme
+./cpp/c++11.lambda.cc
 ./cpp/pointer.1.cc
 ./cpp/readme
+./cpp/stl.transform.cc
 ./c/readme
 ./csharp/readme
 ./delphi/readme
@@ -32,6 +34,7 @@
 ./javascript/closure.2.js
 ./javascript/coolshell.question.1.js
 ./javascript/readme
+./javascript/reduce.js
 ./jpython/readme
 ./LICENSE
 ./lua/readme
@@ -43,7 +46,13 @@
 ./perl/symbol.pl
 ./php/funcation.1.php
 ./php/readme
+./python/functional.1.py
+./python/functional.lambda.py
+./python/functional.map.py
+./python/functional.pipeline.1.py
+./python/functional.pipeline.py
 ./python/readme
+./readme
 ./README.md
 ./r/readme
 ./ruby/readme

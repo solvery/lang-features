@@ -5,11 +5,6 @@ function Animal(){
 }
 
 function Cat(name,color){
-	this.name = name;
-	this.color = color;
-}
-
-function Cat(name,color){
 	Animal.apply(this, arguments);
 	this.name = name;
 	this.color = color;
@@ -71,8 +66,4 @@ function extend2(Child, Parent) {
 extend2(Cat, Animal);
 var cat1 = new Cat("大毛","黄色");
 alert(cat1.species); // 动物
-
-
-
-
 

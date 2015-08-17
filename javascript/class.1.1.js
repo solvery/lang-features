@@ -1,5 +1,6 @@
+alert=console.log
 
-//我们可以看到， 其用function来做class。
+// use function to create class
 var Person = function(name, email, website){
 	this.name = name;
 	this.email = email;
@@ -15,4 +16,7 @@ var Person = function(name, email, website){
 
 var chenhao = new Person("Chen Hao", "haoel@hotmail.com",
 		"http://coolshell.cn");
+chenhao.sayHello();
+
+delete chenhao['email']
 chenhao.sayHello();

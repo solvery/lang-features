@@ -1,45 +1,22 @@
-// http://coolshell.cn/articles/6668.html
 
-function Base() {
-	this.id = "base"
-}
+var chenhao = {
+    name: "Chen Hao",
+    email: "haoel@hotmail.com",
+    website: "http://coolshell.cn",
+    age: 100,
+    get birth_year() {
+        var d = new Date();
+        var y = d.getFullYear();
+        return ( y - this.age );
+    },
+    set birth_year(year) {
+        var d = new Date();
+        var y = d.getFullYear();
+        this.age = y - year;
+    }
 
-// var obj = new Base();
-// 等于下面的代码
-var obj  = {};
-obj.__proto__ = Base.prototype;
-Base.call(obj);
-
-Base.prototype.toString = function() {
-	return this.id;
-}
-
-// new 继承
-function Derive(id) {
-	this.id = id;
-}
-Derive.prototype = new Base();
-Derive.prototype.test = function(id){
-	return this.id === id;
-}
-var newObj = new Derive("derive");
-
-// create 继承
-// ECMAScript V5
-
-function object(old) {
-   function F() {};
-   F.prototype = old;
-   return new F();
-}
-var newObj = object(oldObject);
-
-var base ={
-  id:"base",
-  toString:function(){
-          return this.id;
-  }
 };
-var derive = object(base);
-
+alert(chenhao.birth_year);
+chenhao.birth_year = 2000;
+alert(chenhao.age);
 

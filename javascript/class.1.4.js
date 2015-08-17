@@ -14,7 +14,7 @@ Person.sayHello = function () {
     var hello = "<p>Hello, I am "+ this.name  + ", <br>" +
                 "my email is: " + this.email + ", <br>" +
                 "my website is: " + this.website;
-    document.write(hello + "<br>");
+    alert(hello + "<br>");
 }
 
 var Student = Object.create(Person);
@@ -22,7 +22,7 @@ Student.no = "1234567"; //学号
 Student.dept = "Computer Science"; //系
 
 //使用Person的属性
-document.write(Student.name + ' ' + Student.email + ' ' + Student.website +'<br>');
+alert(Student.name + ' ' + Student.email + ' ' + Student.website +'<br>');
 
 //使用Person的方法
 Student.sayHello();
@@ -34,28 +34,28 @@ Student.sayHello = function (person) {
                 "my website is: " + this.website + ", <br>" +
                 "my student no is: " + this. no + ", <br>" +
                 "my departent is: " + this. dept;
-    document.write(hello + '<br>');
+    alert(hello + '<br>');
 }
 //再次调用
 Student.sayHello();
 
 //查看Student的属性（只有 no 、 dept 和 重载了的sayHello）
-document.write('<p>' + Object.keys(Student) + '<br>');
+alert('<p>' + Object.keys(Student) + '<br>');
 
 Student.name = 'aaa';
 
 //输出 aaa
-document.write('<p>' + Student.name + '</p>');
+alert('<p>' + Student.name + '</p>');
 
 //输出 Chen Hao
-document.write('<p>' +Object.getPrototypeOf(Student).name + '</p>');
+alert('<p>' +Object.getPrototypeOf(Student).name + '</p>');
 
 //新版的重载SayHello方法
 Student.sayHello = function (person) {
     Object.getPrototypeOf(this).sayHello.call(this);
     var hello = "my student no is: " + this. no + ", <br>" +
                 "my departent is: " + this. dept;
-    document.write(hello + '<br>');
+    alert(hello + '<br>');
 }
 
 function Composition(target, source)
@@ -91,12 +91,12 @@ Sporter.swim = function() {
 }
 
 Composition(Person, Artist);
-document.write(Person.sing() + '<br>');
-document.write(Person.paint() + '<br>');
+alert(Person.sing() + '<br>');
+alert(Person.paint() + '<br>');
 
 Composition(Person, Sporter);
-document.write(Person.run() + '<br>');
-document.write(Person.swim() + '<br>');
+alert(Person.run() + '<br>');
+alert(Person.swim() + '<br>');
 
 //看看 Person中有什么？（输出：sayHello,sing,paint,swim,run）
-document.write('<p>' + Object.keys(Person) + '<br>');
+alert('<p>' + Object.keys(Person) + '<br>');

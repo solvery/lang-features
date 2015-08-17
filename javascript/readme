@@ -2,6 +2,7 @@ alert=console.log
 
 run in node.js 
 apt-get install nodejs
+node xxx.js
 
 class.2.*
 	http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html

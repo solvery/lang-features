@@ -1,45 +1,43 @@
-// http://coolshell.cn/articles/6668.html
-
-function Base() {
-	this.id = "base"
-}
-
-// var obj = new Base();
-// 等于下面的代码
-var obj  = {};
-obj.__proto__ = Base.prototype;
-Base.call(obj);
-
-Base.prototype.toString = function() {
-	return this.id;
-}
-
-// new 继承
-function Derive(id) {
-	this.id = id;
-}
-Derive.prototype = new Base();
-Derive.prototype.test = function(id){
-	return this.id === id;
-}
-var newObj = new Derive("derive");
-
-// create 继承
-// ECMAScript V5
-
-function object(old) {
-   function F() {};
-   F.prototype = old;
-   return new F();
-}
-var newObj = object(oldObject);
-
-var base ={
-  id:"base",
-  toString:function(){
-          return this.id;
-  }
+function Person(name, email, website){
+    this.name = name;
+    this.email = email;
+    this.website = website;
 };
-var derive = object(base);
 
+Person.prototype.sayHello = function(){
+    var hello = "Hello, I am "+ this.name  + ", <br>" +
+                "my email is: " + this.email + ", <br>" +
+                "my website is: " + this.website;
+    return hello;
+};
 
+function Student(name, email, website, no, dept){
+    var proto = Object.getPrototypeOf;
+    proto(Student.prototype).constructor.call(this, name, email, website);
+    this.no = no;
+    this.dept = dept;
+}
+
+// 继承prototype
+Student.prototype = Object.create(Person.prototype);
+
+//重置构造函数
+Student.prototype.constructor = Student;
+
+//重载sayHello()
+Student.prototype.sayHello = function(){
+    var proto = Object.getPrototypeOf;
+    var hello = proto(Student.prototype).sayHello.call(this) + '<br>';
+    hello += "my student no is: " + this. no + ", <br>" +
+             "my departent is: " + this. dept;
+    return hello;
+};
+
+var me = new Student(
+    "Chen Hao",
+    "haoel@hotmail.com",
+    "http://coolshell.cn",
+    "12345678",
+    "Computer Science"
+);
+document.write(me.sayHello());

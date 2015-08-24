@@ -11,3 +11,4 @@ https://en.wikipedia.org/wiki/Comparison_of_programming_languages
 	generic		泛型
 	meta		元编程
 
+会参看一些博客，如果有比较精妙的例子也会收入这个笔记；

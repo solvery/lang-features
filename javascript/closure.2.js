@@ -1,5 +1,7 @@
 alert=console.log
 
+// 作用
+
 // 闭包中局部变量是引用而非拷贝
 function say667() {
     // Local variable that ends up within closure

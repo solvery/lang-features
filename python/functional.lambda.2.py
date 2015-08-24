@@ -18,7 +18,7 @@ for i in range(len(upname)):
 
 ## lambda
 squares = map(lambda x: x * x, range(9))
-	print squares
+print squares
 # 输出 [0, 1, 4, 9, 16, 25, 36, 49, 64]
 
 ## not functional

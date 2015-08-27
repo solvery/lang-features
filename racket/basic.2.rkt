@@ -34,3 +34,18 @@
 (number? "1")
 (number? 1+2i)
 
+; 函数定义任性
+(define (-@&*123y!!!->!my_god? x) x)
+(-@&*123y!!!->!my_god? 10)
+
+(define PI 3.1415926)
+(define hello "hello world")
+(format "~a:~a" hello PI)
+
+(define
+    (circle-area r) ; 函数名 参数列表
+    (* pi (sqr r)))  ; 函数体
+        
+
+(circle-area 10)
+

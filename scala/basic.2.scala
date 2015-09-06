@@ -4,7 +4,7 @@
 2 == 1
 2 != 1
 
-// if else
+// if else, need ()
 val a=1
 val b=2
 if (b<a) {

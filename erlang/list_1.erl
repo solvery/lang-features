@@ -1,6 +1,5 @@
 -module(basic_1).
 -export([start/0]).
 
-run
-	run_erlang xxx.erl
+[1,2,3,4]
 

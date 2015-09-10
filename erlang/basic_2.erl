@@ -1,3 +1,10 @@
+% function/n
+% data
+% atom
+% tuple
+% list
+% string
+
 -module(basic_2).
 -export([start/0]).
 

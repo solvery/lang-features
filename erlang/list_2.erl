@@ -1,4 +1,5 @@
-% list
+% list comprehension
+% ||
 
 -module(list_2).
 -export([start/0]).

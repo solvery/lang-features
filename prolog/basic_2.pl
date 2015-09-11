@@ -1,9 +1,8 @@
-father(zeb, john_boy_sr).
-father(john_boy_sr, john_boy_jr).
+/**/
 
-ancestor(X, Y) :- father(X, Y).
-ancestor(X, Y) :- father(X, Z), father(Z, Y).
-
-ancestor(john_boy_sr, john_boy_jr).
-
+basic_2 :-
+	X = 3,
+	4 = Y,
+	format('~n'),
+	halt.
 

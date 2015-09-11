@@ -1,0 +1,7 @@
+#!/bin/sh
+
+file=$1
+name=`echo $file | sed 's/\.erl//g'`
+erlc $file
+erl -noshell -s $name start -s init stop
+rm -f $name.beam

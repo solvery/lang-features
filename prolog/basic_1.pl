@@ -1,8 +1,6 @@
-father(zeb, john_boy_sr).
-father(john_boy_sr, john_boy_jr).
+/*hello world*/
+% 
 
-ancestor(X, Y) :- father(X, Y).
-ancestor(X, Y) :- father(X, Z), father(Z, Y).
-
-ancestor(john_boy_sr, john_boy_jr).
-
+basic_1 :-
+	format('Hello, World!~n'),
+	halt.

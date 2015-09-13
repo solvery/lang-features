@@ -1,3 +1,4 @@
+#include <iostream>
 
 // 空指针调用静态函数
 class Foo {

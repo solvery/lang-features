@@ -1,5 +1,6 @@
 
 scala = java + funcational
+JVM
 
 run 
     scala xxx.scala

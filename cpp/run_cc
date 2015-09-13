@@ -1,0 +1,7 @@
+#!/bin/sh
+
+file=$1
+name=`echo $file | sed 's/\.cc//g'`
+
+g++ -std=c++11 -o $name $file && ./$name
+rm -f $name 

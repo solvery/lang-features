@@ -12,3 +12,4 @@
 (rest '(1 2 3))
 (next '(1 2 3))
 
+(count "hehe")

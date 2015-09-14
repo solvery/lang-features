@@ -5,7 +5,6 @@
 % + - * / // mod
 
 basic_2 :-
-	format('hehe~n'),
 	X = 3,
 	4 = Y,
 	(X, Y) = (1, 2),
@@ -15,7 +14,5 @@ basic_2 :-
 	true, 
 	fail,
 	is(X, 2 + 2),
-	format('~p~n', ['aa']),
-	format('hehe~n'),
 	halt.
 

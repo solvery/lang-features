@@ -36,3 +36,12 @@ nil
 (/ 7 3)
 (/ 7 (* 3 1.0))
 
+; math
+(Math/pow 2 32)
+(Math/sqrt 2)
+
+;
+(String/format "%s: %d %.2f"
+   (to-array ["Foo" 7 13.457]))
+(.equals "foo" "bar")
+(.compareTo "foo" "bar")

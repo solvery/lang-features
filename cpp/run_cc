@@ -1,0 +1,7 @@
+#!/bin/sh
+
+file=$1
+name=`echo $file | sed 's/\.cc//g'`
+
+gcc -o $name $file && ./$name
+rm -f $name 

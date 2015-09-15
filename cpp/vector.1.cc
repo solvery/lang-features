@@ -17,7 +17,7 @@ int main(int argc, char** arg) {
 		size_t cap = a.capacity();
 		a.reserve(10);
 		bool is_empty = a.empty();
-		//a.clear();
+		//a.clear(); // core dumped
 		int n = a[0];
 		int n2 = a.at(0);
 		a[2] = 4;

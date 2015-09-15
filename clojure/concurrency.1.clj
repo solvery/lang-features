@@ -21,9 +21,10 @@
 ;(defn next-counter [] (dosync (alter counter inc)))
 (dotimes [_ 50] (.start (Thread. #(println (next-counter)))))
 
-;
+; validator
 (def validate-song
 	(partial every? #(not (nil? %))))
 (def song (ref #{} :validator validate-song))
 (dosync (alter song conj #{"Dangerous"}))
 ; (dosync (alter song conj #{}))
+

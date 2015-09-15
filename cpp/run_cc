@@ -3,5 +3,5 @@
 file=$1
 name=`echo $file | sed 's/\.cc//g'`
 
-g++ -o $name $file && ./$name
+g++ -std=c++11 -o $name $file && ./$name
 rm -f $name 

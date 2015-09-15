@@ -96,10 +96,15 @@ int main(int argc, char** arg) {
 		sort(a.begin(), a.end());
 	}
 	{
+		vector<int> a({1, 1, 2, 2, 3});
+		set<int> tmp(a.cbegin(), a.cend());
+		vector<int> a2(tmp.cbegin(), tmp.cend());
 	}
 	{
-	}
-	{
+		vector<int> a({1, 2, 3});
+		if (find(a.cbegin(), a.cend(), 7) != a.cend()) {
+			cout<<"contains 7"<<endl;
+		}
 	}
 	{
 	}

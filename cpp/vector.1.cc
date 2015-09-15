@@ -17,7 +17,7 @@ int main(int argc, char** arg) {
 		size_t cap = a.capacity();
 		a.reserve(10);
 		bool is_empty = a.empty();
-		a.clear();
+		//a.clear();
 		int n = a[0];
 		int n2 = a.at(0);
 		a[2] = 4;
@@ -54,7 +54,7 @@ int main(int argc, char** arg) {
 	{
 		vector<int> a1({1, 2, 3});
 		vector<int> a2({4, 5, 6});
-		a1.insert(a1.cend(), a2.cbegin(), a2.end());
+		a1.insert(a1.end(), a2.begin(), a2.end());
 	}
 	{
 		vector<int> a(10, 0);

@@ -17,6 +17,10 @@ class Bam : public runtime_error {
 		Bam() : runtime_error("bam!") {}
 };
 
+int
+add(int a, int b) noexcept {
+	return a + b;
+}
 
 int main(int argc, char** arg) {
 	{

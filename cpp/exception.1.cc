@@ -33,7 +33,7 @@ int main(int argc, char** arg) {
 		}
 		catch (const exception& e) {
 			cout << "an error occurred..." << endl;
-			throw;
+			//throw;
 		}
 	}
 	{

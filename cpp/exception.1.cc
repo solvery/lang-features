@@ -56,6 +56,13 @@ int main(int argc, char** arg) {
 		}
 	}
 	{
+		try {
+			risky();
+		}
+		catch (...) {
+			cout << "an error was ignored"
+				<< endl;
+		}
 	}
 }
 

@@ -1,3 +1,5 @@
+// namespace 
+
 #include <iostream>
 
 namespace foo {

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+file=$1
+name=`echo $file | sed 's/\.java//g'`
+
+javac $file
+java $name
+rm -f $name.class
+

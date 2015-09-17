@@ -1,6 +1,6 @@
 
 public class basic_2 {
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 		{
 			int i;
 			int j = 3;
@@ -26,14 +26,20 @@ public class basic_2 {
 		{
 			Math.pow(2.0, 32.0);
 			Math.sqrt(2);
-			(long)3.77;
+			long l;
+			l = (long)3.77;
 			Math.round(3.77);
-			(long)Math.floor(3.77);
-			(long)Math.ceil(3.77);
+			l = (long)Math.floor(3.77);
+			l = (long)Math.ceil(3.77);
 			Math.abs(-7);
 			Math.abs(-7.77);
 		}
 		{
+			boolean b1 = true;
+			boolean b2 = false;
+			// boolean to string
+			String str = true + "";
+			System.out.println(str); 
 		}
 		{
 		}

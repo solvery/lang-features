@@ -1,6 +1,11 @@
 
 class BaseClass {
 	public int foo = 5;
+	public int bar = 5;
+
+	public void todo() {
+		System.out.println("in base.");
+	}
 }
 
 public class oo_1 extends BaseClass {
@@ -25,6 +30,12 @@ public class oo_1 extends BaseClass {
 		}
 	}
 
+	// override
+	public void todo() {
+		System.out.println("in oo.");
+		super.todo();
+	}
+
 	// super
 	public void accessBase() {
 		System.out.println(super.foo);
@@ -38,7 +49,14 @@ public class oo_1 extends BaseClass {
 		o2.test();
 		o2.test("hello");
 		o2.test(new String[]{"he","he"});
+		System.out.println(o2.foo);
 		o2.accessBase();
+
+		System.out.println(o2.bar);
+		o2.bar = 3;
+		System.out.println(o2.bar);
+
+		o2.todo();
     }
 }
 

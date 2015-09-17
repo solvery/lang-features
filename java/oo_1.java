@@ -1,5 +1,9 @@
 
-public class oo_1 {
+class BaseClass {
+	public int foo = 5;
+}
+
+public class oo_1 extends BaseClass {
 	public int foo;
 
 	// constractor
@@ -20,6 +24,11 @@ public class oo_1 {
 			System.out.println(s);
 		}
 	}
+
+	// super
+	public void accessBase() {
+		System.out.println(super.foo);
+	}
 	
     public static void main(String[] args) {
 		oo_1 o1 = new oo_1();
@@ -29,6 +38,7 @@ public class oo_1 {
 		o2.test();
 		o2.test("hello");
 		o2.test(new String[]{"he","he"});
+		o2.accessBase();
     }
 }
 

@@ -68,6 +68,33 @@ public class basic_2 {
 
 		}
 		{
+
+			System.out.println("Hello!" + 'a' + 7);
+			System.out.println('a' + 7 + "Hello!");
+			System.out.println(3 + 4 + "Hello！");
+			System.out.println("Hello！" + 3 + 4);
+			int a; int b; int c;
+			a = b = c = 7;
+			System.out.println(5 & 9);
+			System.out.println(5 | 9);
+			System.out.println(~-5);
+			System.out.println(5 ^ 9);
+			System.out.println(5 << 2);
+			System.out.println(-5 << 2);
+			System.out.println(-5 >> 2);
+			System.out.println(-5 >>> 2);
+			System.out.println("5和5.0是否相等：" + (5 == 5.0));
+			System.out.println("97和'a'是否相等：" + (97 == 'a'));
+			System.out.println("true和false是否相等：" + (true == false));
+			a = new Integer(6);
+			//通过自动装箱，允许把基本类型值赋值给包装类的实例
+			Integer ina = 2;
+			Integer inb = 2;
+			System.out.println("两个2自动装箱后是否相等：" + (ina == inb));
+			Integer biga = 128;
+			Integer bigb = 128;
+			//输出false
+			System.out.println("两个128自动装箱后是否相等：" + (biga == bigb));
 		}
 	}
 }

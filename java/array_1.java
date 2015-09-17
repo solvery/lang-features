@@ -1,3 +1,4 @@
+import java.util.*;
 
 public class array_1 {
 	public static void main(String[] args) {
@@ -18,12 +19,12 @@ public class array_1 {
 				System.out.println(a[i]);
 			}
 		}
-{
-		int[] a = new int[]{3, 4 , 5, 6};
-		int[] b = Arrays.copyOf(a, 6); 
-		Arrays.fill(b , 2, 4 , 1);
-		Arrays.sort(b);
-}
+		{
+			int[] a = new int[]{3, 4 , 5, 6};
+			int[] b = Arrays.copyOf(a, 6); 
+			Arrays.fill(b , 2, 4 , 1);
+			Arrays.sort(b);
+		}
 		{
 			java.util.Vector<String> vec = new java.util.Vector<String>();
 			vec.size();
@@ -38,8 +39,6 @@ public class array_1 {
 				System.out.println(book);
 			}
 
-		}
-		{
 		}
 		{
 		}

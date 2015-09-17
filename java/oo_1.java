@@ -3,6 +3,14 @@ class Base {
 	public int foo = 5;
 	public int bar = 5;
 
+	public Base() {
+		System.out.println("Base()");
+	}
+
+	public Base(int a) {
+		System.out.println("Base(int) " + a);
+	}
+
 	public void todo() {
 		System.out.println("in base.");
 	}
@@ -15,6 +23,9 @@ public class oo_1 extends Base {
 	public oo_1() {
 		int foo = 0;
 		this.foo = 6;
+	}
+	public oo_1(int i) {
+		super(2);
 	}
 
 	// overload
@@ -43,6 +54,8 @@ public class oo_1 extends Base {
 	
     public static void main(String[] args) {
 		oo_1 o1 = new oo_1();
+		oo_1 o3 = new oo_1(2);
+
 		oo_1 o2;
 		o2 = new oo_1();
 		System.out.println(new oo_1().foo);

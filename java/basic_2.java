@@ -42,8 +42,30 @@ public class basic_2 {
 			System.out.println(str); 
 		}
 		{
+			float af = 5.2345556f;
+			System.out.println(af);
+			double a = 0.0;
+			double c = Double.NEGATIVE_INFINITY;
+			float d = Float.NEGATIVE_INFINITY;
+			System.out.println(c == d);
+			//0.0除以0.0将出现非数
+			System.out.println(a / a);
+			//两个非数之间是不相等的
+			System.out.println(a / a == Float.NaN);
+			//所有正无穷大都是相等的
+			System.out.println(6.0 / 0 == 555.0/0);
+			//负数除以0.0得到负无穷大
+			System.out.println(-8 / a);
+			//下面代码将抛出除以0的异常
+			//System.out.println(0 / 0);
 		}
 		{
+			byte a = 56;
+			long bigValue2 = 9223372036854775807L;
+			byte b = 9;
+			// 下面代码将出错，byte型不能自动类型转换为char型
+			//char c = b;
+
 		}
 		{
 		}

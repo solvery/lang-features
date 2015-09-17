@@ -1,5 +1,5 @@
 
-class BaseClass {
+class Base {
 	public int foo = 5;
 	public int bar = 5;
 
@@ -8,7 +8,7 @@ class BaseClass {
 	}
 }
 
-public class oo_1 extends BaseClass {
+public class oo_1 extends Base {
 	public int foo;
 
 	// constractor

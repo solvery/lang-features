@@ -1,8 +1,14 @@
 
 class Base {
+	{
+		foo = 12;
+	}
 	public int foo = 5;
 	public int bar = 5;
 
+	static{
+		System.out.println("static initial block.");
+	}
 	{
 		System.out.println("initial block.");
 	}

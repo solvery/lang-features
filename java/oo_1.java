@@ -3,6 +3,10 @@ class Base {
 	public int foo = 5;
 	public int bar = 5;
 
+	{
+		System.out.println("initial block.");
+	}
+
 	public Base() {
 		System.out.println("Base()");
 	}

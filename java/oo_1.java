@@ -16,7 +16,9 @@ public class oo_1 {
 		System.out.println("" + msg);
 	}
 	public void test(String... msg ) {
-		System.out.println(msg);
+		for (String s : msg) {
+			System.out.println(s);
+		}
 	}
 	
     public static void main(String[] args) {

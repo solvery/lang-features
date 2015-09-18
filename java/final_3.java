@@ -6,10 +6,11 @@ public class final_3 {
 	public int v1;
 	public int v2 = 2;
 
-	public final int fv1 = 0;
-	public final static int fv3 = 0;
-	//public final static int fv5;
+	public final int fv1 = 1;
+	public final static int fv3 = 3;
+
 	private final int fv5;
+	private final static int fv6;
 
 	public final String s1 = "hello";
 
@@ -17,6 +18,13 @@ public class final_3 {
 	public final int fv2;
 	/// public final static int fv4;
 
+	{
+		fv5 = 5;
+	}
+
+	static {
+		fv6 = 6;
+	}
 	public final_3(int a) {
 		fv2 = a;
 	}

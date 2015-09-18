@@ -1,10 +1,10 @@
 
 import package_a.package_a;
 
-public class package_1 {
+public class package_2 {
 
     public static void main(String[] args) {
-		package_1 o1 = new package_1();
+		package_a o1 = new package_a();
 		o1.m1();
     }
 }

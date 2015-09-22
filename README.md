@@ -1,10 +1,6 @@
 # lang-features
 How many difference Programming Language feature are your meet?
 
-https://en.wikipedia.org/wiki/List_of_programming_languages
-https://en.wikipedia.org/wiki/Comparison_of_programming_languages
-
-一些压箱底的例子
 
 编程语言的范式
 	procedural	过程
@@ -13,8 +9,9 @@ https://en.wikipedia.org/wiki/Comparison_of_programming_languages
 	generic		泛型
 	meta		元编程
 
-会参看一些博客，如果有比较精妙的例子也会收入这个笔记；
 
 
 ref
 	hello ubuntu, http://ubuntuforums.org/showthread.php?t=497579
+	https://en.wikipedia.org/wiki/List_of_programming_languages
+	https://en.wikipedia.org/wiki/Comparison_of_programming_languages

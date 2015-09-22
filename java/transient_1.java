@@ -18,13 +18,13 @@ public class transient_1 {
 		ObjectInputStream ois = null;
 		try {
 			oos = new ObjectOutputStream(
-					new FileOutputStream("transient.txt"));
+					new FileOutputStream("/tmp/transient.txt"));
 			Person p1 = new Person("John", 20);
 			oos.writeObject(p1);
 			System.out.println(p1.age);
 
 			ois = new ObjectInputStream(
-					new FileInputStream("transient.txt"));
+					new FileInputStream("/tmp/transient.txt"));
 			Person p2 = (Person)ois.readObject();
 			System.out.println(p2.age);
 		}

@@ -12,6 +12,7 @@ class Base {
 public class final_2 extends Base {
 
 	// override
+ 	///
 	public void m1() { }
 
 	// ok

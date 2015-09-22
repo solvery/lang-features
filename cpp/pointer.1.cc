@@ -3,7 +3,8 @@
 // 空指针调用静态函数
 class Foo {
 	public:
-		static void bar() {
+		// static void bar() {
+		void bar() {
 			std::cout << "bar()" << std::endl;
 		}
 };

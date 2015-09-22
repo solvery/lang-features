@@ -1,0 +1,9 @@
+#!/bin/sh
+
+file=$1
+name=`echo $file | sed 's/\.hs//g'`
+
+ghc -o $name $file && ./$name
+rm -f $name 
+rm -f $name.o
+rm -f $name.hi

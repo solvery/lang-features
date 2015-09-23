@@ -6,7 +6,7 @@ class Foo<T> {
 	}
 }
 
-public class generic_1 {
+public class generic_2 {
 	public static void main(String[] args) {
 		Foo<String> o1 = new Foo<String>("foo");
 		System.out.println(o1.a);
@@ -14,5 +14,6 @@ public class generic_1 {
 		System.out.println(o2.a);
 	}
 }
+
 
 

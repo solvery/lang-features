@@ -6,4 +6,4 @@ name=`echo $file | sed 's/\.java//g'`
 javac $file
 java $name
 rm -f $name.class
-
+rm -f *.class

@@ -5,7 +5,7 @@ enum E {
 	A,B,C,D,E
 }
 
-public class set_1 {
+public class enum_set_1 {
     public static void main(String[] args) {
 		EnumSet<E> es1 = EnumSet.allOf(E.class);
 		System.out.println(es1);

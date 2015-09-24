@@ -3,7 +3,7 @@
 file=$1
 name=`echo $file | sed 's/\.java//g'`
 
-javac $file
+javac -Xlint $file
 java $name
 rm -f $name.class
 rm -f *.class

@@ -1,7 +1,8 @@
-import java.util.*;
+//
 
-public class basic_2 {
+public class java8_1 {
     public static void main(String[] args) {
     }
 }
+
 

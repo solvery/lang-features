@@ -8,7 +8,10 @@ public class collection_1 {
 		// HashSet<String> c1 = new HashSet<String>();
 		
 		// Collection<String> c1 = new ArrayList<String>();
-		List<String> c1 = new ArrayList<String>();
+		// List<String> c1 = new ArrayList<String>();
+
+		// Collection<String> c1 = new LinkedHashSet<String>();
+		LinkedHashSet<String> c1 = new LinkedHashSet<String>();
 		
 		c1.add("a");
 		c1.add("b");

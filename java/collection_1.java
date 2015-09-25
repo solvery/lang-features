@@ -18,6 +18,9 @@ public class collection_1 {
 		
 		List<String> c12 = new ArrayList<String>();
 
+		Collection<String> c13 = Collections.synchronizedCollection(new ArrayList<String>());
+		List<String> c14 = Collections.synchronizedList(new ArrayList<String>());
+
 		
 		c1.add("a");
 		c1.add("b");

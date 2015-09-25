@@ -11,8 +11,20 @@ public class hash_1 {
 			m.put("foo", 2);
 			m.put("hello", 5);
 			m.get("hello");
+
 			m.size();
 			m.remove("hello");
+
+			Iterator<String> it = m.keySet().iterator();
+			String first = it.next();
+			System.out.println(first);
+
+			Iterator<Integer> it2 = m.entrySet().iterator();
+			while (m.hasNext()) {
+				Map.Entry<String, Integer> e = it2.next();
+				System.out.println(e);
+			}
+
 			for ( Map.Entry<String, Integer> e : m.entrySet() ) {
 				  e.getKey(); 
 				  e.getValue();

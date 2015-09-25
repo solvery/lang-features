@@ -2,7 +2,7 @@
 import java.util.*;
 
 enum E {
-	A,B,C,D,E
+	A,B,C,D,E;
 }
 
 public class enum_hash_1 {

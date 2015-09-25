@@ -4,7 +4,7 @@ enum Gender
 	MALE("male"),FEMALE("female");
 	private String name;
 	/// public Gender(String name) 
-	// enum only private 
+	// enum only private constructor.
 	private Gender(String name)
 	{
 		this.name = name;

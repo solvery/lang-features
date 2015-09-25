@@ -3,19 +3,20 @@ import java.util.*;
 
 public class collection_1 {
     public static void main(String[] args) {
-		// Collection<String> c1 = new HashSet<String>();
-		// Collection<String> c1 = new LinkedHashSet<String>();
-		// Collection<String> c1 = new ArrayList<String>();
-		// Collection<String> c1 = new TreeSet<String>();
-		// Collection<String> c1 = new Stack<String>();
-		// Collection<String> c1 = new PriorityQueue<String>();
-		Collection<String> c1 = new PriorityQueue<String>();
+		Collection<String> c1 = new ArrayList<String>();
 
-		// Set<String> c1 = new HashSet<String>();
-		// HashSet<String> c1 = new HashSet<String>();
-		// LinkedHashSet<String> c1 = new LinkedHashSet<String>();
+		Collection<String> c2 = new HashSet<String>();
+		Collection<String> c3 = new LinkedHashSet<String>();
+		Collection<String> c4 = new ArrayList<String>();
+		Collection<String> c5 = new TreeSet<String>();
+		Collection<String> c6 = new Stack<String>();
+		Collection<String> c7 = new PriorityQueue<String>();
+
+		Set<String> c9 = new HashSet<String>();
+		HashSet<String> c10 = new HashSet<String>();
+		LinkedHashSet<String> c11 = new LinkedHashSet<String>();
 		
-		// List<String> c1 = new ArrayList<String>();
+		List<String> c12 = new ArrayList<String>();
 
 		
 		c1.add("a");

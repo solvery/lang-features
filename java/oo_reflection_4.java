@@ -1,4 +1,6 @@
 
+import java.lang.reflect.Constructor;
+
 class A{
 	public int v1;
 	public int v2;
@@ -20,7 +22,11 @@ public class oo_reflection_4 {
 		A o1 =  null;
 		A o2 =  null;
 		A o3 =  null;
-		o1 = (A)c1.newInstance();
+		// get all constructor
+		Constructor<?> cons[] = c1.getConstructors();
+		o1 = (A)cons[0].newInstance();
+		o2 = (A)cons[1].newInstance(1);
+		o3 = (A)cons[2].newInstance(1,2);
     }
 }
 

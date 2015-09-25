@@ -1,6 +1,10 @@
 
 class A{
-	public A(){}
+	public int v;
+	/// public A(){}
+	public A(int a){
+		this.v = a;
+	}
 }
 
 public class oo_reflection_3 {

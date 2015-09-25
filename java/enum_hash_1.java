@@ -7,7 +7,7 @@ enum E {
 
 public class enum_hash_1 {
     public static void main(String[] args) {
-		EnumMap<E, String> em1 = new EnumMap<E, String>(E.class);
+		Map<E, String> em1 = new EnumMap<E, String>(E.class);
 		System.out.println(em1);
 
 		em1.put(E.A, "a");

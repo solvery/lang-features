@@ -96,6 +96,9 @@ public class basic_2 {
 			//输出false
 			System.out.println("两个128自动装箱后是否相等：" + (biga == bigb));
 		}
+		{
+			System.out.println(System.getProperty("java.runtime.version"));
+		}
 	}
 }
 

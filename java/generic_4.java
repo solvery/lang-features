@@ -19,11 +19,17 @@ public class generic_4 {
 
 		m2(o1);
 		/// m2(o2);
+
+		m3(o1);
 	}
+
 	public static void m1(Foo<?> f) {
 		System.out.println(f.a);
 	}
 	public static void m2(Foo<? extends String> f) {
+		System.out.println(f.a);
+	}
+	public static void m3(Foo<? super String> f) {
 		System.out.println(f.a);
 	}
 }

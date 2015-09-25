@@ -1,4 +1,5 @@
 // wildcard
+// extends, super
 
 class Foo<T> {
 	public T a;

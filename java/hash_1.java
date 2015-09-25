@@ -7,8 +7,9 @@ public class hash_1 {
 			// TreeMap<String, Integer> m = new TreeMap<String, Integer>();
 			// Map<String, Integer> m = new TreeMap<String, Integer>();
 			// Map<String, Integer> m = new HashMap<String, Integer>();
+			// Map<String, Integer> m = new WeakHashMap<String, Integer>();
 			// Map<String, Integer> m = new Hashtable<String, Integer>();
-			Map<String, Integer> m = new Hashtable<String, Integer>();
+			Map<String, Integer> m = new WeakHashMap<String, Integer>();
 			m.put("foo", 2);
 			m.put("hello", 5);
 			m.get("hello");

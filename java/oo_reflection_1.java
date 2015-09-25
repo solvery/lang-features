@@ -7,6 +7,9 @@ public class oo_reflection_1 {
 		System.out.println(o1.getClass());
 		System.out.println(o1.getClass().getName());
 		System.out.println(o1.getClass().getSuperclass());
+
+		System.out.println(o1.getClass().getClassLoader().getClass());
+
 	}
 }
 

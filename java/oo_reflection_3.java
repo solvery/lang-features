@@ -1,5 +1,6 @@
 
 class A{
+	public A(){}
 }
 
 public class oo_reflection_3 {

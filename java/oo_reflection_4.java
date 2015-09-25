@@ -27,6 +27,10 @@ public class oo_reflection_4 {
 		o1 = (A)cons[0].newInstance();
 		o2 = (A)cons[1].newInstance(1);
 		o3 = (A)cons[2].newInstance(1,2);
+
+		for(Constructor<?> e: cons) {
+			System.out.println(e);
+		}
     }
 }
 

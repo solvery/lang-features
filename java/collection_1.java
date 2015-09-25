@@ -21,6 +21,9 @@ public class collection_1 {
 		Collection<String> c13 = Collections.synchronizedCollection(new ArrayList<String>());
 		List<String> c14 = Collections.synchronizedList(new ArrayList<String>());
 
+		List<String> c15 = Collections.emptyList();
+		List<?> c16 = Collections.emptyList();
+
 		
 		c1.add("a");
 		c1.add("b");

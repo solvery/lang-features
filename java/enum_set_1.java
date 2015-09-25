@@ -2,12 +2,14 @@
 import java.util.*;
 
 enum E {
-	A,B,C,D,E
+	A,B,C,D,E //;
 }
 
 public class enum_set_1 {
     public static void main(String[] args) {
-		EnumSet<E> es1 = EnumSet.allOf(E.class);
+		// EnumSet<E> es1 = EnumSet.allOf(E.class);
+		// Set<E> es1 = EnumSet.allOf(E.class);
+		Set<E> es1 = EnumSet.allOf(E.class);
 		System.out.println(es1);
 
 		EnumSet<E> es2 = EnumSet.noneOf(E.class);

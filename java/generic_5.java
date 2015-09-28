@@ -16,5 +16,10 @@ public class generic_5 {
 		}
 	}
 	public <T> void m6(T a){}
+
+	public <T,S> void m7(T a, S b){}
+	public <T,S> T m8(T a, S b){
+		return a;
+	}
 }
 

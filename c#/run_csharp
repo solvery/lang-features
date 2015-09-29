@@ -1,0 +1,7 @@
+#!/bin/sh
+
+file=$1
+name=`echo $file | sed 's/\.cs//g'`
+
+gmcs -out:$name $file && ./$name
+rm -f $name 

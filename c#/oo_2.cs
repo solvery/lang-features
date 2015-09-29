@@ -15,6 +15,8 @@ class A{
 	}
 
 }
+class B:A {
+}
 
 class Hello {
 	static void Main() {
@@ -27,6 +29,10 @@ class Hello {
 			o1.m1();
 			/// o1.m2();
 			A.m2();
+		}
+		{
+			B o1 = new B();
+			System.Console.WriteLine(o1.v2);
 		}
 		{
 			var o1 = new {s1="a", v1="1"};

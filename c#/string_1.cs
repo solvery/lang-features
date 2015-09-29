@@ -1,5 +1,12 @@
 class Hello {
 	static void Main() {
+		string[] s1 = {"a","b","c"};
+		string[] s2;
+		s2 = new string[] {"a","b","c"};
+		string[] s3 = new string[] {"a","b","c"};
+		string[] s4 = new string[3] {"a","b","c"};
+		string[] s5 = new string[3];
+
 		System.Console.WriteLine();
 		System.Console.WriteLine(string.Format("{0}: {1}", "Spain", 7));
 		System.Console.WriteLine("hello".CompareTo("world"));

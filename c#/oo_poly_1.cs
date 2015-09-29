@@ -1,3 +1,4 @@
+// star
 
 class A {
 	public string show(D obj) { return ("1 A and D"); }

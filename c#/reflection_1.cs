@@ -6,5 +6,6 @@ class Hello {
 		System.Type t2 = typeof(object);
 		System.Console.WriteLine(t1);
 		System.Console.WriteLine(t2);
+		System.Console.WriteLine(t2.ToString());
 	}
 }

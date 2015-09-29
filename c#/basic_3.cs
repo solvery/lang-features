@@ -22,6 +22,15 @@ namespace CsharpExample {
 				} else {
 					  signum = -1;
 				}
+
+				switch(i) {
+					case 0:
+						break;
+					case 1:
+						break;
+					default:
+						break;
+				}
 			}
 		}
 	}

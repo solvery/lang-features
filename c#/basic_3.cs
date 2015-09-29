@@ -31,6 +31,12 @@ class Hello {
 					break;
 			}
 		}
+		{
+			int i = 123;
+			object o = i;	// boxing
+			int j = (int)o; // unboxing
+			System.Console.WriteLine(j);
+		}
 	}
 }
 

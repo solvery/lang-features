@@ -13,6 +13,15 @@ namespace CsharpExample {
 				System.Console.WriteLine(s1);
 			}
 			{
+				int i = 0;
+				int signum;
+				if (i>0) {
+					  signum = 1;
+				} else if (i==0) {
+					  signum = 0;
+				} else {
+					  signum = -1;
+				}
 			}
 		}
 	}

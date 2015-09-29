@@ -17,7 +17,7 @@ class Hello {
 		System.Console.WriteLine("{0} {1}", v1, v2);
 
 		int result;
-		m4(1,2,result);
+		m4(1,2,out result);
 		System.Console.WriteLine(result);
 	}
 

@@ -30,3 +30,13 @@ class Hello {
 		System.Console.WriteLine( b.show(d));
 	}
 }
+// 2 A and A
+// 2 A and A
+// 1 A and D
+// 2 A and A
+// 2 A and A
+// 1 A and D
+// 3 B and B
+// 3 B and B
+// 3 B and B
+

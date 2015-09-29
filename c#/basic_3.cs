@@ -1,4 +1,8 @@
+
+#pragma warning disable 0219, 0168
+
 class Hello {
+	readonly int i = 2;
 	static void Main() {
 		{
 			int i;
@@ -36,6 +40,9 @@ class Hello {
 			object o = i;	// boxing
 			int j = (int)o; // unboxing
 			System.Console.WriteLine(j);
+		}
+		{
+			/// readonly int i = 2;
 		}
 	}
 }

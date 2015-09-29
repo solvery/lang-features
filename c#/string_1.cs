@@ -20,7 +20,7 @@ namespace CsharpExample {
 			System.Console.WriteLine(double.Parse("65") );
 			System.Console.WriteLine(decimal.Parse("65"));
 			System.Console.WriteLine();
-			System.Console.WriteLine();
+			System.Console.WriteLine(System.String.Join(", ", "hello"));
 			System.Console.WriteLine();
 			System.Console.WriteLine();
 			System.Console.WriteLine();

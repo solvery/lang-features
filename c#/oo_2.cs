@@ -23,4 +23,12 @@ class Hello {
 		/// o1.m2();
 		A.m2();
 	}
+	{
+		var patent1 =
+			new { Title = "Bifocals",
+				YearOfPublication = "1784" };
+		var patent2 =
+			new { Title = "Phonograph",
+				YearOfPublication = "1877" };
+	}
 }

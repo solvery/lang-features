@@ -1,4 +1,5 @@
 // poly, this > super > this(super) > super(super)
+// star
 
 class A {
 	public String show(D obj) { return ("1 A and D"); }
@@ -37,4 +38,12 @@ public class oo_poly_1 {
     }
 }
 
-
+// 2 A and A
+// 2 A and A
+// 1 A and D
+// 4 B and A
+// 4 B and A
+// 1 A and D
+// 3 B and B
+// 3 B and B
+// 1 A and D

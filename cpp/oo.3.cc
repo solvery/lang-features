@@ -20,19 +20,19 @@ class A {
 
 class B1 : public A {
 	public:
-		void b1m1() {
+		void m1() {
 			A::v1 = 1;
 			A::v2 = 2;
 			/// A::v3 = 3;
 		}
 	protected:
-		void b1m2() {
+		void m2() {
 			A::v1 = 1;
 			A::v2 = 2;
 			/// A::v3 = 3;
 		}
 	private:
-		void b1m3() {
+		void m3() {
 			A::v1 = 1;
 			A::v2 = 2;
 			/// A::v3 = 3;
@@ -41,19 +41,19 @@ class B1 : public A {
 
 class B2 : protected A {
 	public:
-		void b1m1() {
+		void m1() {
 			A::v1 = 1;
 			A::v2 = 2;
 			/// A::v3 = 3;
 		}
 	protected:
-		void b1m2() {
+		void m2() {
 			A::v1 = 1;
 			A::v2 = 2;
 			/// A::v3 = 3;
 		}
 	private:
-		void b1m3() {
+		void m3() {
 			A::v1 = 1;
 			A::v2 = 2;
 			/// A::v3 = 3;
@@ -62,19 +62,19 @@ class B2 : protected A {
 
 class B3 : private A {
 	public:
-		void b1m1() {
+		void m1() {
 			A::v1 = 1;
 			A::v2 = 2;
 			/// A::v3 = 3;
 		}
 	protected:
-		void b1m2() {
+		void m2() {
 			A::v1 = 1;
 			A::v2 = 2;
 			/// A::v3 = 3;
 		}
 	private:
-		void b1m3() {
+		void m3() {
 			A::v1 = 1;
 			A::v2 = 2;
 			/// A::v3 = 3;

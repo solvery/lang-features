@@ -1,16 +1,18 @@
 
 #include <iostream>
 
+using namespace std;
+
 class A {
 	friend class B;
+	enum {a=1};
 };
 
 class B {
+	int v[A::a];
 };
 
-using namespace std;
 
 int main(int argc, char** arg) {
-	B ob;
 }
 

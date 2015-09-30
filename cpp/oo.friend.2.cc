@@ -8,11 +8,11 @@ class A {
 		int a2;
 	private:
 		int a3;
+	public:
+		friend B;
 };
 
 class B {
-	public:
-		friend A;
 
 };
 

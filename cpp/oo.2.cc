@@ -5,13 +5,10 @@ using namespace std;
 class A {
 	public:
 		int v1;
-		void m1(){ cout << "A m1()" << endl; }
 	protected:
 		int v2;
-		void m2(){ cout << "A m2()" << endl; }
 	private:
 		int v3;
-		void m3(){ cout << "A m3()" << endl; }
 
 	public:
 		A(){
@@ -19,38 +16,30 @@ class A {
 			v2=2;
 			v3=3;
 		}
-
-		void m4();
-};
-
-void A::m4(){
-	cout << "A m4()" << endl;
-}
-
-class B1 : public A {
-	public:
-		void b1m1() {
-			cout << A::v1 << endl;
-			cout << A::v2 << endl;
-			/// cout << A::v3 << endl;
-		}
-	protected:
-		void b1m2() {
-			cout << A::v1 << endl;
-			cout << A::v2 << endl;
-			/// cout << A::v3 << endl;
-		}
-	private:
-		void b1m3() {
-			cout << A::v1 << endl;
-			cout << A::v2 << endl;
-			/// cout << A::v3 << endl;
+		void show() {
+			cout << v1 << '\t';
+			cout << v2 << '\t';
+			cout << v3 << '\t' << endl;
 		}
 };
+
+class B1 : public A {};
+class B2 : protected A {};
+class B3 : private A {};
 
 int main(int argc, char** arg) {
-	{
-	}
+	A oa;
+	B1 ob1;
+	B2 ob2;
+	B3 ob3;
+	oa.v1 = 1;
+	/// oa.v2 = 1;
+	/// oa.v3 = 1;
+	/// ob3.v1 = 1;
+	/// ob3.v2 = 1;
+	/// ob3.v3 = 1;
 }
+
+
 
 

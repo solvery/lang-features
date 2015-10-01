@@ -46,7 +46,7 @@ int main(int argc, char** arg) {
 	cout << a1->show(pb) << endl;
 	cout << a1->show(pc) << endl;
 	cout << a1->show(pd) << endl;
-	cout << a2->show(pb) << endl;
+	cout << a2->show(pb) << endl; // A的指针,调用的A的show().
 	cout << a2->show(pc) << endl;
 	cout << a2->show(pd) << endl;
 	cout << pb->show(pb) << endl;

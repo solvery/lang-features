@@ -39,14 +39,14 @@ int main(int argc, char** arg) {
 	cout << oa.show(pb) << endl;
 	cout << oa.show(pc) << endl;
 	cout << oa.show(pd) << endl;
-	cout << ob.show(pb) << endl;
+	cout << ob.show(pb) << endl; // 静态
 	cout << ob.show(pc) << endl;
 	cout << ob.show(pd) << endl;
 	cout << "" << endl;
 	cout << a1->show(pb) << endl;
 	cout << a1->show(pc) << endl;
 	cout << a1->show(pd) << endl;
-	cout << a2->show(pb) << endl;
+	cout << a2->show(pb) << endl; // A的指针,调用的是B的show(), 动态，根据指针的内容决定。
 	cout << a2->show(pc) << endl;
 	cout << a2->show(pd) << endl;
 	cout << pb->show(pb) << endl;
@@ -55,5 +55,4 @@ int main(int argc, char** arg) {
 	cout << "" << endl;
 	return 0;
 }
-
 

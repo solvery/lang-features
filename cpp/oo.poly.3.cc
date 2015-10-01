@@ -15,20 +15,30 @@ class A {
 
 class B : public  A {
 	public:
-		void foo() {
+		void foo() {  // is virtual 
 			cout << "B foo" << endl;
+		}
+};
+
+class C : public  B {
+	public:
+		void foo() { // is virtual
+			cout << "C foo" << endl;
 		}
 };
 
 int main(int argc, char** arg) {
 
 	A* pa ;
-	B* pb ;
+
 	A oa;
 	B ob;
+	C oc;
 	pa=&oa;
 	pa->foo();
 	pa=&ob;
+	pa->foo();
+	pa=&oc;
 	pa->foo();
 
 	pa=&oa;

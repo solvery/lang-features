@@ -10,14 +10,14 @@ class A {
 		}
 };
 
-class B : public A {
+class B : virtual public A {
 	public:
 		B(){
 			cout << "B()" << endl;
 		}
 };
 
-class C : public A {
+class C : virtual public A {
 	public:
 		C(){
 			cout << "C()" << endl;
@@ -34,4 +34,5 @@ class D : public B,C {
 int main(int argc, char** arg) {
 	D od;
 }
+
 

@@ -36,15 +36,12 @@ int main(int argc, char** arg) {
 	A* a1 = &oa;
 	A* a2 = &ob;
 
-	cout << pa->show(pb) << endl;
-	cout << pa->show(pc) << endl;
-	cout << pa->show(pd) << endl;
-	cout << pb->show(pb) << endl;
-	cout << pb->show(pc) << endl;
-	cout << pb->show(pd) << endl;
-	cout << pb->show(pb) << endl;
-	cout << pb->show(pc) << endl;
-	cout << pb->show(pd) << endl;
+	cout << oa.show(pb) << endl;
+	cout << oa.show(pc) << endl;
+	cout << oa.show(pd) << endl;
+	cout << ob.show(pb) << endl;
+	cout << ob.show(pc) << endl;
+	cout << ob.show(pd) << endl;
 	cout << "" << endl;
 	cout << a1->show(pb) << endl;
 	cout << a1->show(pc) << endl;

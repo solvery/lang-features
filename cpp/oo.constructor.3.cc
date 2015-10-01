@@ -1,15 +1,18 @@
+
 #include <iostream>
 using namespace std;
 
 class A {
 	public:
-		A()      {
+		A() {
 			count++;
 		}
-		~A()     {
+		// 默认的拷贝构造函数没有处理静态数据成员
+		// A(const A& a) { count++; }
+		~A() {
 			count--;
 		}
-		static int getCount()       {
+		static int getCount() {
 			return count;
 		}
 	private:

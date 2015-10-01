@@ -12,5 +12,6 @@ struct S {
 
 int main(int argc, char** arg) {
 	class A2{};
+	class B{} b1, b2;
 }
 

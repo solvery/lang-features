@@ -10,3 +10,5 @@ main = do
     putStrLn $ "get: " ++ show (a1' ! 4)
     putStrLn $ "len: " ++ show ((+1) . snd . bounds $ a1')
 
+    let a2 = array (0,4) [(i,i+1) | i <- [0..4]]
+    putStrLn $ "dcl: " ++ show a2

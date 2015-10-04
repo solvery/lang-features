@@ -1,4 +1,6 @@
 -- pattern match
+-- where
+-- let
 
 func :: (Integral a) => a -> String   
 func 1 = "One!"   
@@ -35,3 +37,4 @@ main = do
 
     print $ func3 1 2
 
+    print $ 4 * (let a = 9 in a + 1) + 2   

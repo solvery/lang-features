@@ -1,3 +1,5 @@
+-- ' !! ++
+
 main = do
     let s = [] :: [String]
     putStrLn $ "emp: " ++ show s
@@ -28,3 +30,4 @@ main = do
 
     let twoD = [[i + j | j <- [0..i]] | i <- [0..2]]
     putStrLn $ "2d: " ++ show twoD
+

@@ -1,4 +1,8 @@
 
+import Control.Monad
+import Control.Monad.Cont
+
+
 main = do
     forM_ [1..3] $ \i -> do
         print i

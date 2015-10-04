@@ -1,4 +1,4 @@
+data Bool = False | True
 
 main = do
-    let s = :t 'a'
-
+    print ""

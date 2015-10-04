@@ -33,3 +33,5 @@ main = do
     print $ func2 3
     print $ func2 7
 
+    print $ func3 1 2
+

@@ -32,3 +32,8 @@ last' = foldl1 (\_ x -> x)
 main = do
     print $ sum' [1,2,3,4]
     print $ sum'' [1,2,3,4]
+
+    print $ scanl (+) 0 [1,2,3,4]
+    print $ scanr (+) 0 [1,2,3,4]
+    print $ scanl1 (\acc x -> if x > acc then x else acc) [3,4,5,3,7,9,2,1]
+    print $ scanl (flip (:)) [] [3,2,1] 

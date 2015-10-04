@@ -32,6 +32,7 @@ main = do
     -- list comprehension, predicate
     print $ [x*2 | x <- [1..10]]
     print $ [x*2 | x <- [1..10], x*2 >= 12]
+    print $ [x | x <- [50..100], x `mod` 7 == 3]
 
     print $ ['a'..'z']
     print $ ['Y'..'Z']

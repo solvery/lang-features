@@ -5,9 +5,6 @@ func1 x = x + x
 func2 :: Int -> Int -> Int
 func2 x y = x*2 + y*2
 
-func3 :: Int -> Int -> Int -
-func3 x y = func2 x + func2 y
-
 plus :: Int -> Int -> Int
 plus = (+)
 

@@ -35,6 +35,7 @@ main = do
     print $ [x | x <- [50..100], x `mod` 7 == 3]
     print $ [ x | x <- [10..20], x /= 13, x /= 15, x /= 19] 
     print $ [ if x < 10 then "BOOM!" else "BANG!" | x <- [7..13], odd x]  
+    print $ [ x*y | x <- [2,5,10], y <- [8,10,11]]
 
     print $ ['a'..'z']
     print $ ['Y'..'Z']

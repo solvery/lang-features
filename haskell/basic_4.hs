@@ -1,5 +1,3 @@
-import Data.Time
-import Data.Time.Calendar.WeekDate
 
 main = do
     let i = 2
@@ -9,16 +7,14 @@ main = do
         2 -> putStrLn "two"
         3 -> putStrLn "three"
 
-    now <- getCurrentTime
-    let (_, _, week) = toWeekDate . utctDay $ now
+    let week = 3
     putStrLn $
         case week of
             6 -> "it's the weekend"
             7 -> "it's the weekend"
             _ -> "it's a weekday"
 
-    localtime <- utcToLocalZonedTime now
-    let hour = todHour . localTimeOfDay . zonedTimeToLocalTime $ localtime
+    let hour = 15
     case hour of
         _
             | hour < 12 -> putStrLn "it's before noon"

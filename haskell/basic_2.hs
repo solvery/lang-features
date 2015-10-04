@@ -1,3 +1,4 @@
+-- :: type
 
 s :: String
 s = "constant"

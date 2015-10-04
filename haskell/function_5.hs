@@ -37,4 +37,4 @@ main = do
 
     print $ func3 1 2
 
-    print $ 4 * (let a = 9 in a + 1) + 2   
+

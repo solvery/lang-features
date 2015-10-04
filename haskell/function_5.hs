@@ -1,27 +1,35 @@
 -- pattern match
 
-sayMe :: (Integral a) => a -> String   
-sayMe 1 = "One!"   
---- sayMe x = "Not between 1 and 5" 
-sayMe 2 = "Two!"   
-sayMe 3 = "Three!"   
-sayMe 4 = "Four!"   
-sayMe 5 = "Five!"   
-sayMe x = "Not between 1 and 5" 
+func :: (Integral a) => a -> String   
+func 1 = "One!"   
+--- func x = "Not between 1 and 5" 
+func 2 = "Two!"   
+func 3 = "Three!"   
+func 4 = "Four!"   
+func 5 = "Five!"   
+func x = "Not between 1 and 5" 
 
-sayMe2 :: (Integral a) => a -> String
-sayMe2 dig
+func2 :: (Integral a) => a -> String
+func2 dig
     | dig == 1 = "one"
     | dig == 2 = "two"
     | dig == 3 = "three"
     | otherwise = "tired."
 
-main = do
-    print $ sayMe 1
-    print $ sayMe 3
-    print $ sayMe 7
+func3 :: (Integral a) => a -> a -> String
+func3 x y
+    | dig == 1 = "one"
+    | dig == 2 = "two"
+    | dig == 3 = "three"
+    | otherwise = "tired."
+    where dig = x + y
 
-    print $ sayMe2 1
-    print $ sayMe2 3
-    print $ sayMe2 7
+main = do
+    print $ func 1
+    print $ func 3
+    print $ func 7
+
+    print $ func2 1
+    print $ func2 3
+    print $ func2 7
 

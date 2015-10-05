@@ -1,12 +1,14 @@
+-- 类型参数
 
-data Car a b c = Car { company :: a 
-                       , model :: b 
-                       , year :: c 
-                        } deriving (Show)
+data Rect = Rect Int Int
 
-tellCar :: Car a b c -> String 
-tellCar (Car {company = c, model = m, year = y}) = "This " ++ c ++ " " ++ m ++ " was made in " ++ show y
+area :: Rect -> Int
+area (Rect w h) = w * h
+
+perim :: Rect -> Int
+perim (Rect w h) = 2 * w + 2 * h
 
 main = do
-    let stang = Car {company="Ford", model="Mustang", year=1967}
-    print $ tellCar stang "This Ford Mustang was made in 1967"
+    let r = Rect 10 5
+    putStrLn $ "area: " ++ show (area r)
+    putStrLn $ "perim: " ++ show (perim r)

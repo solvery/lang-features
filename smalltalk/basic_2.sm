@@ -1,0 +1,21 @@
+1234 printNl!
+(9 + 7) printNl! 
+
+Smalltalk at: #x put: 0! 	"Smalltalk是一个词典,它维护各个对象."
+
+x := Array new: 20!	"创建空间为20的数组并把它绑定到变量x中"
+(x at: 1) printNl!	"打印数组中下标为1的单元的内容.注意smalltalk中数组以1开始"
+x at: 1 put: 99!	"把99这个对象赋给数组x中的单元1"
+
+x := Set new!	"创建集合并把它绑定到x.注意smalltak采用垃圾回收机制"
+x add: 5!	"把对象5加入集合x中"
+x add: 7; add: 'foo'!	"把对象7和字符串foo加入集合x中.分号后接消息表示消息的接受者不变"
+x remove: 5!	"从集合x中移除对象5"
+(x includes: 7) printNl!	"测试集合x是否包含对象7,括号中的结果产生一个bool对象"
+
+x := Dictionary new!	"创建词典并绑定到x"
+x at: 'One' put: 1!
+x at: 1 put: 'One'!	"词典的键和值都可以为任意对象"
+(x at: 1) printNl!	"打印词典x中键为1的值"
+
+

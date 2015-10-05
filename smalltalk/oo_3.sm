@@ -1,0 +1,78 @@
+Number subclass: #Complex
+    instanceVariableNames: 'realpart imagpart'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: nil !
+
+!Complex class methodsFor: 'creating'!
+new
+    ^self error: 'use real:imaginary:'
+!
+new: ignore
+    ^self new
+!
+real: r imaginary: i
+    ^(super new) setReal: r setImag: i
+! !
+
+!Complex methodsFor: 'creating--private'!
+setReal: r setImag: i
+    realpart := r.
+    imagpart := i.
+    ^self
+! !
+
+!Complex methodsFor: 'basic'!
+real
+    ^realpart
+!
+imaginary
+    ^imagpart
+! !
+
+!Complex methodsFor: 'math'!
++ val
+    ^Complex real: (realpart + val real)
+    imaginary: (imagpart + val imaginary)
+!
+- val
+    ^Complex real: (realpart - val real)
+    imaginary: (imagpart - val imaginary)
+!
+* val
+    ^Complex real: (realpart * val real) - (imagpart * val imaginary)
+    imaginary: (imagpart * val real) + (realpart * val imaginary)
+!
+/ val
+    | d r i |
+    d := (val real * val real) + (val imaginary * val imaginary).
+    r := ((realpart * val real) + (imagpart * val imaginary)).
+    i := ((imagpart * val real) - (realpart * val imaginary)).
+    ^Complex real: r / d imaginary: i / d
+! !
+
+!Complex methodsFor: 'comparison'!
+= val
+    ^(realpart = val real) & (imagpart = val imaginary)
+!
+> val
+    ^self shouldNotImplement
+!
+>= val
+    ^self shouldNotImplement
+!
+< val
+    ^self shouldNotImplement
+!
+<= val
+    ^self shouldNotImplement
+! !
+
+!Complex methodsFor: 'printing'!
+printOn: aStream
+    aStream nextPut: $(. "$(表示literal的左括号"
+    realpart printOn: aStream.
+    aStream nextPut: $,. "$,表示literal的逗号"
+    imagpart printOn: aStream.
+    aStream nextPut: $)
+! !

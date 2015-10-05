@@ -1,0 +1,23 @@
+
+Array variableSubclass: #NiledArray "有关variableSubclass下面再讲述"
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: nil !
+
+!NiledArray methodsFor: 'bounds checking'!
+boundsCheck: index
+    ^(index < 1) | (index > (self basicSize)) "basicSize返回数组的大小.这里|消息是发送给了(index < 1)这个bool对象,产生或的功能.注意|不能短路,or:消息能够短路"
+! !
+
+!NiledArray methodsFor: 'basic'!
+at: index
+    ^(self boundsCheck: index)
+        ifTrue: [ nil ]
+        ifFalse: [ super at: index ]
+!
+at: index put: val
+    ^(self boundsCheck: index)
+    ifTrue: [ val ]
+    ifFalse: [ super at: index put: val ]
+! !

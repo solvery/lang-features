@@ -170,3 +170,19 @@ printChecks
         (assoc value) printNl. "associationsDo:是词典特有的消息,它遍历词典里的每一项时执行[]里的代码.:assoc表示遍历时的一项,是[]代码块获得的参数.key消息返回此项的键,value消息返回此项的值."
     ]
 ! !
+
+!Checking methodsFor: 'scanning'!
+checksOver: amount do: aBlock "aBlock是[]包起来的代码段"
+    history associationsDo: [:assoc|
+        ((assoc value) > amount)
+            ifTrue: [aBlock value: (assoc key)] "若真则调用aBlock中的代码段,给aBlock传入的参数为assoc key.注意一个代码段可以被传入0,1,2个参数,对应消息为value,value:,value:value:"
+    ]
+! !
+
+!Checking methodsFor: 'scanning'!
+checksOver: amount do: aBlock
+    | chosen |
+    chosen := history select: [:amt| amt > amount]. "select消息会选择那些代码段执行结果为真的项,返回这些项组成的词典"
+    chosen associationsDo: aBlock
+! !
+

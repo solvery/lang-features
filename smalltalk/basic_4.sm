@@ -1,0 +1,15 @@
+
+"整数循环"
+1 to: 20 do: [:x | x printNl ] !
+1 to: 20 by: 2 do: [:x | x printNl ] !
+20 to: 1 by: -1 do: [:x | x printNl ] !
+
+"区间"
+Smalltalk at: #i put: (Interval from: 5 to: 10) !
+i printNl !
+i do: [:x | x printNl] !
+
+i := (Interval from: 5 to: 10 by: 2) !
+i printNl !
+i do: [:x| x printNl] !
+

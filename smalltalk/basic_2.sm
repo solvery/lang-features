@@ -18,4 +18,4 @@ x at: 'One' put: 1!
 x at: 1 put: 'One'!	"词典的键和值都可以为任意对象"
 (x at: 1) printNl!	"打印词典x中键为1的值"
 
-
+Smalltalk inspect! "查看Smalltalk中的各个对象"

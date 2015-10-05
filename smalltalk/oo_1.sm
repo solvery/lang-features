@@ -1,0 +1,172 @@
+"Object是所有其他类的基类"
+
+"Account类"
+Object subclass: 
+#Account
+    instanceVariableNames: 'balance' "每个实例都有的变量,注意smalltalk中每个变量可以保存任意类型的对象"
+    classVariableNames: '' "所有实例共享的变量"
+    poolDictionaries: ''
+    category: nil !
+
+Account comment:
+    'I represent a place to deposit and withdraw money' !
+
+(Account comment) printNl!
+(Integer comment) printNl!
+
+"定义方法"
+!Account class methodsFor: 
+    'instance creation'! "此方法是Account类所拥有的.methodsFor可认为用于文档注释"
+     new "方法名,即函数名"
+     | r | "声明r为这个方法的局部变量"
+     r := super new. "调用基类的new方法生成!这个类!"
+     r init. "调用init方法,后面会给出"
+     ^r "返回对象r"
+     ! ! "方法定义结束标志"
+
+"创建这个对象"
+"x := Account new!"
+
+!Account methodsFor: 'instance initialization'! "此方法属于Account的实例,即可以被Account的实例调用"
+init
+balance := 0
+! !
+
+!Account methodsFor: 'printing'!
+printOn: stream
+    super printOn: stream.
+    stream nextPutAll: ' with balance: '. "把字符串放入流中"
+    balance printOn: stream
+! !
+
+!Account methodsFor: 'moving money'!
+spend: amount
+    balance := balance - amount
+! "一个类的连续定义的多个方法中的一个方法定义完毕标志"
+deposit: amount
+    balance := balance + amount
+! ! "一个类的连续定义的多个方法中的全部方法定义完毕标志"
+
+"Saving子类"
+Account subclass: #Savings
+    instanceVariableNames: 'interest'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: nil !
+
+!Savings methodsFor: 'initialization'!
+init
+    interest := 0.
+    ^ super init
+! !
+
+!Savings methodsFor: 'interest'!
+interest: amount
+    interest := interest + amount.
+    self deposit: amount
+!
+clearInterest
+    | oldinterest |
+    oldinterest := interest.
+    interest := 0.
+    ^oldinterest
+! !
+
+"Checking类"
+Account subclass: #Checking
+    instanceVariableNames: 'checknum checksleft'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: nil !
+
+!Checking methodsFor: 'Initialization'!
+init
+    checksleft := 0.
+    ^super init
+! !
+
+!Checking methodsFor: 'spending'!
+newChecks: number count: checkcount
+    checknum := number.
+    checksleft := checkcount
+!
+
+writeCheck: amount
+    | num |
+    num := checknum.
+    checknum := checknum + 1.
+    checksleft := checksleft - 1.
+    self spend: amount.
+    ^ num
+! !
+
+"条件判断"
+!Checking methodsFor: 'spending'! "这个版本的writeCheck会取代以前的版本,并且以前的实例会重新编译一遍"
+writeCheck: amount
+    | num |
+    (checksleft < 1) "括号中的内容产生一个bool对象"
+        ifTrue: [ ^self error: 'Out of checks' ]. "给产生的bool对象发ifTrue消息,参数为[]中的代码块,意即若此bool对象为真则执行传入的代码块.对应有ifFalse:消息"
+    num := checknum.
+    checknum := checknum + 1.
+    checksleft := checksleft - 1.
+    self spend: amount. "调用自身的spend函数"
+    ^ num
+! !
+
+"循环"
+Account subclass: #Checking "此Checking类会取代以前的版本"
+    instanceVariableNames: 'checknum checksleft history'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: nil !
+
+!Checking methodsFor: 'initialization'!
+init
+    checksleft := 0.
+    history := Dictionary new.
+    ^ super init
+! !
+
+!Checking methodsFor: 'spending'!
+writeCheck: amount
+    | num |
+"Sanity check that we have checks left in our checkbook"
+    (checksleft < 1)
+        ifTrue: [ ^self error: 'Out of checks' ].
+"Make sure we've never used this check number before"
+    num := checknum.
+    (history includesKey: num)
+        ifTrue: [ ^self error: 'Duplicate check number' ]. "如果出错则调用自身的error函数,结束函数的运行"
+"Record the check number and amount"
+    history at: num put: amount.
+"Update our next checknumber, checks left, and balance"
+    checknum := checknum + 1.
+    checksleft := checksleft - 1.
+    self spend: amount.
+    ^ num
+! !
+
+!Checking methodsFor: 'printing'!
+    printOn: stream
+    super printOn: stream.
+    ', checks left: ' printOn: stream. "字符串也是个对象,可以发送消息给它"
+    checksleft printOn: stream.
+    ', checks written: ' printOn: stream.
+    (history size) printOn: stream. "size消息返回词典的长度"
+!
+check: num
+    | c |
+    c := history
+        at: num
+        ifAbsent: [ ^self error: 'No such check #' ]. "若不存在以num为键的项则执行[]里的代码"
+    ^c
+! !
+
+!Checking methodsFor: 'printing'!
+printChecks
+    history associationsDo: [ :assoc |
+        (assoc key) print.
+        ' - ' print.
+        (assoc value) printNl. "associationsDo:是词典特有的消息,它遍历词典里的每一项时执行[]里的代码.:assoc表示遍历时的一项,是[]代码块获得的参数.key消息返回此项的键,value消息返回此项的值."
+    ]
+! !

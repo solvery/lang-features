@@ -23,7 +23,7 @@ data Book = Book {
     author  :: Author,
     isbn    :: ISBN,
     price   :: Price
-}
+} deriving (Show, Eq)
 
 main = do
     print Mon

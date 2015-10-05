@@ -1,0 +1,7 @@
+begin
+   integer Int1;
+   comment The first SIMULA program written for this book;
+   Int1:=3;
+   OutInt(Int1,4);
+   OutImage
+end

@@ -2,7 +2,8 @@
 
 file=$1
 name=`echo $file | sed 's/\.sim//g'`
+export LD_LIBRARY_PATH=/usr/local/lib
 
-cim $file && ./$name
+cim -v $file && echo "";  ./$name
 rm -f $name 
 rm -f $name.o

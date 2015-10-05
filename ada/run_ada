@@ -1,0 +1,9 @@
+#!/bin/sh
+
+file=$1
+name=`echo $file | sed 's/\.adb//g'`
+
+gnatmake $name && ./$name
+rm -f $name
+rm -f $name.o
+rm -f $name.ali

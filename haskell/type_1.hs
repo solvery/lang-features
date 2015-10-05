@@ -1,3 +1,5 @@
+-- | 
+-- deriving 派生实例
 
 -- data
 data Bool = False | True

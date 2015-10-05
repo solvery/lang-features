@@ -1,4 +1,5 @@
--- type
+-- type 类型别名
+
 type Name = String
 type Author = String
 type ISBN = String
@@ -15,4 +16,5 @@ data Book = Book {
     price   :: Price
 } deriving (Show, Eq)
 
-
+main = do
+    print ""

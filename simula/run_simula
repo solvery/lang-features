@@ -1,0 +1,8 @@
+#!/bin/sh
+
+file=$1
+name=`echo $file | sed 's/\.sim//g'`
+
+cim $file && ./$name
+rm -f $name 
+rm -f $name.o

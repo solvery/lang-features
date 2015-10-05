@@ -1,0 +1,7 @@
+#!/bin/sh
+
+file=$1
+name=`echo $file | sed 's/\.f..//g'`
+
+gfortran -o $name $file && ./$name
+rm -f $name 

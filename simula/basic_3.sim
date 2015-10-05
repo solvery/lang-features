@@ -1,0 +1,8 @@
+
+begin
+integer Int1;
+Int1:=InInt;
+if Int1=2 then OutText("YES")
+else OutText("NO");
+OutImage
+end

@@ -1,7 +1,14 @@
 begin
-   integer Int1;
-   comment The first SIMULA program written for this book;
-   Int1:=3;
-   OutInt(Int1,4);
+    integer Int1;
+    comment The first SIMULA program written for this book;
+   integer I;
+   real Arc;
+    Int1:=3;
+    OutInt(Int1,4);
+    OutImage;
+
+   I := 5;
+   Arc := 3.2;
+   OutInt(I,3);
    OutImage
 end

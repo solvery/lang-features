@@ -1,0 +1,7 @@
+#!/bin/sh
+
+file=$1
+name=`echo $file | sed 's/\.fs//g'`
+
+fsharpc $file && ./$name.exe
+rm -f $name.exe

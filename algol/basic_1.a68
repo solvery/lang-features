@@ -1,0 +1,4 @@
+PR quiet PR
+BEGIN
+  print(("Hello, world!",newline))
+END

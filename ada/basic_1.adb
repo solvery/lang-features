@@ -1,5 +1,5 @@
 with Text_IO;
-procedure basic_1 is
+procedure func is
     begin
         Text_IO.Put_line("Hello World!");
-    end basic_1;
+    end func;

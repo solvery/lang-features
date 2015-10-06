@@ -1,0 +1,7 @@
+#!/bin/sh
+
+file=$1
+name=`echo $file | sed 's/\.cob//g'`
+
+cobc -x $file && ./$name
+rm -f $name 

@@ -18,12 +18,16 @@ class Base {
 int main(int argc, char** arg) {
     typedef void(*Fun)(void);
 
+    int v1;
     Base b;
+    long v2;
     
 
     Fun pFun = NULL;
 
+    cout << "addr v1    : \t\t\t" << (long*)(&v1) << endl;
     cout << "addr vtable: \t\t\t" << (long*)(&b) << endl;
+    cout << "addr v2    : \t\t\t" << (long*)(&v2) << endl;
 
     // Invoke the first virtual function 
     pFun = (Fun)*((long*)*(long*)(&b));

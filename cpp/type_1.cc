@@ -42,5 +42,12 @@ int main(int argc, char** arg) {
         int arr[4]={0,1,2,3};
         struct tm today={0};
     }
+    {
+        // C++11 container initializer
+        vector vs<string>={ "first", "second", "third"};
+        map singers =
+        { {"Lady Gaga", "+1 (212) 555-7890"},
+            {"Beyonce Knowles", "+1 (212) 555-0987"}};
+    }
 }
 

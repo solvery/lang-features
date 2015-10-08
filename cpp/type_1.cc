@@ -1,9 +1,11 @@
 // c++11
+// initializer
 
 #include <iostream>
 #include <algorithm>
 #include <numeric>
 #include <string>
+#include <map>
 #include <vector>
 
 using namespace std;
@@ -15,7 +17,7 @@ struct S {
 
 class C
 {
-    int a;
+    int a = 7;
     int b;
     public:
     C(int i, int j){};
@@ -44,8 +46,8 @@ int main(int argc, char** arg) {
     }
     {
         // C++11 container initializer
-        vector vs<string>={ "first", "second", "third"};
-        map singers =
+        vector<string>vs={ "first", "second", "third"};
+        map<string,string> singers =
         { {"Lady Gaga", "+1 (212) 555-7890"},
             {"Beyonce Knowles", "+1 (212) 555-0987"}};
     }

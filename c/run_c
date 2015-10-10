@@ -3,5 +3,5 @@
 file=$1
 name=`echo $file | sed 's/\.c//g'`
 
-gcc -o $name $file && ./$name
+gcc -o $name $file && ./$name 
 rm -f $name 

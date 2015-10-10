@@ -1,12 +1,7 @@
 
 // 严格模式
 
-// "use strict";
-
-// 全局变量必须显式声明
-v1 = 1; 
-
-// 静态绑定
+"use strict";
 
 function strict(){
     "use strict";
@@ -17,3 +12,15 @@ function strict(){
 function notStrict() {
     return "这是正常模式。";
 }
+//
+// 全局变量必须显式声明
+/// v1 = 1; 
+
+// 静态绑定
+// no with
+function A() {
+}
+var oa = new A();
+with (oa) {
+} 
+

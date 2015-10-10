@@ -1,10 +1,12 @@
 
 // 严格模式
 
-"use strict";
+// "use strict";
 
 // 全局变量必须显式声明
-/// v1 = 1; 
+v1 = 1; 
+
+// 静态绑定
 
 function strict(){
     "use strict";

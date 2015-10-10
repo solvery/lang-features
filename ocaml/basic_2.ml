@@ -20,5 +20,10 @@ print_string "\n";;
 
 let myvar= ref "hello";;
 
+(* let name = expressino in 定义局部表达式 *)
 let average a b =
 let sum = a +. b in sum /. 2.0;;
+
+let f a b =
+let x = a +. b in 
+x +. x **2.;;

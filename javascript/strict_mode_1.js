@@ -1,7 +1,10 @@
+alert=console.log
 
 // 严格模式
+// www.ruanyifeng.com/blog/2013/01/javascript_strict_mode.html
 
-"use strict";
+'use strict';
+
 
 function strict(){
     "use strict";
@@ -21,6 +24,9 @@ function notStrict() {
 function A() {
 }
 var oa = new A();
-with (oa) {
-} 
+/// with (oa) { } 
+
+var x = 2;
+alert(eval("var x=5; x"))
+alert(x);
 

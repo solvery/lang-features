@@ -1,3 +1,5 @@
+// 通过将构造函数声明为 explicit，来防止在需要隐式转换的上下文中使用构造函数：
+
 #include <iostream>
 
 using namespace std;

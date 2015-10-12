@@ -13,6 +13,8 @@ print_string "\n";;
 
 
 let a = 1;;
+
+(* let 绑定, := 引用, !解引用 *)
 let my_ref = ref 0;;
 my_ref := 100;;
 print_int !my_ref;;

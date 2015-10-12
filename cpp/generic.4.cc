@@ -1,4 +1,6 @@
 // 模板无类型参数
+// 模板默认类型参数
+
 #include <iostream>
 using namespace std;
 

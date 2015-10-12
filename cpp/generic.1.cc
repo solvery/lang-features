@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// type
+// class
 template <class A>
 class Foo {
 	public:

@@ -1,3 +1,5 @@
+// 模板特殊化
+
 #include <iostream>
 using namespace std;
 

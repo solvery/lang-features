@@ -3,7 +3,8 @@
 
 using namespace std;
 
-template <class T>
+// template <class T>
+template <typename T>
 inline T square(T x) {
 	T result;
 	result = x*x;

@@ -1,4 +1,4 @@
-// 类模板的静态成员：
+// 类模板的静态成员
 
 #include <iostream>
 
@@ -30,6 +30,9 @@ main()
     A<float> oa2;
 
     oa1.m1();
+    oa1.m1();
     cout << oa1.v1 << endl;
     oa2.m1();
+    oa2.m1();
 }
+

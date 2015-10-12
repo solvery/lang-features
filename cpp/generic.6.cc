@@ -4,11 +4,10 @@
 using namespace std;
 
 /// template <template <typename T> typename U>
-template <template <typename T> class U>
+template <typename S, template <typename T> class U>
 class A {
 	public:
-		T v1;
-		U v2;
+		U<S> v2;
 };
 
 int main(int argc, char** arg) {

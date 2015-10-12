@@ -5,6 +5,7 @@
 using namespace std;
 
 // class
+// 类模板
 template <class A>
 class Foo {
 	public:

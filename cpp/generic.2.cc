@@ -20,6 +20,7 @@ int main(int argc, char** arg) {
 	cout << square<float>(v2) << endl;
 	cout << square<double>(v3) << endl;
 
+	// 隐含的方式使用模板
 	cout << square(v1) << endl;
 	cout << square(v2) << endl;
 }

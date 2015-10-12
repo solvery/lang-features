@@ -9,5 +9,8 @@ sign:
 	*	定义指针；取内容
 	&	解引用
 
+keyword
+	typename 
+
 features:
 	func1().func2()

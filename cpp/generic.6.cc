@@ -3,6 +3,7 @@
 #include <iostream>
 using namespace std;
 
+/// template <template <typename T> typename U>
 template <template <typename T> class U>
 class A
 {

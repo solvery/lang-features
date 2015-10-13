@@ -55,6 +55,40 @@ $sqr(2);
 
 $func = "add";
 
+function counter()
+{
+	static $i = 0;
+	return ++$i;
+}
+
+echo counter();
+
+function make_counter()
+{
+	$i = 0;
+	return function () use (&$i) {
+		return ++$i;
+	};
+}
+
+$nays = make_counter();
+echo $nays();
+
+# PHP 5.5:
+function make_counter2() {
+	$i = 0;
+	while (1) {
+		yield ++$i;
+	}
+}
+
+$nays = make_counter2();
+# does not return a value:
+$nays->next();
+# runs generator if generator has not
+# yet yielded:
+echo $nays->current();
+
 echo "\n";
 ?>
 

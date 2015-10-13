@@ -14,5 +14,8 @@ echo "$count ${item}s\n";
 $fmt = "lorem %s %d %f";
 sprintf($fmt, "ipsum", 13, 3.7);
 
+$s = "Hello, ";
+$s2 = $s . "World!";
+
 ?>
 

@@ -12,6 +12,8 @@ class A implements I {
 	}
 }
 
+$oa = new A();
+
 echo "\n";
 ?>
 

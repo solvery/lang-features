@@ -18,8 +18,8 @@
 
 好用。全部例子都可以运行，各个语言都有辅助的脚本，不用考虑编译器和参数，都是一种执行方式，运行结果通过终端打印显示，不涉及图形界面。
 
-省事。采用VirtualBox虚拟机+Ubuntu 10.04.4 LTS，不同语言有不同的编译器，apt-get都能够下载到，每种语言需要get的东西在相应的文件夹下的readme有记录。如果你觉得麻烦，关注公众号：Solvery，可以回复vm得到作者的虚拟机。回复lang获得项目地址。
+省事。采用VirtualBox虚拟机+Ubuntu 10.04.4 LTS，不同语言有不同的编译器，apt-get都能够下载到，每种语言需要get的东西在相应的文件夹下的readme有记录。
 
-例外。Mac上的Xcode是一个强大的开发环境，swift和Objective-C的例子采用Xcode完成，使用一个工程就可以包括全部的例子。关注公众号：Solvery，回复langobjc的到Objective-C的例子，回复langswift的到swift的例子。
+例外。Mac上的Xcode是一个强大的开发环境，swift和Objective-C的例子采用Xcode完成，使用一个工程就可以包括全部的例子。
 
 

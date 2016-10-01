@@ -1,6 +1,9 @@
 1
 2
 files
+a.out
+*.swp
+*.swo
 java/*.c
 java/*.class
 erlang/*.beam

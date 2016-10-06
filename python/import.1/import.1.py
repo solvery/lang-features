@@ -6,4 +6,6 @@
 import import_2
 
 print import_2.a
-
+import_2.foo()
+c=import_2.bar()
+c.grok()

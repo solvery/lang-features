@@ -1,5 +1,8 @@
 
-foo = "abc"
-for i in range(len(foo)):
-    print foo[i], '(%d)' % i
+str1 = "hello"
+for i in range(len(str1)):
+    print str1[i], '(%d)' % i
+
+for s in str1:
+    print s
 

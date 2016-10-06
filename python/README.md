@@ -8,3 +8,5 @@ java 开发者称呼之为AOP（Aspect Oriented Programming，面向方面编程
 
 pip
 virtualenv
+
+https://www.zhihu.com/question/24590883

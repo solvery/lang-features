@@ -1,17 +1,3 @@
-
-# string
-s = 'abcdefgh'
-print s
-print s[::-1] 
-print s[::2]
-for i in [None] + range(-1, -len(s), -1):
-    print s[:i]
-
-print
-foo = "abc"
-for i in range(len(foo)):
-    print foo[i], '(%d)' % i
-
 # list
 print
 aList = [1, 2, 3, 4]

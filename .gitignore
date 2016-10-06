@@ -8,3 +8,4 @@ java/*.c
 java/*.class
 erlang/*.beam
 erlang/*.dump
+*.pyc

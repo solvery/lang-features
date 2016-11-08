@@ -6,6 +6,8 @@ typedef struct {
 	int v2;
 }ST;
 
+ST st1 = {1,2};
+
 ST sa[] = {
 	{1,2},
 	{3,4},

@@ -1,4 +1,3 @@
-Time [s],Packet ID,Address,Data,Read/Write,ACK/NAK
 33.921907,,0x00,0xFF,Write,ACK
 33.921997,,0x00,0x00,Write,ACK
 33.922201,,0x00,0x01,Write,ACK

@@ -2,8 +2,15 @@
 import csv
 
 #read csv type file.
-file_in = '1.txt'
+file_in = 'untitled.txt'
+# file_in = '1.txt'
+
+sample_data_time = 0.0
 with open(file_in,'rb') as f:
     csv_contents = csv.reader(f)
     for row in csv_contents:
-        print row[0]
+        sample_data_time_last = sample_data_time
+        sample_data_time = float(row[0])
+        if ( sample_data_time - sample_data_time_last) > 0.0002 :
+            print
+        print row[2], row[3], row[4], row[5]

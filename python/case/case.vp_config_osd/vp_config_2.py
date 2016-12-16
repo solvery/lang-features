@@ -12,10 +12,12 @@ osd_seg_width   = 80
 osd_alpha   = 0x80
 osd_num     = 0x27
 
+
 #  COM3修改成您老的使用的串口 
 ser = serial.Serial("COM3", 115200)  
 def main():  
     data_bin_array=''
+    int_num = 8
     while True:  
         for data in config_head:
             data_bin = struct.pack('B', data) 
@@ -25,10 +27,17 @@ def main():
         data_bin_array = data_bin_array + struct.pack('BB', osd_seg_height/0x100, osd_seg_height%0x100)
         data_bin_array = data_bin_array + struct.pack('BB', osd_seg_width/0x100, osd_seg_width%0x100)
         data_bin_array = data_bin_array + struct.pack('B', osd_alpha)
-        data_bin_array = data_bin_array + struct.pack('B', osd_num)
+        data_bin_array = data_bin_array + struct.pack('B', int2bcd(int_num))
         ser.write(data_bin_array)
         ser.flushInput()  
-        time.sleep(0.1)  
+        time.sleep(2.1)  
+        #raw_input()
+        int_num =  int_num + 1
+
+
+def int2bcd(a):
+    return (a/10)*16+ (a%10 & 0x0f)
+    pass
      
 if __name__ == '__main__':  
     try:  

@@ -3,19 +3,17 @@ import serial
 import struct
 import time  
 
+config_data_hex = [0x80, 0x81, 0x82, 0x83, 0x00, 0x00, 0xc8, 0x00, 0xc8, 0x01, 0x90, 0x00, 0x50, 0x80, 0x23];
+
 #  COM3修改成您老的使用的串口 
 ser = serial.Serial("COM3", 115200)  
 def main():  
+    data_bin_array=''
     while True:  
-        count = ser.inWaiting()  
-        if count != 0:  
-            recv = ser.read(count)  
-            ser.write(recv)  
-            
-            for data in recv:
-                data_hex = struct.unpack('B', data)
-                print '%02x' % data_hex,
-            print 
+        for data in config_data_hex:
+            data_bin = struct.pack('B', data) 
+            data_bin_array = data_bin_array + data_bin[0]
+        ser.write(data_bin_array)
         ser.flushInput()  
         time.sleep(0.1)  
      

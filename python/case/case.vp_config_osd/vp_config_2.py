@@ -5,20 +5,21 @@ import time
 
 config_head = [0x80, 0x81, 0x82, 0x83, 0x00]
 
-osd_left    = 200
-osd_top     = 200
-osd_seg_height  = 400
-osd_seg_width   = 80 
-osd_alpha   = 0x80
-osd_num     = 0x27
 
 
 #  COM3修改成您老的使用的串口 
 ser = serial.Serial("COM3", 115200)  
 def main():  
-    data_bin_array=''
-    int_num = 8
+    int_num = 12
+    osd_left    = 2
+    osd_top     = 20
+    osd_seg_height  = 400
+    osd_seg_width   = 80 
+    osd_alpha   = 0x80
+    osd_num     = 0x27
+
     while True:  
+        data_bin_array=''
         for data in config_head:
             data_bin = struct.pack('B', data) 
             data_bin_array = data_bin_array + data_bin[0]
@@ -30,9 +31,17 @@ def main():
         data_bin_array = data_bin_array + struct.pack('B', int2bcd(int_num))
         ser.write(data_bin_array)
         ser.flushInput()  
-        time.sleep(2.1)  
+
+        time.sleep(0.1)
         #raw_input()
-        int_num =  int_num + 1
+        #int_num =  int_num + 1
+        osd_left = osd_left + 1
+        osd_top = osd_top + 1
+        osd_alpha   = 0xf0
+        if (osd_left > 1200):
+            osd_left = 0
+        if (osd_top > 300):
+            osd_top = 0
 
 
 def int2bcd(a):

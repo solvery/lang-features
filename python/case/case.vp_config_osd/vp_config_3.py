@@ -51,7 +51,7 @@ def main():
 
     while True:  
         data_bin_array=''
-        config_data = [osd_left/0x100, osd_left%0x100]
+        config_data = osd_left/0x100, osd_left%0x100]
         for data in config_head:
             data_bin = struct.pack('B', data) 
             data_bin_array = data_bin_array + data_bin[0]

@@ -104,6 +104,8 @@ def main():
             osd_top = 0
         if (osd_left%20 == 0):
             int_num =  int_num + 1
+        if (int_num > 99):
+            int_num = 0
 
 
 def int2bcd(a):

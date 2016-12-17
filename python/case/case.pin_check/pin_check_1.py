@@ -13,3 +13,4 @@ with open('pin2.txt','rb') as f:
 for key_pin1 in pin_dict_1:
     if (key_pin1 not in pin_dict_2.keys()):
         print key_pin1,
+

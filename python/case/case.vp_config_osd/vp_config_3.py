@@ -51,60 +51,59 @@ def main():
 
     while True:  
         data_bin_array=''
-        config_data = osd_left/0x100, osd_left%0x100]
-        for data in config_head:
+        config_data = [\
+            0x80, 0x81, 0x82, 0x83, 0x00, \
+            osd_left/0x100, osd_left%0x100, \
+            osd_top/0x100, osd_top%0x100, \
+            osd_seg_height/0x100, osd_seg_height%0x100,\
+            osd_seg_width/0x100, osd_seg_width%0x100,\
+            osd_alpha,\
+            int2bcd(int_num),\
+            osd_r,\
+            osd_g,\
+            osd_b,\
+            v1_clip_left/0x100, v1_clip_left%0x100,\
+            v1_clip_top/0x100, v1_clip_top%0x100,\
+            v1_clip_width/0x100, v1_clip_width%0x100,\
+            v1_clip_height/0x100, v1_clip_height%0x100,\
+            v1_out_left/0x100,   v1_out_left%0x100,\
+            v1_out_top/0x100,    v1_out_top%0x100,\
+            v1_out_width/0x100,  v1_out_width%0x100,\
+            v1_out_height/0x100, v1_out_height%0x100,\
+            v1_alpha,\
+            v1_scale_h/0x100, v1_scale_h%0x100,\
+            v1_scale_v/0x100, v1_scale_v%0x100,\
+            v2_clip_left/0x100, v2_clip_left%0x100,\
+            v2_clip_top/0x100, v2_clip_top%0x100,\
+            v2_clip_width/0x100, v2_clip_width%0x100,\
+            v2_clip_height/0x100, v2_clip_height%0x100,\
+            v2_out_left/0x100,   v2_out_left%0x100,\
+            v2_out_top/0x100,    v2_out_top%0x100,\
+            v2_out_width/0x100,  v2_out_width%0x100,\
+            v2_out_height/0x100, v2_out_height%0x100,\
+            v2_alpha,\
+            v2_scale_h/0x100, v2_scale_h%0x100,\
+            v2_scale_v/0x100, v2_scale_v%0x100,\
+            background_r,\
+            background_g,\
+            background_b\
+        ]
+
+        for data in config_data:
             data_bin = struct.pack('B', data) 
             data_bin_array = data_bin_array + data_bin[0]
-        data_bin_array = data_bin_array + struct.pack('BB', osd_left/0x100, osd_left%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', osd_top/0x100, osd_top%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', osd_seg_height/0x100, osd_seg_height%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', osd_seg_width/0x100, osd_seg_width%0x100)
-        data_bin_array = data_bin_array + struct.pack('B', osd_alpha)
-        data_bin_array = data_bin_array + struct.pack('B', int2bcd(int_num))
-        data_bin_array = data_bin_array + struct.pack('B', osd_r)
-        data_bin_array = data_bin_array + struct.pack('B', osd_g)
-        data_bin_array = data_bin_array + struct.pack('B', osd_b)
-
-        data_bin_array = data_bin_array + struct.pack('BB', v1_clip_left/0x100, v1_clip_left%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v1_clip_top/0x100, v1_clip_top%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v1_clip_width/0x100, v1_clip_width%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v1_clip_height/0x100, v1_clip_height%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v1_out_left/0x100,   v1_out_left%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v1_out_top/0x100,    v1_out_top%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v1_out_width/0x100,  v1_out_width%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v1_out_height/0x100, v1_out_height%0x100)
-        data_bin_array = data_bin_array + struct.pack('B', v1_alpha)
-        data_bin_array = data_bin_array + struct.pack('BB', v1_scale_h/0x100, v1_scale_h%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v1_scale_v/0x100, v1_scale_v%0x100)
-
-        data_bin_array = data_bin_array + struct.pack('BB', v2_clip_left/0x100, v2_clip_left%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v2_clip_top/0x100, v2_clip_top%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v2_clip_width/0x100, v2_clip_width%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v2_clip_height/0x100, v2_clip_height%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v2_out_left/0x100,   v2_out_left%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v2_out_top/0x100,    v2_out_top%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v2_out_width/0x100,  v2_out_width%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v2_out_height/0x100, v2_out_height%0x100)
-        data_bin_array = data_bin_array + struct.pack('B', v2_alpha)
-        data_bin_array = data_bin_array + struct.pack('BB', v2_scale_h/0x100, v2_scale_h%0x100)
-        data_bin_array = data_bin_array + struct.pack('BB', v2_scale_v/0x100, v2_scale_v%0x100)
-
-        data_bin_array = data_bin_array + struct.pack('B', background_r)
-        data_bin_array = data_bin_array + struct.pack('B', background_g)
-        data_bin_array = data_bin_array + struct.pack('B', background_b)
-
         ser.write(data_bin_array)
-        ser.flushInput()  
 
         time.sleep(0.1)
         #raw_input()
-        #int_num =  int_num + 1
         osd_left = osd_left + 1
         osd_top = osd_top + 1
         if (osd_left > 1200):
             osd_left = 0
         if (osd_top > 300):
             osd_top = 0
+        if (osd_left%20 == 0):
+            int_num =  int_num + 1
 
 
 def int2bcd(a):

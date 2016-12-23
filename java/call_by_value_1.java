@@ -28,7 +28,7 @@ public class call_by_value_1 {
         System.out.println(s);
 
         StringBuilder sb = new StringBuilder("hello");
-        o1.func3(sb);
+        o1.func3(sb); // 改变了
         System.out.println(sb);
 
         o1.func4(sb);

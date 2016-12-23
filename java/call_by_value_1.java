@@ -1,4 +1,5 @@
-
+// = 修改了内存状态
+// 参数传递相当于一种=操作
 
 public class call_by_value_1 {
     void func1(int value) {

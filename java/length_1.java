@@ -1,5 +1,6 @@
 // length 针对数组
 // length 针对String 
+// size 针对泛型集合
 
 import java.util.*;
 
@@ -11,6 +12,13 @@ public class length_1 {
 
         System.out.println("hello".length());
         // System.out.println("hello".length); // error
+        
+        List<Integer> array=new ArrayList<Integer>();
+        array.add(1);
+        array.add(2);
+        array.add(3);
+        System.out.println(array.size());
+
     }
 }
 

@@ -1,5 +1,7 @@
+// static nested classes
+// 嵌套就是我跟你没关系，自己可以完全独立存在，但是我就想借你的壳用一下，来隐藏一下我自己
 // inner class
-// static inner class
+// 内部就是我是你的一部分，我了解你，我知道你的全部，没有你就没有我。
 
 public class oo_inner_class_1 {
 

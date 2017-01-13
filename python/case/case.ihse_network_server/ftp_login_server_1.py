@@ -47,7 +47,7 @@ while True:
 
 
         if data:
-            print >>sys.stderr, 'sending data back to the client'
+            print >>sys.stderr, ''
         else:
             print >>sys.stderr, 'no more data from', client_address
             break

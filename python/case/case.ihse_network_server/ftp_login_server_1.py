@@ -20,36 +20,36 @@ while True:
     try:
         print >>sys.stderr, 'connection from', client_address
 
-        # Receive the data in small chunks and retransmit it
-        ftp_data = '220 Service ready\r\n'
-        connection.sendall(ftp_data)
-        print >>sys.stderr, 'send "%s"' % ftp_data
-        data = connection.recv(1024)
-        print >>sys.stderr, 'recv "%s"' % data
+        # Receive the data_recv in small chunks and retransmit it
+        data_send = '220 Service ready\r\n'
+        connection.sendall(data_send)
+        print >>sys.stderr, 'send "%s"' % data_send
+        data_recv = connection.recv(1024)
+        print >>sys.stderr, 'recv "%s"' % data_recv
 
-        ftp_data = '331 User name ok, need password\r\n'
-        connection.sendall(ftp_data)
-        print >>sys.stderr, 'send "%s"' % ftp_data
-        data = connection.recv(1024)
-        print >>sys.stderr, 'recv "%s"' % data
+        data_send = '331 User name ok, need password\r\n'
+        connection.sendall(data_send)
+        print >>sys.stderr, 'send "%s"' % data_send
+        data_recv = connection.recv(1024)
+        print >>sys.stderr, 'recv "%s"' % data_recv
 
-        ftp_data = '230 User logged in\r\n'
-        connection.sendall(ftp_data)
-        print >>sys.stderr, 'send "%s"' % ftp_data
-        data = connection.recv(1024)
-        print >>sys.stderr, 'recv "%s"' % data
+        data_send = '230 User logged in\r\n'
+        connection.sendall(data_send)
+        print >>sys.stderr, 'send "%s"' % data_send
+        data_recv = connection.recv(1024)
+        print >>sys.stderr, 'recv "%s"' % data_recv
 
-        ftp_data = '221 Bye\r\n'
-        connection.sendall(ftp_data)
-        print >>sys.stderr, 'send "%s"' % ftp_data
-        data = connection.recv(1024)
-        print >>sys.stderr, 'recv "%s"' % data
+        data_send = '221 Bye\r\n'
+        connection.sendall(data_send)
+        print >>sys.stderr, 'send "%s"' % data_send
+        data_recv = connection.recv(1024)
+        print >>sys.stderr, 'recv "%s"' % data_recv
 
 
-        if data:
+        if data_recv:
             print >>sys.stderr, ''
         else:
-            print >>sys.stderr, 'no more data from', client_address
+            print >>sys.stderr, 'no more data_recv from', client_address
             break
         
     finally:

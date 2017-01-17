@@ -7,7 +7,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 # Bind the socket to the port
-server_address = ('192.168.0.130', 5555)
+server_address = ('localhost', 5555)
 print >>sys.stderr, 'starting up on %s port %s' % server_address
 sock.bind(server_address)
 

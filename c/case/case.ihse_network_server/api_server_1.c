@@ -49,9 +49,6 @@ int main (int argc, char *argv[]) {
             for (int i; i<read; i++)
                 printf("%02x ", buf[i]);
             printf("\n");
-
-                err = send(client_fd, buf, read, 0);
-            if (err < 0) on_error("Client write failed\n");
         }
     }
 

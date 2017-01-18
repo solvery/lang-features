@@ -2,6 +2,7 @@ import socket
 import struct 
 import time
 import sys
+import os
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -29,13 +30,15 @@ data_send1 = hex2bin([0x1b, 0x28, 0x53])
 try:
     
     # Send data
-    print_hex(data_send1)
-    sock.sendall(data_send1)
-
-    data = sock.recv(8192)
-    print_hex(data)
     while True:
-        time.sleep(50)
+        sock.sendall(data_send1)
+        data = sock.recv(8192)
+
+        #print_hex(data_send1)
+        #print_hex(data)
+        print os.getpid()
+
+        time.sleep(5)
 
 finally:
     print >>sys.stderr, 'closing socket'

@@ -1,7 +1,11 @@
 # every byte bit reverse
 import struct
+import sys 
 
-binfile=open("file_in",'rb')    
+file_in  = sys.argv[1]
+file_out = sys.argv[2]
+
+binfile=open(file_in,'rb')    
 data = binfile.read()
 
 def reverse(x, n):
@@ -16,6 +20,6 @@ for d in data:
     d_bin = struct.pack('B', reverse(d_hex[0], 8))
     d_bin_all = d_bin_all + d_bin;
 
-binfile2=open("file_reverse",'wb')    
+binfile2=open(file_out,'wb')    
 binfile2.write(d_bin_all)
 

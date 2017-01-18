@@ -3,7 +3,7 @@ import struct
 
 d_bin_all=''
 
-for d in range(0x0,0xff):
+for d in range(0x0,0x100):
 	d_bin = struct.pack('B', d)
 	d_bin_all = d_bin_all + d_bin;
 

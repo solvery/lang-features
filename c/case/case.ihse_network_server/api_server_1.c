@@ -14,7 +14,7 @@ int main (int argc, char *argv[]) {
 
     int server_fd, client_fd, err;
     struct sockaddr_in server, client;
-    char buf[BUFFER_SIZE];
+    char buff[BUFFER_SIZE];
 
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server_fd < 0) on_error("Could not create socket\n");
@@ -41,16 +41,17 @@ int main (int argc, char *argv[]) {
         if (client_fd < 0) on_error("Could not establish new connection\n");
 
         while (1) {
-            int read = recv(client_fd, buf, BUFFER_SIZE, 0);
+            int read = recv(client_fd, buff, BUFFER_SIZE, 0);
 
             if (!read) break; // done reading
             if (read < 0) on_error("Client read failed\n");
 
             for (int i; i<read; i++)
-                printf("%02x ", buf[i]);
+                printf("%02x ", buff[i]);
             printf("\n");
         }
     }
 
     return 0;
 }
+

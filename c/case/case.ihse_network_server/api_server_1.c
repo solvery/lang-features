@@ -5,7 +5,7 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 1024*8
 #define on_error(...) { fprintf(stderr, __VA_ARGS__); fflush(stderr); exit(1); }
 
 int main (int argc, char *argv[]) {

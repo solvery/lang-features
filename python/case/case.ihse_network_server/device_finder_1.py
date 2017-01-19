@@ -1,13 +1,15 @@
 import socket
 import struct
 
-host=''
+host='<broadcast>'
 port=5556
+
+addr_ba = (host, port)
 
 s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
 s.setsockopt(socket.SOL_SOCKET,socket.SO_BROADCAST,1)
-s.bind((host,port))
+s.bind(('',port))
 
 def print_hex(data):
     for d in data:
@@ -28,7 +30,10 @@ while 1:
     try:
         data,addr=s.recvfrom(8192)
         print "got data from",addr
-        s.sendto(data_resp1, addr)
-        print(data)
+        #print_hex(data)
+        cmd_p2 = struct.unpack('B', data[2])
+        if 0x55 == cmd_p2[0]:
+            s.sendto(data_resp1, addr_ba)
+        #    print(data)
     except KeyboardInterrupt:
         raise

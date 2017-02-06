@@ -49,8 +49,7 @@ int main()
 				if(fd == server_sockfd) 
 				{ 
 					client_len = sizeof(client_address); 
-					client_sockfd = accept(server_sockfd, 
-							(struct sockaddr *)&client_address, &client_len); 
+					client_sockfd = accept(server_sockfd, (struct sockaddr *)&client_address, &client_len); 
 					FD_SET(client_sockfd, &readfds);//将客户端socket加入到集合中
 					printf("adding client on fd %d\n", client_sockfd); 
 				} 

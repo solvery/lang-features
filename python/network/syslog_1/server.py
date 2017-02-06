@@ -1,6 +1,7 @@
 from socket import *
 
 server = "localhost"
+#server = "192.168.2.9"
 port = 514
 buf = 8192*4
 addr = (server,port)

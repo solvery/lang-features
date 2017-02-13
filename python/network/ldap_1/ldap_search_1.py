@@ -1,7 +1,7 @@
 import ldap
 
 try:
-    l = ldap.open("127.0.0.1")
+    l = ldap.open("192.168.0.9")
     l.protocol_version = ldap.VERSION3    
 except ldap.LDAPError, e:
     print e

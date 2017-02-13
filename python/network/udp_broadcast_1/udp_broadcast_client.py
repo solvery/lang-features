@@ -1,6 +1,6 @@
 import socket,sys
 
-addr=('<broadcast>',10000)
+addr=('<broadcast>', 5556)
 
 s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 s.setsockopt(socket.SOL_SOCKET,socket.SO_BROADCAST,1)

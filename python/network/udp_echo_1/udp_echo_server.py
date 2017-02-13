@@ -1,6 +1,6 @@
 import socket
 
-host=''
+host='localhost'
 port=10000
 
 s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)

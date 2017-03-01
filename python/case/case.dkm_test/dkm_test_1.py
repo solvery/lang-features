@@ -27,7 +27,7 @@ def dkm_uart_send(reg_addr, data):
     head = [0xAA, 0xAA, 0x55, 0x55, 0x01]
     pkg1 = head + reg_addr 
     checksum = cal_sum(pkg1)
-    checksum_hex = list((checksum/0x100, checksum%0x100))
+    checksum_hex = list((checksum%0x100, checksum/0x100))
     pkg2 = pkg1 + checksum_hex
     uart_send(hex2bin(pkg2))
     print_hex(pkg2)
@@ -41,7 +41,7 @@ def dkm_uart_read(reg_addr):
     head = [0xAA, 0xAA, 0x55, 0x55, 0x02]
     pkg1 = head + reg_addr
     checksum = cal_sum(pkg1)
-    checksum_hex = list((checksum/0x100, checksum%0x100))
+    checksum_hex = list((checksum%0x100, checksum/0x100))
     pkg2 = pkg1 + checksum_hex
     print_hex(pkg2)
     uart_send(hex2bin(pkg2))

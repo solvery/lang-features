@@ -31,10 +31,10 @@ def dkm_uart_send(reg_addr, data):
     write_checksum_hex = list((write_checksum/0x100, write_checksum%0x100))
     write_pkg2 = write_pkg1 + write_checksum_hex
     uart_send(hex2bin(write_pkg2))
-    print write_pkg2
+    print_hex(write_pkg2)
     write_ack = uart_recv()
-    print_hex(write_ack)
     write_ack_hex = struct.unpack('B', write_ack[0])
+    print_hex(write_ack_hex)
     if (write_ack_hex != 0xA5):
         print "write error"
 
@@ -67,7 +67,7 @@ def hex2bin(data_hex):
 
 def print_hex(data):
     for d in data:
-        print '%02x' % struct.unpack('B', d),
+        print '%02x' % d,
     print
     return
 

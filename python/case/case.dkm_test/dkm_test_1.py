@@ -25,17 +25,17 @@ def uart_recv():
         time.sleep(0.1)  
 
 def dkm_uart_send(reg_addr, data):
-    write_head = [0xAA, 0xAA, 0x55, 0x55, 0x01]
-    write_pkg1 = write_head + reg_addr 
-    write_checksum = cal_sum(write_pkg1)
-    write_checksum_hex = list((write_checksum/0x100, write_checksum%0x100))
-    write_pkg2 = write_pkg1 + write_checksum_hex
-    uart_send(hex2bin(write_pkg2))
-    print_hex(write_pkg2)
-    write_ack = uart_recv()
-    write_ack_hex = struct.unpack('B', write_ack[0])
-    print_hex(write_ack_hex)
-    if (write_ack_hex != 0xA5):
+    head = [0xAA, 0xAA, 0x55, 0x55, 0x01]
+    pkg1 = head + reg_addr 
+    checksum = cal_sum(pkg1)
+    checksum_hex = list((checksum/0x100, checksum%0x100))
+    pkg2 = pkg1 + checksum_hex
+    uart_send(hex2bin(pkg2))
+    print_hex(pkg2)
+    ack = uart_recv()
+    ack_hex = struct.unpack('B', ack[0])
+    print_hex(ack_hex)
+    if (ack_hex != 0xA5):
         print "write error"
 
 def dkm_uart_read(reg_addr):

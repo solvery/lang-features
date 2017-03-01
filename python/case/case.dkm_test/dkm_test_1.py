@@ -6,18 +6,17 @@ import time
 #  COM3修改成您老的使用的串口 
 ser = serial.Serial("COM4", 115200)  
 def main():  
-    while True:  
-        dkm_uart_send([0x16], [0x20])
-        data = dkm_uart_read([0x16])
-        print_hex(data)
-        ser.flushInput()  
-        time.sleep(0.1)  
+    dkm_uart_send([0x16], [0x20])
+    data = dkm_uart_read([0x16])
+    print_hex(bin2hex(data))
+    time.sleep(0.1)  
 
 def uart_send(data):
     ser.write(data)  
 
 def uart_recv():
     while True:  
+        ser.flushInput()
         count = ser.inWaiting()  
         if count != 0:  
             recv = ser.read(count)  
@@ -39,13 +38,15 @@ def dkm_uart_send(reg_addr, data):
         print "write error"
 
 def dkm_uart_read(reg_addr):
-    read_head = [0xAA, 0xAA, 0x55, 0x55, 0x02]
-    read_pkg1 = read_head + reg_addr
-    read_checksum = cal_sum(read_pkg1)
-    read_pkg2 = read_pkg1 + read_checksum
-    uart_send(hex2bin(read_pkg2))
-    read_data = uart_recv()
-    return read_data
+    head = [0xAA, 0xAA, 0x55, 0x55, 0x02]
+    pkg1 = head + reg_addr
+    checksum = cal_sum(pkg1)
+    checksum_hex = list((checksum/0x100, checksum%0x100))
+    pkg2 = pkg1 + checksum_hex
+    print_hex(pkg2)
+    uart_send(hex2bin(pkg2))
+    data = uart_recv()
+    return data
 
 def cal_sum(data):
     data_sum = 0
@@ -54,7 +55,6 @@ def cal_sum(data):
     return data_sum
      
 def bin2hex(data_bin):
-    data_hex=''
     for d in data_bin:
         data_hex = data_hex + struct.unpack('B', d)
     return data_hex

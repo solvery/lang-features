@@ -3,15 +3,16 @@ import serial
 import struct
 import time  
 
-ascii_code = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+\|';:/?.,<>~"
+keyboard_char = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+\|';:/?.,<>~"
+test1 = [0x82, 0x04, 0x80, 0x04, 0x82, 0x04];
 
 #  COMx修改成您老的使用的串口 
 ser = serial.Serial("COM4", 9600)  
 def main():  
     while True:  
-        ser.write(ascii_code)  
+        ser.write(test1)  
             
-        time.sleep(0.1)  
+        time.sleep(20.1)  
      
 if __name__ == '__main__':  
     try:  

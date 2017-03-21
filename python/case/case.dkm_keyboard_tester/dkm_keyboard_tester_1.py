@@ -37,19 +37,20 @@ sso=key_lshift + key_lshift + 'o'
 escx2=key_esc + key_esc
 
 def main():  
-    while True:  
-        
-        hid_send(key_esc)
-        hid_send(key_f12)
+    #while True:  
+    
+    hid_send(key_lshift + key_esc)
+    hid_send(key_f12)
+    hid_send(key_f12)
 
-        hid_send("open osd", 3)
-        hid_send(key_lshift + key_lshift + 'o', 2)
-        hid_send(key_esc, 2)
-        hid_send(key_down, 2)
-        hid_send(key_down, 2)
-        hid_send(key_down, 2)
-            
-        time.sleep(20.1)
+    hid_send("open osd", 3)
+    hid_send(key_lshift + key_lshift + 'o', 2)
+    hid_send(key_esc, 2)
+    hid_send(key_down, 1)
+    hid_send(key_down, 1)
+    hid_send(key_down, 1)
+    hid_send(key_down, 1)
+    hid_send(key_down, 1)
      
 if __name__ == '__main__':  
     try:  

@@ -12,7 +12,7 @@ def hex2bin(data):
         data_bin_array = data_bin_array + struct.pack('B', d)
     return data_bin_array
 
-def hid_send(data, sleep):
+def hid_send(data, sleep=0):
     ser.write(data)  
     time.sleep(sleep)  
 
@@ -21,8 +21,8 @@ key_esc     = hex2bin([0x1b])
 key_enter   = hex2bin([0x0a])
 key_bs      = hex2bin([0x08])
 key_space   = hex2bin([0x20])
-key_+       = hex2bin([0x2b])
-key_-       = hex2bin([0x2d])
+key_add     = hex2bin([0x2b])
+key_sub     = hex2bin([0x2d])
 key_tab     = hex2bin([0x80, 0x2b])
 key_pageup  = hex2bin([0x80, 0x4b])
 key_pagedown= hex2bin([0x80, 0x4e])
@@ -39,15 +39,17 @@ escx2=key_esc + key_esc
 def main():  
     while True:  
         
-        hid_send(key_esc, 0)
-        hid_send(key_f12, 0)
+        hid_send(key_esc)
+        hid_send(key_f12)
 
         hid_send("open osd", 3)
         hid_send(key_lshift + key_lshift + 'o', 2)
-        hid_send(key_esc, 0)
-        hid_send(key_esc)
+        hid_send(key_esc, 2)
+        hid_send(key_down, 2)
+        hid_send(key_down, 2)
+        hid_send(key_down, 2)
             
-        time.sleep(2.1)
+        time.sleep(20.1)
      
 if __name__ == '__main__':  
     try:  

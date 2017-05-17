@@ -12,3 +12,6 @@ virtualenv
 https://www.zhihu.com/question/24590883
 
 network
+
+排列组合
+	import itertools

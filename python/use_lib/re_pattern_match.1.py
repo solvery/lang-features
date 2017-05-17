@@ -3,16 +3,17 @@
 
 import re
 
-str1 = 'hello world! hello'
+str1 = "swHandleInsertExtender(): PORT=63 EXT=50638331:1"
  
 # 将正则表达式编译成Pattern对象, 工厂方法
-pattern = re.compile(r'hello')
+pattern = re.compile(r'PORT=(\d+) EXT=(\d+)')
  
 # 使用Pattern匹配文本，获得匹配结果，无法匹配时将返回None
-match = pattern.match(str1)
+match = pattern.search(str1)
  
 if match:
     # 使用Match获得分组信息
-    print match.group()
+    print match.group(1), 
+    print match.group(2)
  
 

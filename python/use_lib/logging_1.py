@@ -6,7 +6,7 @@ formatter="%(asctime)s %(levelname)-12s %(message)s"
 
 logging.basicConfig(
         filename="config.log",
-        filemode="w",
+        filemode="a",
         format=formatter,
         level=logging.INFO);
 

@@ -404,12 +404,18 @@ def uart_send(data):
 def uart_recv():
     logging.info("uart read")
     data = ''
-    while ser.inWaiting() > 0:
-        data += ser.read(1)
-    if (data != ''):
-        return data
-    else:
-        return '\b0x0'
+    for i in range(1,10):
+        logging.info("uart read")
+        time.sleep(0.2)  
+        count = ser.inWaiting()  
+        if count != 0:  
+            buf = ser.read(count)  
+            data += buf
+        else:
+            if data != '':
+                return data
+            else:
+                return '\b0'
 
 def print_hex(data):
     logging.info(" ".join(("%02x" % n) for n in data))

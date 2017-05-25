@@ -91,6 +91,10 @@ def get_cpu_to_con(conid):
 
 def check_size(data):
     #print "%d %d" % (data[3], len(data))
+    if len(data) < 4:
+        logging.info("check size <3")
+        return False
+
     if (data[3]) == (len(data)):
         return True
     else: 
@@ -102,12 +106,12 @@ def uart_send(data):
 
 def uart_recv():
     while True:  
-        #ser.flushInput()
         logging.info("uart read")
         count = ser.inWaiting()  
         if count != 0:  
             recv = ser.read(count)  
             return recv
+        ser.flushInput()
         time.sleep(0.1)  
 
 def print_hex(data):
@@ -128,6 +132,7 @@ def hex2bin(data_hex):
 
 
 def main():  
+    logging.info("dkm_api_sender_uart start"
     while True:  
         get_system_time()
         switch_off_all_ports()

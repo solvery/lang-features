@@ -37,6 +37,12 @@ def get_system_time():
     recv_bytes = bin2hex(recv)
     print_hex(recv_bytes)
     
+    if len(recv_bytes) >= 1:
+        if recv_bytes == 0x1b:
+            logging.error("head is not 0x1b")
+    else:
+        logging.error("recv size == 0")
+
     if check_size(recv_bytes) == False:
         logging.error("check_size error")
     else:

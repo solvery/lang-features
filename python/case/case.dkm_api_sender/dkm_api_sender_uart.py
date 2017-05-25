@@ -6,7 +6,8 @@ import time
 import logging
 
 #  COM3修改成您老的使用的串口 
-ser = serial.Serial("COM3", 115200)  
+serial_port = sys.argv[1]
+ser = serial.Serial(serial_port, 115200)  
 
 # logging
 formatter="%(asctime)s %(levelname)-12s %(message)s"

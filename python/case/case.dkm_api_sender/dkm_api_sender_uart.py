@@ -94,6 +94,7 @@ def get_cpu_to_con(conid):
         logging.info("CON=%04d, CPU=%04d" % (conid, cpuid))
 
 # 1B 5B 4A--- 6.2.4 Get CPU devices connected to CON devices
+# 获得的是主机内部的连接关系，外设不存在也可以获得
 def get_cpu_to_cons(conid_list):
     con_cnt = len(conid_list)
     cmd_size = 7+con_cnt*2

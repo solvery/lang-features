@@ -105,13 +105,13 @@ def uart_send(data):
     logging.info("uart write")
 
 def uart_recv():
-    while True:  
+    for i in range(1,10):
         logging.info("uart read")
         count = ser.inWaiting()  
         if count != 0:  
             recv = ser.read(count)  
             return recv
-        ser.flushInput()
+        #ser.flushInput()
         time.sleep(0.1)  
 
 def print_hex(data):
@@ -132,7 +132,7 @@ def hex2bin(data_hex):
 
 
 def main():  
-    logging.info("dkm_api_sender_uart start"
+    logging.info("dkm_api_sender_uart start")
     while True:  
         get_system_time()
         switch_off_all_ports()

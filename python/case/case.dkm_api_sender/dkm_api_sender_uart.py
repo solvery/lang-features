@@ -243,7 +243,10 @@ def main():
     logging.info("dkm_api_sender_uart start")
     while True:  
         get_con_to_cpu(cpuid=1003)
-        time.sleep(2)  
+        for i in range(1001, 1009):
+            get_con_to_cpu(cpuid=i)
+            time.sleep(1)
+        time.sleep(2)
     while False:  
         get_system_time()
         switch_off_all_ports()

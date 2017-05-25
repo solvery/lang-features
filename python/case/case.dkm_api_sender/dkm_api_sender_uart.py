@@ -188,10 +188,10 @@ def set_con_to_cpus(cpu_con_list):
     cmd_size = 7+con_cnt*4
     cmd = [0x1b, 0x5b, 0x4b, cmd_size, 0x00, con_cnt, 0x00]
     for i in range(con_cnt):
-        con = [cpu_con_list[i*2]%0x100, cpu_con_list[i*2]/0x100]
-        cpu = [cpu_con_list[i*2+1]%0x100, cpu_con_list[i*2+1]/0x100]
-        logging.info("set_cpu_to_cons, conid=%04d cpuid=%04d" % (cpu_con_list[i*2], cpu_con_list[i*2+1]))
-        cmd += con + cpu
+        cpu = [cpu_con_list[i*2]%0x100, cpu_con_list[i*2]/0x100]
+        con = [cpu_con_list[i*2+1]%0x100, cpu_con_list[i*2+1]/0x100]
+        logging.info("set_cpu_to_cons, conid=%04d cpuid=%04d" % (cpu_con_list[i*2+1], cpu_con_list[i*2]))
+        cmd += cpu + con
     uart_send(hex2bin(cmd))
     print_hex(cmd)
 
@@ -318,11 +318,17 @@ def hex2bin(data_hex):
 def main():  
     logging.info("dkm_api_sender_uart start")
     while True:  
+        time.sleep(2)
+    while False:  
+        switch_off_all_ports()
+        get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
+        set_con_to_cpus(cpu_con_list=[3001, 1001, 3002, 1002, 3006, 1003])
+        get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
+
         set_cpu_to_cons(cpu_con_list=[3001, 1001, 3002, 1002, 3006, 1003])
         get_con_to_cpus(cpuid_list=[1001, 1002, 1003, 1004, 1005, 1006])
         get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
-        time.sleep(2)
-    while False:  
+
         get_con_to_cpu(cpuid=1003)
         get_con_to_cpus(cpuid_list=[1003])
         set_cpu_to_cons(cpu_con_list=[3001, 1001, 3002, 1002])

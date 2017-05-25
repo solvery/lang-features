@@ -34,11 +34,10 @@ def get_system_time():
     uart_send(hex2bin(cmd))
 
     recv = uart_recv()
-    print_hex(recv)
     recv_bytes = bin2hex(recv)
-    check_size_result = check_size(recv_bytes)
-    print check_size_result
-    if check_size_result == False:
+    print_hex(recv_bytes)
+    
+    if check_size(recv_bytes) == False:
         logging.error("check_size error")
     else:
         second  = recv_bytes[5]
@@ -76,7 +75,7 @@ def get_conn_ext(conid):
         logging.info("conid=%04d, cpuid=%04d" % (conid, cpuid))
 
 def check_size(data):
-    print "%d %d" % (data[3], len(data))
+    #print "%d %d" % (data[3], len(data))
     if (data[3]) == (len(data)):
         return True
     else: 
@@ -97,10 +96,7 @@ def uart_recv():
     logging.info("uart read")
 
 def print_hex(data):
-    for d in data:
-        print '%02x' % struct.unpack('B', d),
-    print
-    return
+    logging.info(" ".join(("%02x" % n) for n in data))
 
 def bin2hex(data_bin):
     data_hex_array = []

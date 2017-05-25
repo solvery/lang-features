@@ -61,18 +61,27 @@ def switch_off_all_ports():
         else:
             logging.error("nak")
 
-def get_conn_ext(conid):
-    cmd = [0x1b, 0x5b, 0x48, 0x07, 0x00, conid%0x100, conid/100]
+# 1B 5B 48--- 6.2.2 Get CPU device connected to CON device
+def get_cpu_to_con(conid):
+    logging.info("get_cpu_to_con, conid=%04d" % (conid))
+    cmd = [0x1b, 0x5b, 0x48, 0x07, 0x00, conid%0x100, conid/0x100]
     uart_send(hex2bin(cmd))
+    print_hex(cmd)
 
     recv = uart_recv()
     recv_bytes = bin2hex(recv)
+    print_hex(recv_bytes)
+
+    if len(recv_bytes) == 1 :
+        logging.warn("nak")
+        return
+        
     if check_size(recv_bytes) == False:
         logging.error("check_size error")
     else:
         conid = recv_bytes[5] + recv_bytes[6]*0x100
         cpuid = recv_bytes[7] + recv_bytes[8]*0x100
-        logging.info("conid=%04d, cpuid=%04d" % (conid, cpuid))
+        logging.info("CON=%04d, CPU=%04d" % (conid, cpuid))
 
 def check_size(data):
     #print "%d %d" % (data[3], len(data))
@@ -114,8 +123,12 @@ def hex2bin(data_hex):
 
 def main():  
     while True:  
-        #get_system_time()
-        #switch_off_all_ports()
+        get_system_time()
+        switch_off_all_ports()
+
+        for conid in range(3001, 3009):
+            get_cpu_to_con(conid)
+            time.sleep(1)  
         time.sleep(1)  
      
 if __name__ == '__main__':  

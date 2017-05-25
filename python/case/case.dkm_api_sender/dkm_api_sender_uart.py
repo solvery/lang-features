@@ -181,6 +181,29 @@ def get_cpu_to_cons(conid_list):
             logging.info("GET CON=%04d, CPU=%04d" % (conid, cpuid))
 
 
+# 1B 5B 50--- 6.2.10 Set CON device connection to CPU device(bidirectional)
+def set_con_and_cpu(cpu_con):
+    logging.info("set_con_and_cpu")
+    cmd = [0x1b, 0x5b, 0x50, 0x09, 0x00]
+    con = cpu_con[0]
+    cpu = cpu_con[1]
+    logging.info("set_cpu_to_cons, conid=%04d cpuid=%04d" % (cpu, con))
+    cmd += cpu + con
+    uart_send(hex2bin(cmd))
+    print_hex(cmd)
+
+    recv = uart_recv()
+    recv_bytes = bin2hex(recv)
+    print_hex(recv_bytes)
+
+    if len(recv_bytes) != 1 :
+        logging.error("respone len != 1")
+        return
+    if recv_bytes[0] == 0x06:
+        logging.info("set_con_and_cpu ok")
+    else:
+        logging.error("nak")
+
 # 1B 5B 4F--- 6.2.9 Set connection of CON devices to CPU devices
 def set_con_to_cpus(cpu_con_list):
     logging.info("set_cpu_to_cons")
@@ -318,6 +341,9 @@ def hex2bin(data_hex):
 def main():  
     logging.info("dkm_api_sender_uart start")
     while True:  
+        switch_off_all_ports()
+        set_con_and_cpu([3006, 1003])
+        get_con_to_cpu(cpuid=1003)
         time.sleep(2)
     while False:  
         switch_off_all_ports()

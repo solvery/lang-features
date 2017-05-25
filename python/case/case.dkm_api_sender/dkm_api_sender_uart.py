@@ -27,18 +27,18 @@ console.setFormatter(formatter)
 logging.getLogger('').addHandler(console)
 
 # API命令
-cmd_get_system_time = \
-    [0x1b, 0x28, 0x53]
-cmd_switch_off_all_ports = \
-    [0x1b, 0x5b, 0x41]
 
 def get_system_time():
     logging.info("get_system_time")
-    uart_send(hex2bin(cmd_get_system_time))
+    cmd = [0x1b, 0x28, 0x53]
+    uart_send(hex2bin(cmd))
 
     recv = uart_recv()
+    print_hex(recv)
     recv_bytes = bin2hex(recv)
-    if check_size(recv_bytes) == False:
+    check_size_result = check_size(recv_bytes)
+    print check_size_result
+    if check_size_result == False:
         logging.error("check_size error")
     else:
         second  = recv_bytes[5]
@@ -52,7 +52,8 @@ def get_system_time():
 
 def switch_off_all_ports():
     logging.info("switch_off_all_ports")
-    uart_send(hex2bin(cmd_switch_off_all_ports))
+    cmd = [0x1b, 0x5b, 0x41]
+    uart_send(hex2bin(cmd))
     recv = uart_recv()
     recv_bytes = bin2hex(recv)
     if (len(recv_bytes) == 1):
@@ -75,27 +76,38 @@ def get_conn_ext(conid):
         logging.info("conid=%04d, cpuid=%04d" % (conid, cpuid))
 
 def check_size(data):
-    if data[3] == len(data):
+    print "%d %d" % (data[3], len(data))
+    if (data[3]) == (len(data)):
         return True
     else: 
         return False
 
 def uart_send(data):
     ser.write(data)  
+    logging.info("uart write")
 
 def uart_recv():
     while True:  
-        ser.flushInput()
+        #ser.flushInput()
         count = ser.inWaiting()  
         if count != 0:  
             recv = ser.read(count)  
             return recv
         time.sleep(0.1)  
+    logging.info("uart read")
+
+def print_hex(data):
+    for d in data:
+        print '%02x' % struct.unpack('B', d),
+    print
+    return
 
 def bin2hex(data_bin):
+    data_hex_array = []
     for d in data_bin:
-        data_hex = data_hex + struct.unpack('B', d)
-    return data_hex
+        data_hex = struct.unpack('B', d)
+        data_hex_array = data_hex_array + [data_hex[0]]
+    return data_hex_array
 
 def hex2bin(data_hex):
     data_bin=''
@@ -107,7 +119,7 @@ def hex2bin(data_hex):
 def main():  
     while True:  
         get_system_time()
-        time.sleep(0.1)  
+        time.sleep(1)  
      
 if __name__ == '__main__':  
     try:  

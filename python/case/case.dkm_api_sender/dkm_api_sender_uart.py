@@ -1,5 +1,6 @@
 #encoding=utf-8
 
+import sys
 import serial  
 import struct
 import time  
@@ -47,7 +48,7 @@ def get_system_time():
         date    = recv_bytes[9]
         month   = recv_bytes[10]
         year    = recv_bytes[11]
-        logging.info("system time is: 20%02x-%02x-%02x 02x:%02x:%02x day:%02x", % (year, month, date, hour, minute, second))
+        logging.info("system time is: 20%02x-%02x-%02x 02x:%02x:%02x day:%02x" % (year, month, date, hour, minute, second))
 
 def switch_off_all_ports():
     logging.info("switch_off_all_ports")
@@ -71,7 +72,7 @@ def get_conn_ext(conid):
     else:
         conid = recv_bytes[5] + recv_bytes[6]*0x100
         cpuid = recv_bytes[7] + recv_bytes[8]*0x100
-        logging.info("conid=%04d, cpuid=%04d" % ())
+        logging.info("conid=%04d, cpuid=%04d" % (conid, cpuid))
 
 def check_size(data):
     if data[3] == len(data):
@@ -105,16 +106,7 @@ def hex2bin(data_hex):
 
 def main():  
     while True:  
-        count = ser.inWaiting()  
-        if count != 0:  
-            recv = ser.read(count)  
-            ser.write(recv)  
-            
-            for data in recv:
-                data_hex = struct.unpack('B', data)
-                print '%02x' % data_hex,
-            print 
-        ser.flushInput()  
+        get_system_time()
         time.sleep(0.1)  
      
 if __name__ == '__main__':  

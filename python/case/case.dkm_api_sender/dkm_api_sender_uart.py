@@ -43,11 +43,11 @@ def get_system_time():
         second  = recv_bytes[5]
         minute  = recv_bytes[6]
         hour    = recv_bytes[7]
-        day     = recv_bytes[8]
+        week    = recv_bytes[8]
         date    = recv_bytes[9]
         month   = recv_bytes[10]
         year    = recv_bytes[11]
-        logging.info("system time is: 20%02x-%02x-%02x 02x:%02x:%02x day:%02x" % (year, month, date, hour, minute, second))
+        logging.info("system time is: 20%02x-%02x-%02x %02x:%02x:%02x week:%x" % (year, month, date, hour, minute, second, week))
 
 def switch_off_all_ports():
     logging.info("switch_off_all_ports")
@@ -88,12 +88,12 @@ def uart_send(data):
 def uart_recv():
     while True:  
         #ser.flushInput()
+        logging.info("uart read")
         count = ser.inWaiting()  
         if count != 0:  
             recv = ser.read(count)  
             return recv
         time.sleep(0.1)  
-    logging.info("uart read")
 
 def print_hex(data):
     logging.info(" ".join(("%02x" % n) for n in data))

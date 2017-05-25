@@ -285,6 +285,41 @@ def set_con_and_cpus(con_cpu_pairs):
         logging.error("nak")
 
 
+# 1B 5B 53--- 6.2.13 Set connection for all CON devices and CPU devices
+def set_all_connections(con_cpu_pairs1, con_cpu_pairs2):
+    logging.info("set_all_connections")
+
+    pairs_cnt1 = len(con_cpu_pairs1)/2
+    pairs_cnt2 = len(con_cpu_pairs2)/2
+    cmd_size = 7+pairs_cnt1*4+pairs_cnt2*4
+    cmd = [0x1b, 0x5b, 0x4b, cmd_size, 0x00, pairs_cnt1, 0x00, pairs_cnt2, 0x00]
+    for i in range(pairs_cnt1):
+        con = [con_cpu_pairs1[i*2]%0x100, con_cpu_pairs1[i*2]/0x100]
+        cpu = [con_cpu_pairs1[i*2+1]%0x100, con_cpu_pairs1[i*2+1]/0x100]
+        logging.info("set_cpu_to_cons, conid=%04d cpuid=%04d" % (con_cpu_pairs1[i*2], con_cpu_pairs1[i*2+1]))
+        cmd += cpu + con
+    for i in range(pairs_cnt2):
+        con = [con_cpu_pairs2[i*2]%0x100, con_cpu_pairs2[i*2]/0x100]
+        cpu = [con_cpu_pairs2[i*2+1]%0x100, con_cpu_pairs2[i*2+1]/0x100]
+        logging.info("set_con_and_cpus, conid=%04d cpuid=%04d" % (con_cpu_pairs2[i*2], con_cpu_pairs2[i*2+1]))
+        cmd += con + cpu
+
+    uart_send(hex2bin(cmd))
+    print_hex(cmd)
+
+    recv = uart_recv()
+    recv_bytes = bin2hex(recv)
+    print_hex(recv_bytes)
+
+    if len(recv_bytes) != 1 :
+        logging.error("respone len != 1")
+        return
+    if recv_bytes[0] == 0x06:
+        logging.info("set_all_connections ok")
+    else:
+        logging.error("nak")
+
+
 # 1B 5B 4B--- 6.2.5 Set connections of CPU devices to CON devices
 def set_cpu_to_cons(con_cpu_pairs):
     logging.info("set_cpu_to_cons")

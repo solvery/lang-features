@@ -435,50 +435,76 @@ def hex2bin(data_hex):
 
 def main():  
     logging.info("dkm_api_sender_uart start")
-    while True:  
+    while False:  
         #set_all_connections([3001, 1001], [3002, 1002])
         #set_all_connections([3001, 3002, 3003, 3004, 3005, 3006], [3001, 3002, 3003, 3004, 3005, 3006])
         get_all_connections()
         time.sleep(2)
-    while False:  
+    while True:  
         get_all_connections()
+        time.sleep(1)  
         
         switch_off_all_ports()
+        time.sleep(1)  
         get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
+        time.sleep(1)  
         set_con_and_cpus(con_cpu_pairs=[3001, 1001, 3002, 1002, 3006, 1003])
+        time.sleep(1)  
         get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
+        time.sleep(1)  
 
         switch_off_all_ports()
+        time.sleep(1)  
         set_con_and_cpu([3006, 1003])
+        time.sleep(1)  
         get_con_to_cpu(cpuid=1003)
+        time.sleep(1)  
 
         switch_off_all_ports()
+        time.sleep(1)  
         get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
+        time.sleep(1)  
         set_con_to_cpus(con_cpu_pairs=[3001, 1001, 3002, 1002, 3006, 1003])
+        time.sleep(1)  
         get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
+        time.sleep(1)  
 
         set_cpu_to_cons(con_cpu_pairs=[3001, 1001, 3002, 1002, 3006, 1003])
+        time.sleep(1)  
         get_con_to_cpus(cpuid_list=[1001, 1002, 1003, 1004, 1005, 1006])
+        time.sleep(1)  
         get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
+        time.sleep(1)  
 
         get_con_to_cpu(cpuid=1003)
+        time.sleep(1)  
         get_con_to_cpus(cpuid_list=[1003])
+        time.sleep(1)  
         set_cpu_to_cons(con_cpu_pairs=[3001, 1001, 3002, 1002])
+        time.sleep(1)  
         get_con_to_cpus(cpuid_list=[1001, 1002, 1003, 1004, 1005, 1006])
+        time.sleep(1)  
 
         get_system_time()
+        time.sleep(1)  
         switch_off_all_ports()
+        time.sleep(1)  
 
         for conid in range(3001, 3009):
             get_cpu_to_con(conid)
             time.sleep(1)  
 
         switch_off_all_ports()
+        time.sleep(1)  
         set_cpu_to_con(cpuid=1003, conid=3006)
+        time.sleep(1)  
 
         get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
+        time.sleep(1)  
         set_cpu_to_cons(con_cpu_pairs=[3006, 1003])
+        time.sleep(1)  
         set_cpu_to_cons(con_cpu_pairs=[3001, 1001, 3002, 1002])
+        time.sleep(1)  
 
         get_con_to_cpu(cpuid=1003)
         for i in range(1001, 1009):

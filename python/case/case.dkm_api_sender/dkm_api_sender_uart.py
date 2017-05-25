@@ -176,7 +176,25 @@ def set_cpu_to_cons(cpu_con_list):
         logging.error("nak")
 
 
-# 1B 5B 49--- 6.2.3 Set CPU device connection to CON device
+# 1B 5B 4D--- 6.2.7 Set CON device connection to CPU device
+def set_con_to_cpu(conid, cpuid):
+    logging.info("set_cpu_to_con, conid=%04d, cpuid=%04d" % (conid, cpuid))
+    cmd = [0x1b, 0x5b, 0x4d, 0x09, 0x00, cpuid%0x100, cpuid/0x100, conid%0x100, conid/0x100]
+    uart_send(hex2bin(cmd))
+    print_hex(cmd)
+
+    recv = uart_recv()
+    recv_bytes = bin2hex(recv)
+    print_hex(recv_bytes)
+
+    if len(recv_bytes) != 1 :
+        logging.error("respone len != 1")
+        return
+    if recv_bytes[0] == 0x06:
+        logging.info("SET CON=%04d CPU=%04d" % (conid, cpuid))
+    else:
+        logging.error("nak")
+ # 1B 5B 49--- 6.2.3 Set CPU device connection to CON device
 def set_cpu_to_con(conid, cpuid):
     logging.info("set_cpu_to_con, conid=%04d, cpuid=%04d" % (conid, cpuid))
     cmd = [0x1b, 0x5b, 0x49, 0x09, 0x00, conid%0x100, conid/0x100, cpuid%0x100, cpuid/0x100]
@@ -242,10 +260,7 @@ def hex2bin(data_hex):
 def main():  
     logging.info("dkm_api_sender_uart start")
     while True:  
-        get_con_to_cpu(cpuid=1003)
-        for i in range(1001, 1009):
-            get_con_to_cpu(cpuid=i)
-            time.sleep(1)
+        set_con_to_cpu(cpuid=1003, conid=3006)
         time.sleep(2)
     while False:  
         get_system_time()
@@ -261,6 +276,11 @@ def main():
         get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
         set_cpu_to_cons(cpu_con_list=[3006, 1003])
         set_cpu_to_cons(cpu_con_list=[3001, 1001, 3002, 1002])
+
+        get_con_to_cpu(cpuid=1003)
+        for i in range(1001, 1009):
+            get_con_to_cpu(cpuid=i)
+            time.sleep(1)
 
         time.sleep(1)  
      

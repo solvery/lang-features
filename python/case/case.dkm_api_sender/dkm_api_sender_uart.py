@@ -113,6 +113,7 @@ def uart_recv():
             return recv
         #ser.flushInput()
         time.sleep(0.1)  
+    return '\b0'
 
 def print_hex(data):
     logging.info(" ".join(("%02x" % n) for n in data))

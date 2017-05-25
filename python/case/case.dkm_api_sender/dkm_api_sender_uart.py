@@ -291,8 +291,8 @@ def set_all_connections(con_cpu_pairs1, con_cpu_pairs2):
 
     pairs_cnt1 = len(con_cpu_pairs1)/2
     pairs_cnt2 = len(con_cpu_pairs2)/2
-    cmd_size = 7+pairs_cnt1*4+pairs_cnt2*4
-    cmd = [0x1b, 0x5b, 0x4b, cmd_size, 0x00, pairs_cnt1, 0x00, pairs_cnt2, 0x00]
+    cmd_size = 9+pairs_cnt1*4+pairs_cnt2*4
+    cmd = [0x1b, 0x5b, 0x53, cmd_size, 0x00, pairs_cnt1, 0x00, pairs_cnt2, 0x00]
     for i in range(pairs_cnt1):
         con = [con_cpu_pairs1[i*2]%0x100, con_cpu_pairs1[i*2]/0x100]
         cpu = [con_cpu_pairs1[i*2+1]%0x100, con_cpu_pairs1[i*2+1]/0x100]
@@ -436,9 +436,13 @@ def hex2bin(data_hex):
 def main():  
     logging.info("dkm_api_sender_uart start")
     while True:  
+        #set_all_connections([3001, 1001], [3002, 1002])
+        #set_all_connections([3001, 3002, 3003, 3004, 3005, 3006], [3001, 3002, 3003, 3004, 3005, 3006])
         get_all_connections()
         time.sleep(2)
     while False:  
+        get_all_connections()
+        
         switch_off_all_ports()
         get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
         set_con_and_cpus(con_cpu_pairs=[3001, 1001, 3002, 1002, 3006, 1003])

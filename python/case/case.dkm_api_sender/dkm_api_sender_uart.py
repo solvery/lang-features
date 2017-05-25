@@ -93,6 +93,36 @@ def get_cpu_to_con(conid):
         cpuid = recv_bytes[7] + recv_bytes[8]*0x100
         logging.info("CON=%04d, CPU=%04d" % (conid, cpuid))
 
+# 1B 5B 4A--- 6.2.4 Get CPU devices connected to CON devices
+def get_cpu_to_cons(conid_list):
+    con_cnt = len(conid_list)
+    cmd_size = 5+con_cnt*2
+    cmd = [0x1b, 0x5b, 0x4a, cmd_size, con_cnt]
+    for i in range(con_cnt):
+        con = [conid_list[i]%0x100, conid_list[i]/0x100]
+        logging.info("get_cpu_to_cons, conid=%04d" % (conid_list[i]))
+        cmd += con
+    uart_send(hex2bin(cmd))
+    print_hex(cmd)
+
+    recv = uart_recv()
+    recv_bytes = bin2hex(recv)
+    print_hex(recv_bytes)
+
+    # 有的conid会返回nak 
+    if len(recv_bytes) == 1 :
+        logging.warn("nak")
+        return
+        
+    if check_size(recv_bytes) == False:
+        logging.error("check_size error")
+    else:
+        con_cnt = recv_bytes[4]
+        for i in range(con_cnt):
+            conid = recv_bytes[5+i*4] + recv_bytes[6+i*4]*0x100
+            cpuid = recv_bytes[7+i*4] + recv_bytes[8+i*4]*0x100
+            logging.info("GET CON=%04d, CPU=%04d" % (conid, cpuid))
+
 # 1B 5B 49--- 6.2.3 Set CPU device connection to CON device
 def set_cpu_to_con(conid, cpuid):
     logging.info("set_cpu_to_con, conid=%04d, cpuid=%04d" % (conid, cpuid))
@@ -159,8 +189,7 @@ def hex2bin(data_hex):
 def main():  
     logging.info("dkm_api_sender_uart start")
     while True:  
-        switch_off_all_ports()
-        set_cpu_to_con(cpuid=1003, conid=3006)
+        get_cpu_to_cons(conid_list=[3006])
         time.sleep(2)  
     while False:  
         get_system_time()
@@ -169,6 +198,10 @@ def main():
         for conid in range(3001, 3009):
             get_cpu_to_con(conid)
             time.sleep(1)  
+
+        switch_off_all_ports()
+        set_cpu_to_con(cpuid=1003, conid=3006)
+
         time.sleep(1)  
      
 if __name__ == '__main__':  

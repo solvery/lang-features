@@ -56,7 +56,7 @@ def switch_off_all_ports():
     recv = uart_recv()
     recv_bytes = bin2hex(recv)
     if (len(recv_bytes) == 1):
-        if recv_bytes == 0x06:
+        if recv_bytes[0] == 0x06:
             logging.info("ack")
         else:
             logging.error("nak")
@@ -114,7 +114,8 @@ def hex2bin(data_hex):
 
 def main():  
     while True:  
-        get_system_time()
+        #get_system_time()
+        #switch_off_all_ports()
         time.sleep(1)  
      
 if __name__ == '__main__':  

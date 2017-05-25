@@ -185,9 +185,9 @@ def get_cpu_to_cons(conid_list):
 def set_con_and_cpu(cpu_con):
     logging.info("set_con_and_cpu")
     cmd = [0x1b, 0x5b, 0x50, 0x09, 0x00]
-    con = cpu_con[0]
-    cpu = cpu_con[1]
-    logging.info("set_cpu_to_cons, conid=%04d cpuid=%04d" % (cpu, con))
+    con = [cpu_con[0]%0x100, cpu_con[0]/0x100]
+    cpu = [cpu_con[1]%0x100, cpu_con[1]/0x100]
+    logging.info("set_cpu_to_cons, conid=%04d cpuid=%04d" % (cpu_con[0], cpu_con[1]))
     cmd += cpu + con
     uart_send(hex2bin(cmd))
     print_hex(cmd)

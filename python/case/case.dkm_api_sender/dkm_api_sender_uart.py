@@ -302,6 +302,7 @@ def set_con_to_cpu(conid, cpuid):
         logging.info("SET CON=%04d CPU=%04d" % (conid, cpuid))
     else:
         logging.error("nak")
+
  # 1B 5B 49--- 6.2.3 Set CPU device connection to CON device
 def set_cpu_to_con(conid, cpuid):
     logging.info("set_cpu_to_con, conid=%04d, cpuid=%04d" % (conid, cpuid))

@@ -135,14 +135,18 @@ def get_all_connections():
     if check_size(recv_bytes) == False:
         logging.error("check_size error")
     else:
-        con_cnt = recv_bytes[5]
+        cpu_cnt = recv_bytes[5]
+        con_cnt = recv_bytes[7]
+        for i in range(cpu_cnt):
+            cpuid = recv_bytes[ 9+i*4] + recv_bytes[10+i*4]*0x100
+            conid = recv_bytes[11+i*4] + recv_bytes[12+i*4]*0x100
+            logging.info("GET CON=%04d, CPU=%04d" % (conid, cpuid))
         for i in range(con_cnt):
-            cpuid = recv_bytes[7+i*4] + recv_bytes[8+i*4]*0x100
-            conid = recv_bytes[9+i*4] + recv_bytes[10+i*4]*0x100
+            conid = recv_bytes[ 9+cpu_cnt*4+i*4] + recv_bytes[10+cpu_cnt*4+i*4]*0x100
+            cpuid = recv_bytes[11+cpu_cnt*4+i*4] + recv_bytes[12+cpu_cnt*4+i*4]*0x100
             logging.info("GET CON=%04d, CPU=%04d" % (conid, cpuid))
 
 # 1B 5B 4E--- 6.2.8 Get CON devices connected to CPU devices
-# 获得的是主机内部的连接关系，外设不存在也可以获得
 def get_con_to_cpus(cpuid_list):
     logging.info("get_con_to_cpus")
     cpu_cnt = len(cpuid_list)
@@ -212,7 +216,7 @@ def set_con_and_cpu(cpu_con):
     con = [cpu_con[0]%0x100, cpu_con[0]/0x100]
     cpu = [cpu_con[1]%0x100, cpu_con[1]/0x100]
     logging.info("set_con_and_cpu, conid=%04d cpuid=%04d" % (cpu_con[0], cpu_con[1]))
-    cmd += cpu + con
+    cmd += cpu + con # notice
     uart_send(hex2bin(cmd))
     print_hex(cmd)
 
@@ -238,7 +242,7 @@ def set_con_to_cpus(con_cpu_pairs):
         con = [con_cpu_pairs[i*2]%0x100, con_cpu_pairs[i*2]/0x100]
         cpu = [con_cpu_pairs[i*2+1]%0x100, con_cpu_pairs[i*2+1]/0x100]
         logging.info("set_cpu_to_cons, conid=%04d cpuid=%04d" % (con_cpu_pairs[i*2+1], con_cpu_pairs[i*2]))
-        cmd += cpu + con
+        cmd += cpu + con # notice
     uart_send(hex2bin(cmd))
     print_hex(cmd)
 
@@ -264,7 +268,7 @@ def set_con_and_cpus(con_cpu_pairs):
         con = [con_cpu_pairs[i*2]%0x100, con_cpu_pairs[i*2]/0x100]
         cpu = [con_cpu_pairs[i*2+1]%0x100, con_cpu_pairs[i*2+1]/0x100]
         logging.info("set_con_and_cpus, conid=%04d cpuid=%04d" % (con_cpu_pairs[i*2], con_cpu_pairs[i*2+1]))
-        cmd += cpu + con
+        cmd += cpu + con # notice
     uart_send(hex2bin(cmd))
     print_hex(cmd)
 
@@ -363,15 +367,19 @@ def uart_send(data):
     logging.info("uart write")
 
 def uart_recv():
+    data = ''
     for i in range(1,10):
         logging.info("uart read")
         count = ser.inWaiting()  
         if count != 0:  
-            recv = ser.read(count)  
-            return recv
-        #ser.flushInput()
+            buf = ser.read(count)  
+            data += buf
+        else:
+            if data != '':
+                return data
+            else:
+                return '\b0'
         time.sleep(0.1)  
-    return '\b0'
 
 def print_hex(data):
     logging.info(" ".join(("%02x" % n) for n in data))
@@ -393,12 +401,14 @@ def hex2bin(data_hex):
 def main():  
     logging.info("dkm_api_sender_uart start")
     while True:  
+        get_all_connections()
+        time.sleep(2)
+    while False:  
         switch_off_all_ports()
         get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
         set_con_and_cpus(con_cpu_pairs=[3001, 1001, 3002, 1002, 3006, 1003])
         get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
-        time.sleep(2)
-    while False:  
+
         switch_off_all_ports()
         set_con_and_cpu([3006, 1003])
         get_con_to_cpu(cpuid=1003)

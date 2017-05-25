@@ -29,7 +29,7 @@ logging.getLogger('').addHandler(console)
 # API命令
 
 def get_system_time():
-    logging.info("get_system_time")
+    logging.info("api get_system_time")
     cmd = [0x1b, 0x28, 0x53]
     uart_send(hex2bin(cmd))
 
@@ -56,7 +56,7 @@ def get_system_time():
         logging.info("system time is: 20%02x-%02x-%02x %02x:%02x:%02x week:%x" % (year, month, date, hour, minute, second, week))
 
 def switch_off_all_ports():
-    logging.info("switch_off_all_ports")
+    logging.info("api switch_off_all_ports")
     cmd = [0x1b, 0x5b, 0x41]
     uart_send(hex2bin(cmd))
     recv = uart_recv()
@@ -72,7 +72,7 @@ def switch_off_all_ports():
 
 # 1B 5B 48--- 6.2.2 Get CPU device connected to CON device
 def get_cpu_to_con(conid):
-    logging.info("get_cpu_to_con, conid=%04d" % (conid))
+    logging.info("api get_cpu_to_con, conid=%04d" % (conid))
     cmd = [0x1b, 0x5b, 0x48, 0x07, 0x00, conid%0x100, conid/0x100]
     uart_send(hex2bin(cmd))
     print_hex(cmd)
@@ -95,7 +95,7 @@ def get_cpu_to_con(conid):
 
 # 1B 5B 4C--- 6.2.6 Get CON device connected to CPU device
 def get_con_to_cpu(cpuid):
-    logging.info("get_con_to_cpu, cpuid=%04d" % (cpuid))
+    logging.info("api get_con_to_cpu, cpuid=%04d" % (cpuid))
     cmd = [0x1b, 0x5b, 0x4c, 0x07, 0x00, cpuid%0x100, cpuid/0x100]
     uart_send(hex2bin(cmd))
     print_hex(cmd)
@@ -118,7 +118,7 @@ def get_con_to_cpu(cpuid):
 
 # 1B 5B 52--- 6.2.12 Get all connections
 def get_all_connections():
-    logging.info("get_all_connections")
+    logging.info("api get_all_connections")
     cmd = [0x1b, 0x5b, 0x52]
     uart_send(hex2bin(cmd))
     print_hex(cmd)
@@ -148,7 +148,7 @@ def get_all_connections():
 
 # 1B 5B 4E--- 6.2.8 Get CON devices connected to CPU devices
 def get_con_to_cpus(cpuid_list):
-    logging.info("get_con_to_cpus")
+    logging.info("api get_con_to_cpus")
     cpu_cnt = len(cpuid_list)
     cmd_size = 7+cpu_cnt*2
     cmd = [0x1b, 0x5b, 0x4e, cmd_size, 0x00, cpu_cnt, 0x00]
@@ -179,7 +179,7 @@ def get_con_to_cpus(cpuid_list):
 
 # 1B 5B 4A--- 6.2.4 Get CPU devices connected to CON devices
 def get_cpu_to_cons(conid_list):
-    logging.info("get_cpu_to_cons")
+    logging.info("api get_cpu_to_cons")
     con_cnt = len(conid_list)
     cmd_size = 7+con_cnt*2
     cmd = [0x1b, 0x5b, 0x4a, cmd_size, 0x00, con_cnt, 0x00]
@@ -211,7 +211,7 @@ def get_cpu_to_cons(conid_list):
 
 # 1B 5B 50--- 6.2.10 Set CON device connection to CPU device(bidirectional)
 def set_con_and_cpu(cpu_con):
-    logging.info("set_con_and_cpu")
+    logging.info("api set_con_and_cpu")
     cmd = [0x1b, 0x5b, 0x50, 0x09, 0x00]
     con = [cpu_con[0]%0x100, cpu_con[0]/0x100]
     cpu = [cpu_con[1]%0x100, cpu_con[1]/0x100]
@@ -234,7 +234,7 @@ def set_con_and_cpu(cpu_con):
 
 # 1B 5B 4F--- 6.2.9 Set connection of CON devices to CPU devices
 def set_con_to_cpus(con_cpu_pairs):
-    logging.info("set_con_to_cpus")
+    logging.info("api set_con_to_cpus")
     con_cnt = len(con_cpu_pairs)/2
     cmd_size = 7+con_cnt*4
     cmd = [0x1b, 0x5b, 0x4f, cmd_size, 0x00, con_cnt, 0x00]
@@ -260,7 +260,7 @@ def set_con_to_cpus(con_cpu_pairs):
 
 # 1B 5B 51--- 6.2.11 Set connection of CON devices to CPU devices(bidirectional)
 def set_con_and_cpus(con_cpu_pairs):
-    logging.info("set_con_and_cpus")
+    logging.info("api set_con_and_cpus")
     con_cnt = len(con_cpu_pairs)/2
     cmd_size = 7+con_cnt*4
     cmd = [0x1b, 0x5b, 0x51, cmd_size, 0x00, con_cnt, 0x00]
@@ -287,7 +287,7 @@ def set_con_and_cpus(con_cpu_pairs):
 
 # 1B 5B 53--- 6.2.13 Set connection for all CON devices and CPU devices
 def set_all_connections(con_cpu_pairs1, con_cpu_pairs2):
-    logging.info("set_all_connections")
+    logging.info("api set_all_connections")
 
     pairs_cnt1 = len(con_cpu_pairs1)/2
     pairs_cnt2 = len(con_cpu_pairs2)/2
@@ -322,7 +322,7 @@ def set_all_connections(con_cpu_pairs1, con_cpu_pairs2):
 
 # 1B 5B 4B--- 6.2.5 Set connections of CPU devices to CON devices
 def set_cpu_to_cons(con_cpu_pairs):
-    logging.info("set_cpu_to_cons")
+    logging.info("api set_cpu_to_cons")
     con_cnt = len(con_cpu_pairs)/2
     cmd_size = 7+con_cnt*4
     cmd = [0x1b, 0x5b, 0x4b, cmd_size, 0x00, con_cnt, 0x00]
@@ -349,7 +349,7 @@ def set_cpu_to_cons(con_cpu_pairs):
 
 # 1B 5B 4D--- 6.2.7 Set CON device connection to CPU device
 def set_con_to_cpu(conid, cpuid):
-    logging.info("set_cpu_to_con, conid=%04d, cpuid=%04d" % (conid, cpuid))
+    logging.info("api set_cpu_to_con, conid=%04d, cpuid=%04d" % (conid, cpuid))
     cmd = [0x1b, 0x5b, 0x4d, 0x09, 0x00, cpuid%0x100, cpuid/0x100, conid%0x100, conid/0x100]
     uart_send(hex2bin(cmd))
     print_hex(cmd)
@@ -368,7 +368,7 @@ def set_con_to_cpu(conid, cpuid):
 
  # 1B 5B 49--- 6.2.3 Set CPU device connection to CON device
 def set_cpu_to_con(conid, cpuid):
-    logging.info("set_cpu_to_con, conid=%04d, cpuid=%04d" % (conid, cpuid))
+    logging.info("api set_cpu_to_con, conid=%04d, cpuid=%04d" % (conid, cpuid))
     cmd = [0x1b, 0x5b, 0x49, 0x09, 0x00, conid%0x100, conid/0x100, cpuid%0x100, cpuid/0x100]
     uart_send(hex2bin(cmd))
     print_hex(cmd)
@@ -402,19 +402,14 @@ def uart_send(data):
     logging.info("uart write")
 
 def uart_recv():
+    logging.info("uart read")
     data = ''
-    for i in range(1,10):
-        logging.info("uart read")
-        count = ser.inWaiting()  
-        if count != 0:  
-            buf = ser.read(count)  
-            data += buf
-        else:
-            if data != '':
-                return data
-            else:
-                return '\b0'
-        time.sleep(0.1)  
+    while ser.inWaiting() > 0:
+        data += ser.read(1)
+    if (data != ''):
+        return data
+    else:
+        return '\b0x0'
 
 def print_hex(data):
     logging.info(" ".join(("%02x" % n) for n in data))

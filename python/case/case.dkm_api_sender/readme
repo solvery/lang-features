@@ -1,0 +1,54 @@
+
+1B 28 53--- 6.1.1 Get System Time
+get_system_time()
+
+1B 5B 41--- 6.2.1 Switch off all ports
+switch_off_all_ports()
+
+1B 5B 48--- 6.2.2 Get CPU device connected to CON device
+get_cpu_to_con(conid=3001)
+
+for conid in range(3001, 3009):
+    get_cpu_to_con(conid)
+
+1B 5B 49--- 6.2.3 Set CPU device connection to CON device
+switch_off_all_ports()
+set_cpu_to_con(cpuid=1003, conid=3006)
+
+1B 5B 4A--- 6.2.4 Get CPU devices connected to CON devices
+get_cpu_to_cons(conid_list=[3001, 3002, 3003, 3004, 3005, 3006])
+
+1B 5B 4B--- 6.2.5 Set connections of CPU devices to CON devices
+set_cpu_to_cons(con_cpu_pairs=[3001, 1001, 3002, 1002, 3006, 1003])
+
+1B 5B 4C--- 6.2.6 Get CON device connected to CPU device
+get_con_to_cpu(cpuid=1003)
+
+for i in range(1001, 1020):
+    get_con_to_cpu(cpuid=i)
+
+1B 5B 4D--- 6.2.7 Set CON device connection to CPU device
+set_con_to_cpu([3006, 1003])
+
+1B 5B 4E--- 6.2.8 Get CON devices connected to CPU devices
+get_con_to_cpus(cpuid_list=[1003])
+
+get_con_to_cpus(cpuid_list=[1001, 1002, 1003, 1004, 1005, 1006])
+
+1B 5B 4F--- 6.2.9 Set connection of CON devices to CPU devices
+set_con_to_cpus(con_cpu_pairs=[3001, 1001, 3002, 1002, 3006, 1003])
+
+1B 5B 50--- 6.2.10 Set CON device connection to CPU device(bidirectional)
+switch_off_all_ports()
+set_con_and_cpu([3006, 1003])
+
+1B 5B 51--- 6.2.11 Set connection of CON devices to CPU devices(bidirectional)
+set_con_and_cpus(con_cpu_pairs=[3001, 1001, 3002, 1002, 3006, 1003])
+
+1B 5B 52--- 6.2.12 Get all connections
+get_all_connections()
+
+1B 5B 53--- 6.2.13 Set connection for all CON devices and CPU devices
+set_all_connections([3001, 1001], [3001, 1001])
+set_all_connections([3001, 1001, 3002, 1002, 3006, 1003], [3001, 1001, 3002, 1002, 3006, 1003])
+

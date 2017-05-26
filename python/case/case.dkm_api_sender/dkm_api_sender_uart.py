@@ -199,12 +199,14 @@ def get_cpu_list(index):
         cnt = recv_bytes[5]
         nxt = recv_bytes[7]
         if cnt > 0:
+            logging.info("cnt=%d next=%s" % (cnt, nxt))
             for i in range(cnt):
                 cpuid = recv_bytes[9+i*24] + recv_bytes[10+i*24]*0x100
                 name = ''
                 for i in range(13+i*24, 33+i*24):
-                    name += struct.pack('B', recv_bytes[i])
-                logging.info("cnt=%d next=%d cpuid=%04d name=%s" % (cnt, nxt, cpuid, name))
+                    if recv_bytes[i] != 0x0:
+                        name += struct.pack('B', recv_bytes[i])
+                logging.info("cpuid=%04d name=%s" % (cpuid, name))
         else:
             logging.info("no cpu in list")
 

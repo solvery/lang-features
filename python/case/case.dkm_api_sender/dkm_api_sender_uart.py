@@ -177,6 +177,40 @@ def get_con_to_cpus(cpuid_list):
             conid = recv_bytes[9+i*4] + recv_bytes[10+i*4]*0x100
             logging.info("GET CON=%04d, CPU=%04d" % (conid, cpuid))
 
+# 6.2.23 Get CON List
+def get_con_list(index):
+    logging.info("api get_con_list")
+    cmd = [0x1b, 0x5b, 0x68, 0x07, 0x00, index, 0x00]
+    uart_send(hex2bin(cmd))
+    print_hex(cmd)
+
+    recv = uart_recv()
+    recv_bytes = bin2hex(recv)
+    print_hex(recv_bytes)
+
+    # 有的conid会返回nak 
+    if len(recv_bytes) == 1 :
+        logging.warn("nak")
+        return
+        
+    if check_size(recv_bytes) == False:
+        logging.error("check_size error")
+    else:
+        cnt = recv_bytes[5]
+        nxt = recv_bytes[7]
+        if cnt > 0:
+            logging.info("cnt=%d next=%s" % (cnt, nxt))
+            for i in range(cnt):
+                conid = recv_bytes[9+i*24] + recv_bytes[10+i*24]*0x100
+                name = ''
+                for i in range(13+i*24, 33+i*24):
+                    if recv_bytes[i] != 0x0:
+                        name += struct.pack('B', recv_bytes[i])
+                logging.info("conid=%04d name=%s" % (conid, name))
+        else:
+            logging.info("no con in list")
+
+
 # 6.2.22 Get CPU List
 def get_cpu_list(index):
     logging.info("api get_cpu_list")

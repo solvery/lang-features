@@ -209,6 +209,30 @@ def get_cpu_to_cons(conid_list):
             logging.info("GET CON=%04d, CPU=%04d" % (conid, cpuid))
 
 
+# 6.2.14 Set extended connection
+def set_extended_connection(cpu_con_mode):
+    logging.info("api set_extended_connection")
+    cmd = [0x1b, 0x5b, 0x62, 0x0b, 0x00]
+    con = [cpu_con_mode[0]%0x100, cpu_con_mode[0]/0x100]
+    cpu = [cpu_con_mode[1]%0x100, cpu_con_mode[1]/0x100]
+    mod = [cpu_con_mode[2]%0x100, cpu_con_mode[2]/0x100]
+    logging.info("set_extended_connection, conid=%04d cpuid=%04d, mode=%d" % (cpu_con_mode[0], cpu_con_mode[1], cpu_con_mode[2]))
+    cmd += cpu + con + mod# notice
+    uart_send(hex2bin(cmd))
+    print_hex(cmd)
+
+    recv = uart_recv()
+    recv_bytes = bin2hex(recv)
+    print_hex(recv_bytes)
+
+    if len(recv_bytes) != 1 :
+        logging.error("respone len != 1")
+        return
+    if recv_bytes[0] == 0x06:
+        logging.info("set_con_and_cpu ok")
+    else:
+        logging.error("nak")
+
 # 1B 5B 50--- 6.2.10 Set CON device connection to CPU device(bidirectional)
 def set_con_and_cpu(cpu_con):
     logging.info("api set_con_and_cpu")
@@ -436,10 +460,8 @@ def hex2bin(data_hex):
 
 def main():  
     logging.info("dkm_api_sender_uart start")
-    while False:  
-        #set_all_connections([3001, 1001], [3002, 1002])
-        #set_all_connections([3001, 3002, 3003, 3004, 3005, 3006], [3001, 3002, 3003, 3004, 3005, 3006])
-        get_all_connections()
+    while True:  
+        set_extended_connection([3001, 1001, 1])
         time.sleep(2)
     while True:  
         get_all_connections()

@@ -553,8 +553,8 @@ def hex2bin(data_hex):
 def main():  
     logging.info("dkm_api_sender_uart start")
     while True:  
-        for i in range(22):
-            get_cpu_list(i)
+        get_cpu_list(0)
+        get_con_list(0)
         time.sleep(2)
     while True:  
         set_extended_connection([3001, 1001, 1])

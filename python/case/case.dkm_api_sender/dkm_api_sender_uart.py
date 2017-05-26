@@ -508,7 +508,7 @@ def main():
         time.sleep(1)  
 
         get_con_to_cpu(cpuid=1003)
-        for i in range(1001, 1009):
+        for i in range(1001, 1020):
             get_con_to_cpu(cpuid=i)
             time.sleep(1)
 

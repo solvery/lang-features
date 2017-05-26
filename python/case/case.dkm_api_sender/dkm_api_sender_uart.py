@@ -177,6 +177,38 @@ def get_con_to_cpus(cpuid_list):
             conid = recv_bytes[9+i*4] + recv_bytes[10+i*4]*0x100
             logging.info("GET CON=%04d, CPU=%04d" % (conid, cpuid))
 
+# 6.2.22 Get CPU List
+def get_cpu_list(index):
+    logging.info("api get_cpu_list")
+    cmd = [0x1b, 0x5b, 0x67, 0x07, 0x00, index, 0x00]
+    uart_send(hex2bin(cmd))
+    print_hex(cmd)
+
+    recv = uart_recv()
+    recv_bytes = bin2hex(recv)
+    print_hex(recv_bytes)
+
+    # 有的conid会返回nak 
+    if len(recv_bytes) == 1 :
+        logging.warn("nak")
+        return
+        
+    if check_size(recv_bytes) == False:
+        logging.error("check_size error")
+    else:
+        cnt = recv_bytes[5]
+        nxt = recv_bytes[7]
+        if cnt > 0:
+            for i in range(cnt):
+                cpuid = recv_bytes[9+i*24] + recv_bytes[10+i*24]*0x100
+                name = ''
+                for i in range(13+i*24, 33+i*24):
+                    name += struct.pack('B', recv_bytes[i])
+                logging.info("cnt=%d next=%d cpuid=%04d name=%s" % (cnt, nxt, cpuid, name))
+        else:
+            logging.info("no cpu in list")
+
+
 # 1B 5B 4A--- 6.2.4 Get CPU devices connected to CON devices
 def get_cpu_to_cons(conid_list):
     logging.info("api get_cpu_to_cons")
@@ -439,7 +471,8 @@ def check_size(data):
         logging.info("check size <3")
         return False
 
-    if (data[3]) == (len(data)):
+    size = data[3] + data[4]*0x100
+    if (size) == (len(data)):
         return True
     else: 
         return False
@@ -484,7 +517,8 @@ def hex2bin(data_hex):
 def main():  
     logging.info("dkm_api_sender_uart start")
     while True:  
-        set_port_con_and_cpu(conport=3, cpuport=2)
+        for i in range(22):
+            get_cpu_list(i)
         time.sleep(2)
     while True:  
         set_extended_connection([3001, 1001, 1])

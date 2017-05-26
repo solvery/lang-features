@@ -233,6 +233,29 @@ def set_extended_connection(cpu_con_mode):
     else:
         logging.error("nak")
 
+# 6.2.15 Set connection of CON device to CPU device (bidirectional, port mode)
+def set_port_con_and_cpu(conport, cpuport):
+    logging.info("api set_port_con_and_cpu")
+    cmd = [0x1b, 0x5b, 0x43, 0x09, 0x00]
+    con = [conport%0x100, conport/0x100]
+    cpu = [cpuport%0x100, cpuport/0x100]
+    logging.info("set_port_con_and_cpu, conport=%04d cpuport=%04d" % (conport, cpuport))
+    cmd += con + cpu # notice
+    uart_send(hex2bin(cmd))
+    print_hex(cmd)
+
+    recv = uart_recv()
+    recv_bytes = bin2hex(recv)
+    print_hex(recv_bytes)
+
+    if len(recv_bytes) != 1 :
+        logging.error("respone len != 1")
+        return
+    if recv_bytes[0] == 0x06:
+        logging.info("set_port_con_and_cpu ok")
+    else:
+        logging.error("nak")
+
 # 1B 5B 50--- 6.2.10 Set CON device connection to CPU device(bidirectional)
 def set_con_and_cpu(cpu_con):
     logging.info("api set_con_and_cpu")
@@ -461,9 +484,11 @@ def hex2bin(data_hex):
 def main():  
     logging.info("dkm_api_sender_uart start")
     while True:  
-        set_extended_connection([3001, 1001, 1])
+        set_port_con_and_cpu(conport=3, cpuport=2)
         time.sleep(2)
     while True:  
+        set_extended_connection([3001, 1001, 1])
+
         get_all_connections()
         time.sleep(1)  
         

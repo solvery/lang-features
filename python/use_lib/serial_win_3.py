@@ -30,7 +30,7 @@ def uart_recv():
     while True:  
         data = ''
         for i in range(1,10):
-            time.sleep(1)
+            time.sleep(0.2)
             count = ser.inWaiting()
             if count != 0:
                 buf = ser.read(count)
@@ -40,7 +40,7 @@ def uart_recv():
 
 def random_package():
     len = random.randint(2,30)
-    rand_list = []
+    rand_list = [0x1b, 0x00, 0x00, len]
     for i in range(len):
         rand_list +=[random.randint(1,255)]
     return rand_list
@@ -49,9 +49,9 @@ def main():
     t = threading.Thread(target=uart_recv)
     t.start()
     while True:  
-        ser.write('hello')
-        #ser.write(bytearray(random_package()))
-        time.sleep(1)  
+        #ser.write('hello')
+        ser.write(bytearray(random_package()))
+        time.sleep(0.5)  
      
 if __name__ == '__main__':  
     try:  

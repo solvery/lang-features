@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*  
+import sys
 import serial  
 import struct
 import time  
 
-#  COM3修改成您老的使用的串口 
-ser = serial.Serial("COM3", 115200)  
+serial_port = sys.argv[1]
+ser = serial.Serial(serial_port, 115200)
+
 def main():  
+    ser.write('hello')
     while True:  
         count = ser.inWaiting()  
         if count != 0:  

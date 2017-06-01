@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*  
+import sys
 import serial  
 import struct
 import time  
+import logging
+import random
+import threading
+import struct
 
 serial_port = sys.argv[1]
 ser = serial.Serial(serial_port, 115200)
@@ -11,7 +16,7 @@ formatter="%(asctime)s %(levelname)-12s %(message)s"
 
 # to file
 log_filename="uart.log"
-#logging.basicConfig( filename=log_filename, filemode="a", format=formatter, level=logging.INFO);
+logging.basicConfig( filename=log_filename, filemode="a", format=formatter, level=logging.INFO);
 
 # to console
 formatter = logging.Formatter(formatter)
@@ -20,19 +25,33 @@ console.setLevel(logging.INFO)
 console.setFormatter(formatter)
 logging.getLogger('').addHandler(console)
 
-def main():  
+def uart_recv():
+    logging.info("uart read")
     while True:  
-        count = ser.inWaiting()  
-        if count != 0:  
-            recv = ser.read(count)  
-            ser.write(recv)  
-            
-            for data in recv:
-                data_hex = struct.unpack('B', data)
-                print '%02x' % data_hex,
-            print 
-        ser.flushInput()  
-        time.sleep(0.1)  
+        data = ''
+        for i in range(1,10):
+            time.sleep(0.2)
+            count = ser.inWaiting()
+            if count != 0:
+                buf = ser.read(count)
+                data += buf
+                if data != '':
+                    logging.info(" ".join(("%02x" % struct.unpack('B', n)) for n in data))
+
+def random_package():
+    len = random.randint(2,30)
+    rand_list = [0x1b, 0x00, 0x00, len]
+    for i in range(len):
+        rand_list +=[random.randint(1,255)]
+    return rand_list
+
+def main():  
+    t = threading.Thread(target=uart_recv)
+    t.start()
+    while True:  
+        #ser.write('hello')
+        ser.write(bytearray(random_package()))
+        time.sleep(0.5)  
      
 if __name__ == '__main__':  
     try:  

@@ -6,6 +6,7 @@ import time
 import logging
 import random
 import threading
+import struct
 
 serial_port = sys.argv[1]
 ser = serial.Serial(serial_port, 115200)
@@ -34,9 +35,8 @@ def uart_recv():
             if count != 0:
                 buf = ser.read(count)
                 data += buf
-                print "s"
                 if data != '':
-                    logging.info(" ".join(("%02x" % n) for n in data))
+                    logging.info(" ".join(("%02x" % struct.unpack('B', n)) for n in data))
 
 def random_package():
     len = random.randint(2,30)

@@ -1,6 +1,6 @@
 @echo off
 
-set mcs_name=PLETHORA_rx_fcv2_copper_84851_xc7k160tfbg484_2_multi
+set mcs_name=system_top
 
 set cmd_file=%mcs_name%_mcs_download.cmd
 set mcs_file=%mcs_name%.mcs

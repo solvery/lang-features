@@ -1,6 +1,6 @@
 @echo off
 
-set bit_name=PLETHORA_rx_fcv2_copper_84851_xc7k160tfbg484_2_multi
+set bit_name=system_top
 
 set cmd_file=%bit_name%_bit_download.cmd
 set bit_file=%bit_name%.bit

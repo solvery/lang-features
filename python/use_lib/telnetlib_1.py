@@ -2,6 +2,7 @@
 
 def do_telnet(Host, username, password, finish, commands):
     import telnetlib
+    import time
  
     tn = telnetlib.Telnet(Host, port=23, timeout=20)
     tn.set_debuglevel(2)
@@ -13,8 +14,13 @@ def do_telnet(Host, username, password, finish, commands):
     tn.write(password + '\r')
       
     tn.read_until(finish)
-    for command in commands:
-        tn.write('%s\r' % command)
+    while True:
+        tn.write('%s\r' % 'olOn 1')
+        tn.read_until(finish)
+        time.sleep(2)
+        tn.write('%s\r' % 'olOff 1')
+        tn.read_until(finish)
+        time.sleep(2)
     
     tn.read_until(finish)
     tn.close() # tn.write('exit\n')

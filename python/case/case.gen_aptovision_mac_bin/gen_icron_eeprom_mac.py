@@ -1,7 +1,11 @@
 
 import struct
+import sys
 
-mac_addr = [0x01, 0x34, 0x1b, 0x22, 0x80, 0x36, ef]
+mac_p1 = int(sys.argv[1], 0)
+mac_p2 = int(sys.argv[2], 0)
+
+mac_addr = [0x01, 0x34, 0x1b, 0x22, 0x80, mac_p1, mac_p2]
 data_bin_array=''
 for data in mac_addr:
     data_bin = struct.pack('B', data) 

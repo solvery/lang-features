@@ -42,7 +42,7 @@ def random_package():
     len = random.randint(2,30)
     c1 = random.randint(0,255)
     c2 = random.randint(0,255)
-    rand_list = [0x1b, 0x5b, 0x48, len]
+    rand_list = [0x1b, c1, c2, len]
     for i in range(len):
         rand_list +=[random.randint(1,255)]
     return rand_list
@@ -57,6 +57,7 @@ def main():
         #ser.write('hello')
         cmd = bytearray(random_package())
         ser.write(cmd)
+        logging.info("")
         logging.info("send: ")
         print_hex(cmd)
         time.sleep(0.1)  

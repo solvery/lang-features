@@ -50,17 +50,31 @@ def random_package():
 def print_hex(data):
     logging.info(" ".join(("%02x" % n) for n in data))
 
+def hex2bin(data_hex):
+    data_bin=''
+    for d in data_hex:
+        data_bin = data_bin + struct.pack('B', d)
+    return data_bin
+
+def send_cmd(cmd):
+    ser.write(cmd)
+    logging.info("")
+    logging.info("send: ")
+    print_hex(cmd)
+    time.sleep(0.1)  
+
+
 def main():  
     t = threading.Thread(target=uart_recv)
     t.start()
     while True:  
         #ser.write('hello')
         cmd = bytearray(random_package())
-        ser.write(cmd)
-        logging.info("")
-        logging.info("send: ")
-        print_hex(cmd)
-        time.sleep(0.1)  
+        send_cmd(cmd)
+        cmd = bytearray([0x1b, 0x28, 0x53])
+        send_cmd(cmd)
+        cmd = bytearray([0x1b, 0x5b, 0x41])
+        send_cmd(cmd)
      
 if __name__ == '__main__':  
     try:  

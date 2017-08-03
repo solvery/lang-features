@@ -39,7 +39,7 @@ def uart_recv():
                     logging.info("recv: " + (" ".join(("%02x" % struct.unpack('B', n)) for n in data)))
 
 def random_package():
-    len = random.randint(2,30)
+    len = random.randint(0,255)
     c1 = random.randint(0,255)
     c2 = random.randint(0,255)
     rand_list = [0x1b, c1, c2, len]

@@ -65,7 +65,7 @@ def send_cmd(cmd):
     logging.info("")
     logging.info("send: ")
     print_hex(cmd)
-    time.sleep(1.1)  
+    time.sleep(0.1)  
 
 data_send1 = 'hello'
 

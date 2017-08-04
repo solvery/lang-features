@@ -63,18 +63,26 @@ def send_cmd(cmd):
     print_hex(cmd)
     time.sleep(1.1)  
 
+def random_cmd():
+    cmd = bytearray(random_package())
+    send_cmd(cmd)
+
+def get_system_time():
+    cmd = bytearray([0x1b, 0x28, 0x53])
+    send_cmd(cmd)
+
+def get_cpu_to_con():
+    conid = random.randint(0,9999)
+    cmd = [0x1b, 0x5b, 0x48, 0x07, 0x00, conid%0x100, conid/0x100]
+
+case_list = [random_cmd, get_system_time, get_cpu_to_con]
 
 def main():  
     t = threading.Thread(target=uart_recv)
     t.start()
     while True:  
-        #ser.write('hello')
-        cmd = bytearray(random_package())
-        send_cmd(cmd)
-        cmd = bytearray([0x1b, 0x28, 0x53])
-        send_cmd(cmd)
-        cmd = bytearray([0x1b, 0x5b, 0x41])
-        send_cmd(cmd)
+        random.choice(case_list)()
+        time.sleep(1.1)  
      
 if __name__ == '__main__':  
     try:  

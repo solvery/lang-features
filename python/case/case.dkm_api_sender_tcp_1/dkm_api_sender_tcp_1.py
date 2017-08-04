@@ -1,4 +1,5 @@
 import socket
+import datetime
 import logging
 import random
 import threading
@@ -11,7 +12,7 @@ import os
 formatter="%(asctime)s %(levelname)-12s %(message)s"
 
 # to file
-log_filename="uart.log"
+log_filename="log_"+datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d.%H.%M.%S.%f')
 logging.basicConfig( filename=log_filename, filemode="a", format=formatter, level=logging.INFO);
 
 # to console

@@ -31,7 +31,7 @@ def uart_recv():
     while True:  
         data = ''
         for i in range(1,10):
-            time.sleep(0.2)
+            time.sleep(0.4)
             count = ser.inWaiting()
             if count != 0:
                 buf = ser.read(count)
@@ -92,10 +92,10 @@ def get_all_connections():
 
 def get_con_to_cpus():
     logging.info(sys._getframe().f_code.co_name)
-    cpuid_list_len = random.randint(498,499)
+    cpuid_list_len = random.randint(1,510)
     cpuid_list = []
     for i in range(cpuid_list_len):
-        cpuid_list += [random.randint(1001, 1099)]
+        cpuid_list += [random.randint(1001, 1999)]
     cpu_cnt = len(cpuid_list)
     cmd_size = 7+cpu_cnt*2
     cmd = [0x1b, 0x5b, 0x4e, cmd_size%0x100, cmd_size/0x100, cpu_cnt%0x100, cpu_cnt/0x100]
@@ -115,7 +115,7 @@ def main():
     while True:  
         logging.info("")
         random.choice(case_list)()
-        time.sleep(0.5)  
+        time.sleep(1.5)  
      
 if __name__ == '__main__':  
     try:  

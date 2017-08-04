@@ -30,7 +30,7 @@ def uart_recv():
     while True:  
         data = ''
         for i in range(1,10):
-            time.sleep(0.2)
+            time.sleep(0.3)
             count = ser.inWaiting()
             if count != 0:
                 buf = ser.read(count)

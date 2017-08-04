@@ -64,22 +64,30 @@ def send_cmd(cmd):
     time.sleep(1.1)  
 
 def random_cmd():
-    logging.info("random_cmd")
+    logging.info(sys._getframe().f_code.co_name)
     cmd = bytearray(random_package())
     send_cmd(cmd)
 
 def get_system_time():
-    logging.info("get_system_time")
+    logging.info(sys._getframe().f_code.co_name)
     cmd = bytearray([0x1b, 0x28, 0x53])
     send_cmd(cmd)
 
 def get_cpu_to_con():
-    logging.info("get_cpu_to_con")
-    conid = random.randint(1000,1080)
+    logging.info(sys._getframe().f_code.co_name)
+    conid = random.randint(3000,3020)
     cmd = [0x1b, 0x5b, 0x48, 0x07, 0x00, conid%0x100, conid/0x100]
     send_cmd(bytearray(cmd))
 
-case_list = [random_cmd, get_system_time, get_cpu_to_con]
+def get_con_to_cpu():
+    logging.info(sys._getframe().f_code.co_name)
+    cpuid = random.randint(1000,1020)
+    cmd = [0x1b, 0x5b, 0x4c, 0x07, 0x00, cpuid%0x100, cpuid/0x100]
+    send_cmd(bytearray(cmd))
+
+case_list1 = [random_cmd, get_system_time, get_cpu_to_con]
+case_list2 = [get_con_to_cpu]
+case_list = case_list2
 
 def main():  
     t = threading.Thread(target=uart_recv)
@@ -87,7 +95,7 @@ def main():
     while True:  
         logging.info("")
         random.choice(case_list)()
-        time.sleep(1.1)  
+        time.sleep(0.5)  
      
 if __name__ == '__main__':  
     try:  

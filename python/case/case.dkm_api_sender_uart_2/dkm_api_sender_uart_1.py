@@ -59,22 +59,25 @@ def hex2bin(data_hex):
 
 def send_cmd(cmd):
     ser.write(cmd)
-    logging.info("")
     logging.info("send: ")
     print_hex(cmd)
     time.sleep(1.1)  
 
 def random_cmd():
+    logging.info("random_cmd")
     cmd = bytearray(random_package())
     send_cmd(cmd)
 
 def get_system_time():
+    logging.info("get_system_time")
     cmd = bytearray([0x1b, 0x28, 0x53])
     send_cmd(cmd)
 
 def get_cpu_to_con():
-    conid = random.randint(0,9999)
+    logging.info("get_cpu_to_con")
+    conid = random.randint(1000,1080)
     cmd = [0x1b, 0x5b, 0x48, 0x07, 0x00, conid%0x100, conid/0x100]
+    send_cmd(bytearray(cmd))
 
 case_list = [random_cmd, get_system_time, get_cpu_to_con]
 
@@ -82,6 +85,7 @@ def main():
     t = threading.Thread(target=uart_recv)
     t.start()
     while True:  
+        logging.info("")
         random.choice(case_list)()
         time.sleep(1.1)  
      

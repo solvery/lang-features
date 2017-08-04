@@ -85,8 +85,28 @@ def get_con_to_cpu():
     cmd = [0x1b, 0x5b, 0x4c, 0x07, 0x00, cpuid%0x100, cpuid/0x100]
     send_cmd(bytearray(cmd))
 
+def get_all_connections():
+    logging.info(sys._getframe().f_code.co_name)
+    cmd = [0x1b, 0x5b, 0x52]
+    send_cmd(bytearray(cmd))
+
+def get_con_to_cpus():
+    logging.info(sys._getframe().f_code.co_name)
+    cpuid_list_len = random.randint(498,499)
+    cpuid_list = []
+    for i in range(cpuid_list_len):
+        cpuid_list += [random.randint(1001, 1099)]
+    cpu_cnt = len(cpuid_list)
+    cmd_size = 7+cpu_cnt*2
+    cmd = [0x1b, 0x5b, 0x4e, cmd_size%0x100, cmd_size/0x100, cpu_cnt%0x100, cpu_cnt/0x100]
+    for i in range(cpu_cnt):
+        cpu = [cpuid_list[i]%0x100, cpuid_list[i]/0x100]
+        cmd += cpu
+    logging.info("cmd len: %d" % len(cmd))
+    send_cmd(bytearray(cmd))
+
 case_list1 = [random_cmd, get_system_time, get_cpu_to_con]
-case_list2 = [get_con_to_cpu]
+case_list2 = [get_con_to_cpus]
 case_list = case_list2
 
 def main():  

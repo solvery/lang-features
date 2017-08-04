@@ -71,6 +71,7 @@ data_send1 = 'hello'
 
 def main():  
     t = threading.Thread(target=data_recv)
+    t.setDaemon(True)
     t.start()
     try:
         while True:  

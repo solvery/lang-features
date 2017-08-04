@@ -55,7 +55,7 @@ def send_cmd(cmd):
     print_hex(cmd)
     time.sleep(1.1)  
     data = sock.recv(8192)
-    print_hex(data)
+    print_hex(bytearray(data))
 
 
 data_send1 = 'hello'

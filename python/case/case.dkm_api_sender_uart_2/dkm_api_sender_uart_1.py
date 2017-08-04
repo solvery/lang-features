@@ -105,8 +105,13 @@ def get_con_to_cpus():
     logging.info("cmd len: %d" % len(cmd))
     send_cmd(bytearray(cmd))
 
+def get_con_list():
+    logging.info(sys._getframe().f_code.co_name)
+    cmd = [0x1b, 0x5b, 0x68, 0x07, 0x00, 0x00, 0x00]
+    send_cmd(bytearray(cmd))
+
 case_list1 = [random_cmd, get_system_time, get_cpu_to_con]
-case_list2 = [get_con_to_cpus]
+case_list2 = [get_con_list]
 case_list = case_list2
 
 def main():  

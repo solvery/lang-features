@@ -105,13 +105,39 @@ def get_con_to_cpus():
     logging.info("cmd len: %d" % len(cmd))
     send_cmd(bytearray(cmd))
 
+def get_cpu_to_cons():
+    logging.info(sys._getframe().f_code.co_name)
+    conid_list_len = random.randint(1,510)
+    conid_list = []
+    for i in range(conid_list_len):
+        conid_list += [random.randint(1001, 1999)]
+    con_cnt = len(conid_list)
+    cmd_size = 7+con_cnt*2
+    cmd = [0x1b, 0x5b, 0x4a, cmd_size%0x100, cmd_size/0x100, con_cnt%0x100, con_cnt/0x100]
+    for i in range(con_cnt):
+        cpu = [conid_list[i]%0x100, conid_list[i]/0x100]
+        cmd += cpu
+    logging.info("cmd len: %d" % len(cmd))
+    send_cmd(bytearray(cmd))
+
 def get_con_list():
     logging.info(sys._getframe().f_code.co_name)
     cmd = [0x1b, 0x5b, 0x68, 0x07, 0x00, 0x00, 0x00]
     send_cmd(bytearray(cmd))
 
+def get_user_list():
+    logging.info(sys._getframe().f_code.co_name)
+    cmd = [0x1b, 0x5b, 0x69, 0x07, 0x00, 0x00, 0x00]
+    send_cmd(bytearray(cmd))
+
+def get_cpu_list():
+    logging.info(sys._getframe().f_code.co_name)
+    cmd = [0x1b, 0x5b, 0x67, 0x07, 0x00, 0x00, 0x00]
+    send_cmd(bytearray(cmd))
+
+
 case_list1 = [random_cmd, get_system_time, get_cpu_to_con]
-case_list2 = [get_con_list]
+case_list2 = [get_cpu_list]
 case_list = case_list2
 
 def main():  

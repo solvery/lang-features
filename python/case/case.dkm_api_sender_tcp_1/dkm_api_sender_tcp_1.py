@@ -48,32 +48,48 @@ def hex2bin(data_hex):
         data_bin = data_bin + struct.pack('B', d)
     return data_bin
 
+def data_recv():
+    while True:  
+        data = ''
+        for i in range(1,10):
+            time.sleep(0.2)
+            data = sock.recv(8192)
+            count = len(data)
+            if count != 0:
+                if data != '':
+                    logging.info("recv: " + (" ".join(("%02x" % struct.unpack('B', n)) for n in data)))
+
 def send_cmd(cmd):
     sock.sendall(cmd)
     logging.info("")
     logging.info("send: ")
     print_hex(cmd)
     time.sleep(1.1)  
-    data = sock.recv(8192)
-    print_hex(bytearray(data))
-
 
 data_send1 = 'hello'
 
-try:
-    
-    # Send data
-    while True:
-        cmd = bytearray(random_package())
-        send_cmd(cmd)
-        cmd = bytearray([0x1b, 0x28, 0x53])
-        send_cmd(cmd)
-        cmd = bytearray([0x1b, 0x5b, 0x41])
-        send_cmd(cmd)
+def main():  
+    t = threading.Thread(target=data_recv)
+    t.start()
+    try:
+        while True:  
+            #ser.write('hello')
+            cmd = bytearray(random_package())
+            send_cmd(cmd)
+            cmd = bytearray([0x1b, 0x28, 0x53])
+            send_cmd(cmd)
+            cmd = bytearray([0x1b, 0x5b, 0x41])
+            send_cmd(cmd)
+    finally:
+        print >>sys.stderr, 'closing socket'
+        sock.close()
 
-        time.sleep(1.3)
+         
+if __name__ == '__main__':  
+    try:  
+        main()  
+    except KeyboardInterrupt:  
+        if sock != None:  
+            sock.close()
 
-finally:
-    print >>sys.stderr, 'closing socket'
-    sock.close()
 

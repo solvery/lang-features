@@ -95,9 +95,9 @@ def get_all_connections():
     cmd = [0x1b, 0x5b, 0x52]
     send_cmd(bytearray(cmd))
 
-def get_con_to_cpus():
+def get_con_to_cpus(a,b):
     logging.info(sys._getframe().f_code.co_name)
-    cpuid_list_len = random.randint(1,510)
+    cpuid_list_len = random.randint(a,b)
     cpuid_list = []
     for i in range(cpuid_list_len):
         cpuid_list += [random.randint(1001, 1999)]
@@ -109,6 +109,14 @@ def get_con_to_cpus():
         cmd += cpu
     logging.info("cmd len: %d" % len(cmd))
     send_cmd(bytearray(cmd))
+
+def get_con_to_cpus_1():
+    get_con_to_cpus(1,510)
+def get_con_to_cpus_2():
+    get_con_to_cpus(510,1024)
+def get_con_to_cpus_3():
+    get_con_to_cpus(4000,4096)
+
 
 def get_cpu_to_cons():
     logging.info(sys._getframe().f_code.co_name)
@@ -149,16 +157,16 @@ def set_con_and_cpu():
     cmd += cpu + con
     send_cmd(bytearray(cmd))
 
-case_list1 = [random_cmd, get_system_time, get_cpu_to_con, get_con_to_cpu, get_cpu_to_cons, get_con_to_cpus, get_con_list, get_user_list, get_cpu_list]
-case_list2 = [set_con_and_cpu]
+case_list1 = [random_cmd, get_system_time, get_cpu_to_con, get_con_to_cpu, get_cpu_to_cons, get_con_to_cpus_1, get_con_list, get_user_list, get_cpu_list]
+case_list2 = [get_con_to_cpus_2]
 case_list = case_list1
 
 def send_cmd(cmd):
-    sock.sendall(hex2bin(cmd))
+    sock.sendall(cmd)
     logging.info("")
     logging.info("send: ")
     print_hex(cmd)
-    time.sleep(0.1)  
+    time.sleep(0.1)
 
 data_send1 = 'hello'
 
@@ -168,8 +176,8 @@ def main():
     t.start()
     try:
         while True:  
-            random.choice(case_list2)()
-            time.sleep(1.5)  
+            random.choice(case_list1)()
+            time.sleep(0.0)  
     finally:
         print >>sys.stderr, 'closing socket'
         sock.close()

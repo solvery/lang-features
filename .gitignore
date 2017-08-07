@@ -9,3 +9,4 @@ java/*.class
 erlang/*.beam
 erlang/*.dump
 *.pyc
+log_*

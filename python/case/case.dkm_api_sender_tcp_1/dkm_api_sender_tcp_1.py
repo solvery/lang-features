@@ -18,7 +18,7 @@ logging.basicConfig( filename=log_filename, filemode="a", format=formatter, leve
 # to console
 formatter = logging.Formatter(formatter)
 console = logging.StreamHandler()
-console.setLevel(logging.ERROR)
+console.setLevel(logging.INFO)
 console.setFormatter(formatter)
 logging.getLogger('').addHandler(console)
 
@@ -140,13 +140,21 @@ def get_cpu_list():
     cmd = [0x1b, 0x5b, 0x67, 0x07, 0x00, 0x00, 0x00]
     send_cmd(bytearray(cmd))
 
+def set_con_and_cpu():
+    #cpu_con = [random.randint(3001, 3999), random.randint(1001, 1999)]
+    cpu_con = [3001,1001]
+    cmd = [0x1b, 0x5b, 0x50, 0x09, 0x00]
+    con = [cpu_con[0]%0x100, cpu_con[0]/0x100]
+    cpu = [cpu_con[1]%0x100, cpu_con[1]/0x100]
+    cmd += cpu + con
+    send_cmd(bytearray(cmd))
 
 case_list1 = [random_cmd, get_system_time, get_cpu_to_con, get_con_to_cpu, get_cpu_to_cons, get_con_to_cpus, get_con_list, get_user_list, get_cpu_list]
-case_list2 = [get_cpu_list]
+case_list2 = [set_con_and_cpu]
 case_list = case_list1
 
 def send_cmd(cmd):
-    sock.sendall(cmd)
+    sock.sendall(hex2bin(cmd))
     logging.info("")
     logging.info("send: ")
     print_hex(cmd)
@@ -160,7 +168,7 @@ def main():
     t.start()
     try:
         while True:  
-            random.choice(case_list)()
+            random.choice(case_list2)()
             time.sleep(1.5)  
     finally:
         print >>sys.stderr, 'closing socket'

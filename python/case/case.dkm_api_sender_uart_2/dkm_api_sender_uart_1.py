@@ -142,17 +142,20 @@ case_list = case_list1
 
 def main():  
     t = threading.Thread(target=uart_recv)
+    t.setDaemon(True)
     t.start()
     while True:  
         logging.info("")
         random.choice(case_list)()
-        time.sleep(1.5)  
+        time.sleep(0.5)  
      
 if __name__ == '__main__':  
     try:  
         main()  
     except KeyboardInterrupt:  
         if ser != None:  
-            ser.close()  
+            logging.info("ctrl-c")
+            ser.close() 
+            sys.exit(1)
 
 

@@ -15,3 +15,9 @@ network
 
 排列组合
 	import itertools
+
+
+python不允许程序员选择采用传值还是传引用。 
+	传对象引用
+	可变对象 值
+	不可变对象 引用

@@ -86,6 +86,13 @@ def random_cmd():
     cmd = bytearray(random_package())
     send_cmd(cmd)
 
+def get_system_time_split():
+    logging.info(sys._getframe().f_code.co_name)
+    cmd1 = bytearray([0x1b, 0x28])
+    cmd2 = bytearray([0x53])
+    send_cmd(cmd1)
+    send_cmd(cmd2)
+
 def get_system_time():
     logging.info(sys._getframe().f_code.co_name)
     cmd = bytearray([0x1b, 0x28, 0x53])
@@ -177,6 +184,7 @@ case_list = case_list1
 case_all_rand_1 = []
 case_all_rand_2 = [get_system_time]
 case_get_system_time_with_random_data = [get_system_time_with_random_data]
+case_get_system_time_split = [get_system_time_split]
 
 def send_cmd(cmd):
     sock.sendall(cmd)

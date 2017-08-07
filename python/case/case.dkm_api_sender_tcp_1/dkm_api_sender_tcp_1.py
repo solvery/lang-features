@@ -43,6 +43,12 @@ def data_recv():
                 if data != '':
                     logging.info("recv: " + (" ".join(("%02x" % struct.unpack('B', n)) for n in data)))
 
+def gen_random_data(a,b):
+    len = random.randint(a,b)
+    rand_list = []
+    for i in range(len):
+        rand_list +=[random.randint(0,255)]
+    return rand_list
 
 def random_package():
     len = random.randint(100,255)
@@ -62,13 +68,18 @@ def hex2bin(data_hex):
         data_bin = data_bin + struct.pack('B', d)
     return data_bin
 
-def random_data():
+def get_system_time_with_random_data():
     logging.info(sys._getframe().f_code.co_name)
-    len = random.randint(0,20)
-    rand_list = []
-    for i in range(len):
-        rand_list +=[random.randint(0,255)]
-    send_cmd(bytearray(rand_list))
+    cmd = [0x1b, 0x28, 0x53]
+    rand1 = gen_random_data(1,10)
+    rand2 = gen_random_data(1,10)
+    cmd = rand1 + cmd + rand2
+    send_cmd(bytearray(cmd))
+
+def random_invalid_cmd():
+    logging.info(sys._getframe().f_code.co_name)
+    cmd = gen_random_data()
+    send_cmd(bytearray(cmd))
 
 def random_cmd():
     logging.info(sys._getframe().f_code.co_name)
@@ -160,11 +171,12 @@ def set_con_and_cpu():
     send_cmd(bytearray(cmd))
 
 case_list1 = [random_cmd, get_system_time, get_cpu_to_con, get_con_to_cpu, get_cpu_to_cons, get_con_to_cpus_1, get_con_list, get_user_list, get_cpu_list]
-case_list2 = [random_data]
+case_list2 = []
 case_list = case_list1
 
-case_all_rand_1 = [random_data]
-case_all_rand_2 = [random_data, get_system_time]
+case_all_rand_1 = []
+case_all_rand_2 = [get_system_time]
+case_get_system_time_with_random_data = [get_system_time_with_random_data]
 
 def send_cmd(cmd):
     sock.sendall(cmd)
@@ -180,8 +192,8 @@ def main():
     t.start()
     try:
         while True:  
-            random.choice(case_all_rand_2)()
-            time.sleep(0.0)  
+            random.choice(case_get_system_time_with_random_data)()
+            time.sleep(1.0)  
     finally:
         print >>sys.stderr, 'closing socket'
         sock.close()

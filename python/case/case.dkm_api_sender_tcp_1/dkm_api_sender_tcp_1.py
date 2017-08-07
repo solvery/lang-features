@@ -62,11 +62,13 @@ def hex2bin(data_hex):
         data_bin = data_bin + struct.pack('B', d)
     return data_bin
 
-def send_cmd(cmd):
-    ser.write(cmd)
-    logging.info("send: ")
-    print_hex(cmd)
-    time.sleep(1.1)  
+def random_data():
+    logging.info(sys._getframe().f_code.co_name)
+    len = random.randint(0,20)
+    rand_list = []
+    for i in range(len):
+        rand_list +=[random.randint(0,255)]
+    send_cmd(bytearray(rand_list))
 
 def random_cmd():
     logging.info(sys._getframe().f_code.co_name)
@@ -158,15 +160,17 @@ def set_con_and_cpu():
     send_cmd(bytearray(cmd))
 
 case_list1 = [random_cmd, get_system_time, get_cpu_to_con, get_con_to_cpu, get_cpu_to_cons, get_con_to_cpus_1, get_con_list, get_user_list, get_cpu_list]
-case_list2 = [get_con_to_cpus_2]
+case_list2 = [random_data]
 case_list = case_list1
+
+case_all_rand_1 = [random_data]
+case_all_rand_2 = [random_data, get_system_time]
 
 def send_cmd(cmd):
     sock.sendall(cmd)
-    logging.info("")
     logging.info("send: ")
     print_hex(cmd)
-    time.sleep(0.1)
+    logging.info("")
 
 data_send1 = 'hello'
 
@@ -176,7 +180,7 @@ def main():
     t.start()
     try:
         while True:  
-            random.choice(case_list1)()
+            random.choice(case_all_rand_2)()
             time.sleep(0.0)  
     finally:
         print >>sys.stderr, 'closing socket'
@@ -189,5 +193,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:  
         if sock != None:  
             sock.close()
-
 

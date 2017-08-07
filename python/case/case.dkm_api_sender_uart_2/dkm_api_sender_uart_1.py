@@ -136,9 +136,9 @@ def get_cpu_list():
     send_cmd(bytearray(cmd))
 
 
-case_list1 = [random_cmd, get_system_time, get_cpu_to_con]
+case_list1 = [random_cmd, get_system_time, get_cpu_to_con, get_con_to_cpu, get_cpu_to_cons, get_con_to_cpus, get_con_list, get_user_list, get_cpu_list]
 case_list2 = [get_cpu_list]
-case_list = case_list2
+case_list = case_list1
 
 def main():  
     t = threading.Thread(target=uart_recv)

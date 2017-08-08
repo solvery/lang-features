@@ -2,9 +2,11 @@
 import serial  
 import struct
 import time  
+import sys
 
 #  COMx修改成您老的使用的串口 
-ser = serial.Serial("COM4", 9600)  
+serial_port = sys.argv[1]
+ser = serial.Serial(serial_port, 9600)  
 
 def hex2bin(data):
     data_bin_array=''

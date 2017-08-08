@@ -1,4 +1,6 @@
 
+v = 1
+
 def _private_1(name):
     return 'Hello, %s' % name
 

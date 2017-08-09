@@ -209,6 +209,13 @@ def run_case(case, delay, times=0):
             for i in range(times):
                 random.choice(case)()
                 time.sleep(delay)
+        logging.info("end test")
+        sock.close()
+        sys.exit(1)
+    except KeyboardInterrupt:  
+        logging.info("ctrl-c")
+        sock.close()
+        sys.exit(1)
     finally:
         print >>sys.stderr, 'closing socket'
         sock.close()
@@ -217,8 +224,6 @@ def run_case(case, delay, times=0):
 if __name__ == '__main__':  
     try:  
         run_case(case_list2, 0.1)
-        sock.close()
-        sys.exit(1)
     except KeyboardInterrupt:  
         if sock != None:  
             sock.close()

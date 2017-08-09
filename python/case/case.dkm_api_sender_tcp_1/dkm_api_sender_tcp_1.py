@@ -196,6 +196,7 @@ def send_cmd(cmd):
 data_send1 = 'hello'
 
 def run_case(case, delay):
+    logging.info("run %s" % case)
     t = threading.Thread(target=data_recv)
     t.setDaemon(True)
     t.start()

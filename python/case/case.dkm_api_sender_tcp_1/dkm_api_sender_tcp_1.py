@@ -73,16 +73,18 @@ def hex2bin(data_hex):
         data_bin = data_bin + struct.pack('B', d)
     return data_bin
 
-def get_system_time_with_random_data():
+def get_system_time_with_random_data(a,b):
     logging.info(sys._getframe().f_code.co_name)
     cmd = [0x1b, 0x28, 0x53]
-    rand1 = gen_random_data(1,a)
-    rand2 = gen_random_data(1,b)
+    rand1 = gen_random_data(a,b)
+    rand2 = gen_random_data(a,b)
     cmd = rand1 + cmd + rand2
     send_cmd(bytearray(cmd))
 
 def get_system_time_with_random_data_1():
-    get_system_time_with_random_data(1000,1000)
+    get_system_time_with_random_data( 500,1001)
+def get_system_time_with_random_data_2():
+    get_system_time_with_random_data(1000,2001)
 
 def random_invalid_cmd():
     logging.info(sys._getframe().f_code.co_name)

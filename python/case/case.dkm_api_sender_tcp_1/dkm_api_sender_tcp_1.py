@@ -18,7 +18,7 @@ logging.basicConfig( filename=log_filename, filemode="a", format=formatter, leve
 # to console
 formatter = logging.Formatter(formatter)
 console = logging.StreamHandler()
-console.setLevel(logging.ERROR)
+console.setLevel(logging.INFO)
 console.setFormatter(formatter)
 logging.getLogger('').addHandler(console)
 
@@ -149,8 +149,8 @@ def get_cpu_to_cons():
     cmd_size = 7+con_cnt*2
     cmd = [0x1b, 0x5b, 0x4a, cmd_size%0x100, cmd_size/0x100, con_cnt%0x100, con_cnt/0x100]
     for i in range(con_cnt):
-        cpu = [conid_list[i]%0x100, conid_list[i]/0x100]
-        cmd += cpu
+        con = [conid_list[i]%0x100, conid_list[i]/0x100]
+        cmd += con 
     logging.info("cmd len: %d" % len(cmd))
     send_cmd(bytearray(cmd))
 
@@ -178,8 +178,8 @@ def set_con_and_cpu():
     cmd += cpu + con
     send_cmd(bytearray(cmd))
 
-case_list1 = [random_cmd, get_system_time, get_cpu_to_con, get_con_to_cpu, get_cpu_to_cons, get_con_to_cpus_1, get_con_list, get_user_list, get_cpu_list]
-case_list2 = []
+case_list1 = [random_cmd, get_system_time, get_cpu_to_con, get_con_to_cpu, get_con_to_cpus_1, get_con_list, get_user_list, get_cpu_list]
+case_list2 = [random_cmd]
 case_list = case_list1
 
 case_all_rand_1 = []
@@ -206,7 +206,7 @@ def run_case(case, delay, times=0):
                 random.choice(case)()
                 time.sleep(delay)
         else:
-            for i in range(times)
+            for i in range(times):
                 random.choice(case)()
                 time.sleep(delay)
     finally:
@@ -216,7 +216,7 @@ def run_case(case, delay, times=0):
          
 if __name__ == '__main__':  
     try:  
-        run_case(case_get_system_time_with_random_data, 1.0)
+        run_case(random_cmd, 1.0)
     except KeyboardInterrupt:  
         if sock != None:  
             sock.close()

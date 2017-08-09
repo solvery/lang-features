@@ -1,0 +1,13 @@
+
+pkill python 
+for p in 99
+#for p in 99 23 12
+do
+	for case in case_command_add_random_1 case_run_command_once_1
+	do
+		for i in `seq 1 2`; do 
+			ip=192.168.100.$p
+			python $case.py $ip &
+		done
+	done
+done

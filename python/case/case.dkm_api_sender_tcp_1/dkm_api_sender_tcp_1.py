@@ -82,9 +82,11 @@ def get_system_time_with_random_data(a,b):
     send_cmd(bytearray(cmd))
 
 def get_system_time_with_random_data_1():
-    get_system_time_with_random_data( 500,1001)
+    get_system_time_with_random_data( 5,20)
 def get_system_time_with_random_data_2():
-    get_system_time_with_random_data(1000,2001)
+    get_system_time_with_random_data( 500,1001)
+def get_system_time_with_random_data_3():
+    get_system_time_with_random_data(16000,20001)
 
 def random_invalid_cmd():
     logging.info(sys._getframe().f_code.co_name)
@@ -193,7 +195,10 @@ case_list = case_list1
 
 case_all_rand_1 = []
 case_all_rand_2 = [get_system_time]
-case_get_system_time_with_random_data = [get_system_time_with_random_data_1]
+case_get_system_time_with_random_data = [get_system_time_with_random_data_2, get_system_time_with_random_data_1]
+case_get_system_time_with_random_data_1 = [get_system_time_with_random_data_1]
+case_get_system_time_with_random_data_2 = [get_system_time_with_random_data_2]
+case_get_system_time_with_random_data_3 = [get_system_time_with_random_data_3]
 case_get_system_time_split = [get_system_time_split]
 
 def send_cmd(cmd):

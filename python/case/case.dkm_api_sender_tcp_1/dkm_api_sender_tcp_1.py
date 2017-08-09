@@ -216,7 +216,7 @@ def run_case(case, delay, times=0):
          
 if __name__ == '__main__':  
     try:  
-        run_case(random_cmd, 1.0)
+        run_case(case_list2, 0.1)
     except KeyboardInterrupt:  
         if sock != None:  
             sock.close()

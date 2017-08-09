@@ -81,12 +81,24 @@ def get_system_time_with_random_data(a,b):
     cmd = rand1 + cmd + rand2
     send_cmd(bytearray(cmd))
 
+def get_system_time_with_random_data_split(a,b):
+    logging.info(sys._getframe().f_code.co_name)
+    cmd = [0x1b, 0x28, 0x53]
+    rand1 = gen_random_data(a,b)
+    rand2 = gen_random_data(a,b)
+    cmd = rand1 + [0x1b]
+    send_cmd(bytearray(cmd))
+    cmd = [0x28, 0x53] + rand2
+    send_cmd(bytearray(cmd))
+
 def get_system_time_with_random_data_1():
-    get_system_time_with_random_data( 5,20)
+    get_system_time_with_random_data( 5,10)
 def get_system_time_with_random_data_2():
     get_system_time_with_random_data( 500,1001)
 def get_system_time_with_random_data_3():
     get_system_time_with_random_data(16000,20001)
+def get_system_time_with_random_data_split_1():
+    get_system_time_with_random_data_split( 5,10)
 
 def random_invalid_cmd():
     logging.info(sys._getframe().f_code.co_name)
@@ -189,17 +201,19 @@ def set_con_and_cpu():
     cmd += cpu + con
     send_cmd(bytearray(cmd))
 
-case_list1 = [random_cmd, get_system_time, get_cpu_to_con, get_con_to_cpu, get_con_to_cpus_1, get_con_list, get_user_list, get_cpu_list]
+case_list1 = [get_system_time, get_cpu_to_con, get_con_to_cpu, get_con_to_cpus_1, get_con_list, get_user_list, get_cpu_list]
 case_list2 = [random_cmd]
 case_list = case_list1
 
 case_all_rand_1 = []
 case_all_rand_2 = [get_system_time]
-case_get_system_time_with_random_data = [get_system_time_with_random_data_2, get_system_time_with_random_data_1]
+case_get_system_time_with_random_data = [get_system_time_with_random_data_1]
 case_get_system_time_with_random_data_1 = [get_system_time_with_random_data_1]
 case_get_system_time_with_random_data_2 = [get_system_time_with_random_data_2]
 case_get_system_time_with_random_data_3 = [get_system_time_with_random_data_3]
 case_get_system_time_split = [get_system_time_split]
+case_get_system_time_with_random_data_split_1 = [get_system_time_with_random_data_split_1]
+case_get_system_time = [get_system_time]
 
 def send_cmd(cmd):
     try:

@@ -33,6 +33,7 @@ print >>sys.stderr, 'connecting to %s port %s' % server_address
 sock.connect(server_address)
 
 def data_recv():
+    logging.info("start recv")
     while True:  
         data = ''
         for i in range(1,10):

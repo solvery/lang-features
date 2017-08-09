@@ -18,7 +18,7 @@ logging.basicConfig( filename=log_filename, filemode="a", format=formatter, leve
 # to console
 formatter = logging.Formatter(formatter)
 console = logging.StreamHandler()
-console.setLevel(logging.INFO)
+console.setLevel(logging.ERROR)
 console.setFormatter(formatter)
 logging.getLogger('').addHandler(console)
 

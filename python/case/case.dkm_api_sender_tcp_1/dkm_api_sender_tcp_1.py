@@ -124,13 +124,13 @@ def get_system_time():
 
 def get_cpu_to_con():
     logging.info(sys._getframe().f_code.co_name)
-    conid = random.randint(3000,3020)
+    conid = random.randint(3000,3010)
     cmd = [0x1b, 0x5b, 0x48, 0x07, 0x00, conid%0x100, conid/0x100]
     send_cmd(bytearray(cmd))
 
 def get_con_to_cpu():
     logging.info(sys._getframe().f_code.co_name)
-    cpuid = random.randint(1000,1020)
+    cpuid = random.randint(1000,1010)
     cmd = [0x1b, 0x5b, 0x4c, 0x07, 0x00, cpuid%0x100, cpuid/0x100]
     send_cmd(bytearray(cmd))
 
@@ -144,7 +144,7 @@ def get_con_to_cpus(a,b):
     cpuid_list_len = random.randint(a,b)
     cpuid_list = []
     for i in range(cpuid_list_len):
-        cpuid_list += [random.randint(1001, 1999)]
+        cpuid_list += [random.randint(1001, 1010)]
     cpu_cnt = len(cpuid_list)
     cmd_size = 7+cpu_cnt*2
     cmd = [0x1b, 0x5b, 0x4e, cmd_size%0x100, cmd_size/0x100, cpu_cnt%0x100, cpu_cnt/0x100]
@@ -167,7 +167,7 @@ def get_cpu_to_cons():
     conid_list_len = random.randint(1,510)
     conid_list = []
     for i in range(conid_list_len):
-        conid_list += [random.randint(1001, 1999)]
+        conid_list += [random.randint(1001, 1010)]
     con_cnt = len(conid_list)
     cmd_size = 7+con_cnt*2
     cmd = [0x1b, 0x5b, 0x4a, cmd_size%0x100, cmd_size/0x100, con_cnt%0x100, con_cnt/0x100]

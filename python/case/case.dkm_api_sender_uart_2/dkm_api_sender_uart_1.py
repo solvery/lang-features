@@ -41,11 +41,11 @@ def uart_recv():
 
 def random_package():
     len = random.randint(100,255)
-    c1 = random.randint(0,255)
-    c2 = random.randint(0,255)
+    c1 = random.randint(28,255)
+    c2 = random.randint(28,255)
     rand_list = [0x1b, c1, c2, len]
     for i in range(len):
-        rand_list +=[random.randint(1,255)]
+        rand_list +=[random.randint(28,255)]
     return rand_list
 
 def print_hex(data):

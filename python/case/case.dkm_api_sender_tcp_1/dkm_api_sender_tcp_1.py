@@ -38,7 +38,11 @@ def data_recv():
         data = ''
         for i in range(1,10):
             time.sleep(0.2)
-            data = sock.recv(8192)
+            try:
+                data = sock.recv(8192)
+            except:
+                logging.info("disconnect")
+                sys.exit(0)
             count = len(data)
             if count != 0:
                 if data != '':
@@ -188,7 +192,11 @@ case_get_system_time_with_random_data = [get_system_time_with_random_data]
 case_get_system_time_split = [get_system_time_split]
 
 def send_cmd(cmd):
-    sock.sendall(cmd)
+    try:
+        sock.sendall(cmd)
+    except:
+        logging.info("disconnect")
+        sys.exit(0)
     logging.info("send: ")
     print_hex(cmd)
     logging.info("")

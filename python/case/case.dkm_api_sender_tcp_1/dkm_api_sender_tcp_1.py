@@ -12,7 +12,7 @@ import os
 formatter="%(asctime)s %(levelname)-12s %(message)s"
 
 # to file
-log_filename="log_"+datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d.%H.%M.%S.%f')
+log_filename="log/log_"+datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d.%H.%M.%S.%f')
 logging.basicConfig( filename=log_filename, filemode="a", format=formatter, level=logging.INFO);
 
 # to console
@@ -194,14 +194,14 @@ def send_cmd(cmd):
 
 data_send1 = 'hello'
 
-def main():  
+def run_case(case, delay):
     t = threading.Thread(target=data_recv)
     t.setDaemon(True)
     t.start()
     try:
         while True:  
-            random.choice(case_get_system_time_with_random_data)()
-            time.sleep(1.0)  
+            random.choice(case)()
+            time.sleep(delay)
     finally:
         print >>sys.stderr, 'closing socket'
         sock.close()
@@ -209,7 +209,7 @@ def main():
          
 if __name__ == '__main__':  
     try:  
-        main()  
+        run_case(case_get_system_time_with_random_data, 1.0)
     except KeyboardInterrupt:  
         if sock != None:  
             sock.close()

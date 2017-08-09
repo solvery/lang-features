@@ -1,6 +1,6 @@
 
 pkill python 
-for p in 12
+for p in 99
 #for p in 99 23 12
 do
 	for i in `seq 1 20`; do 

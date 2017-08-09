@@ -33,7 +33,7 @@ print >>sys.stderr, 'connecting to %s port %s' % server_address
 sock.connect(server_address)
 
 def data_recv():
-    logging.info("start recv")
+    logging.info("start read")
     while True:  
         data = ''
         for i in range(1,10):
@@ -76,10 +76,13 @@ def hex2bin(data_hex):
 def get_system_time_with_random_data():
     logging.info(sys._getframe().f_code.co_name)
     cmd = [0x1b, 0x28, 0x53]
-    rand1 = gen_random_data(1,10)
-    rand2 = gen_random_data(1,10)
+    rand1 = gen_random_data(1,a)
+    rand2 = gen_random_data(1,b)
     cmd = rand1 + cmd + rand2
     send_cmd(bytearray(cmd))
+
+def get_system_time_with_random_data_1():
+    get_system_time_with_random_data(1000,1000)
 
 def random_invalid_cmd():
     logging.info(sys._getframe().f_code.co_name)
@@ -188,7 +191,7 @@ case_list = case_list1
 
 case_all_rand_1 = []
 case_all_rand_2 = [get_system_time]
-case_get_system_time_with_random_data = [get_system_time_with_random_data]
+case_get_system_time_with_random_data = [get_system_time_with_random_data_1]
 case_get_system_time_split = [get_system_time_split]
 
 def send_cmd(cmd):

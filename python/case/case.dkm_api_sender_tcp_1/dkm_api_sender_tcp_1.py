@@ -52,7 +52,7 @@ def gen_random_data(a,b):
     len = random.randint(a,b)
     rand_list = []
     for i in range(len):
-        rand_list +=[random.randint(0,255)]
+        rand_list +=[random.randint(28,255)]
     return rand_list
 
 def random_package():
@@ -61,7 +61,7 @@ def random_package():
     c2 = random.randint(0,255)
     rand_list = [0x1b, c1, c2, len]
     for i in range(len):
-        rand_list +=[random.randint(1,255)]
+        rand_list +=[random.randint(28,255)]
     return rand_list
 
 def print_hex(data):

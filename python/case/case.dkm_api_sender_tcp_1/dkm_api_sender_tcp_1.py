@@ -195,15 +195,20 @@ def send_cmd(cmd):
 
 data_send1 = 'hello'
 
-def run_case(case, delay):
+def run_case(case, delay, times=0):
     logging.info("run %s" % case)
     t = threading.Thread(target=data_recv)
     t.setDaemon(True)
     t.start()
     try:
-        while True:  
-            random.choice(case)()
-            time.sleep(delay)
+        if times == 0:
+            while True:
+                random.choice(case)()
+                time.sleep(delay)
+        else:
+            for i in range(times)
+                random.choice(case)()
+                time.sleep(delay)
     finally:
         print >>sys.stderr, 'closing socket'
         sock.close()

@@ -7,7 +7,7 @@ import struct
 import time
 import sys
 import os
-from ftplib import FTP
+import ftplib 
 
 # logging
 formatter="%(asctime)s %(levelname)-12s %(message)s"
@@ -23,7 +23,18 @@ console.setLevel(logging.INFO)
 console.setFormatter(formatter)
 logging.getLogger('').addHandler(console)
 
+ip_addr = sys.argv[1]
+logging.info("login test, ip addr: %s" % ip_addr)
 
-ftp = FTP('192.168.100.99')
-for i in range(10):
-    print ftp.login(user='admin', passwd='admin')
+for i in range(10000):
+    ret = ''
+    try:
+        ftp = ftplib.FTP(ip_addr, timeout=2)
+        ftp.connect()
+        ret =  ftp.login(user='admin', passwd='admin')
+        ftp.quit()
+    except ftplib.all_errors as e:
+        logging.info("error: %s" % e)
+
+    if ret == '230 User logged in':
+        logging.info("loggin ok")

@@ -4,10 +4,10 @@ for p in 12
 #for p in 99 23 12
 do
 	ip=192.168.100.$p
-	for case in case_get_system_time #case_run_command_1 #case_run_command_1 case_command_add_random_1 case_run_command_once_1
+	for case in  case_run_command_once_1
 	do
-		for i in `seq 1 1000`; do 
-			for j in `seq 1 10`; do
+		while true; do
+			for j in `seq 1 50`; do
 				python $case.py $ip &
 			done	
 			wait

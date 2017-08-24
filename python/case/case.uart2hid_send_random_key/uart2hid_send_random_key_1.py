@@ -26,21 +26,22 @@ def hid_send(data, sleep=0.1):
     time.sleep(sleep)
 
 key_lctrl_d = hex2bin([0x81, 0x07])
+key_lctrl_c = hex2bin([0x81, 0x06])
 key_f12     = hex2bin([0x80, 0x45])
 
 
 def main():  
-    #hid_send(key_f12)
+    hid_send(key_f12)
+    hid_send(key_lctrl_c)
     while 1:
-        hid_send(key_lctrl_d)
         data_fn="keyboard_data_"+datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d.%H.%M.%S.%f')
         print data_fn
+        hid_send('\n')
         hid_send('cat > ' + data_fn + '\n')
         with open('data.txt', 'r') as fd:
             data = fd.read()
             hid_send(data)
         hid_send(key_lctrl_d)
-        hid_send('\n')
         time.sleep(1)
         #hid_send('md5sum data\n')
      
@@ -48,8 +49,9 @@ if __name__ == '__main__':
     try:  
         main()  
     except KeyboardInterrupt:  
+        hid_send(key_lctrl_c)
+        hid_send(key_f12)
         if ser != None:  
-            hid_send(key_lctrl_d)
             ser.close()  
 
 

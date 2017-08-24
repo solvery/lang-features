@@ -4,12 +4,14 @@ import serial
 import struct
 import time  
 import datetime
+import random
 import sys
 
 #  COMx修改成您老的使用的串口 
 serial_port = sys.argv[1]
 ser = serial.Serial(serial_port, 9600)  
 
+list_delay_time = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7]
 
 def hex2bin(data):
     data_bin_array=''
@@ -20,7 +22,7 @@ def hex2bin(data):
 def hid_send(data, sleep=0.1):
     for d in data:
         ser.write(d)
-        time.sleep(0.1)
+        time.sleep(random.choice(list_delay_time))
     time.sleep(sleep)
 
 key_lctrl_d = hex2bin([0x81, 0x07])
@@ -30,6 +32,7 @@ key_f12     = hex2bin([0x80, 0x45])
 def main():  
     #hid_send(key_f12)
     while 1:
+        hid_send(key_lctrl_d)
         data_fn="keyboard_data_"+datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d.%H.%M.%S.%f')
         print data_fn
         hid_send('cat > ' + data_fn + '\n')
@@ -37,6 +40,7 @@ def main():
             data = fd.read()
             hid_send(data)
         hid_send(key_lctrl_d)
+        hid_send('\n')
         time.sleep(1)
         #hid_send('md5sum data\n')
      
@@ -45,6 +49,7 @@ if __name__ == '__main__':
         main()  
     except KeyboardInterrupt:  
         if ser != None:  
+            hid_send(key_lctrl_d)
             ser.close()  
 
 

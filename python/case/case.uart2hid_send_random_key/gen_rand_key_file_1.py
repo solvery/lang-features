@@ -12,7 +12,7 @@ for i in range(97,123):
 print list_char
 
 with open ('data.txt', 'w') as fd:
-    for i in range(100):
+    for i in range(200000):
         l = random.shuffle(list_char)
         s = ''.join(list_char)
         s += '\n'

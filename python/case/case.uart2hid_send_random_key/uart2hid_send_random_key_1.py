@@ -26,11 +26,11 @@ def hid_send(data, sleep=0.1):
 key_lctrl_d = hex2bin([0x81, 0x07])
 key_f12     = hex2bin([0x80, 0x45])
 
-data_fn="keyboard_data_"+datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d.%H.%M.%S.%f')
 
 def main():  
     #hid_send(key_f12)
     while 1:
+        data_fn="keyboard_data_"+datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d.%H.%M.%S.%f')
         print data_fn
         hid_send('cat > ' + data_fn + '\n')
         with open('data.txt', 'r') as fd:

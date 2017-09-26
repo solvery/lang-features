@@ -1,4 +1,10 @@
 import time
+
+
+def nt_read(tn):
+    ret = tn.read_until('{')
+    ret += tn.read_very_eager()
+    print "read: \n" + ret 
     
 def do_telnet():
     import telnetlib
@@ -8,9 +14,11 @@ def do_telnet():
     tn.set_debuglevel(2)
 
     tn.write("mode human on" + '\n')
-    ret = tn.read_until('{')
-    ret += tn.read_very_eager()
-    print "read: \n" + ret 
+    tn.write("require blueriver_api 2.11.0" + '\n')
+
+    tn.write("test ALL memory" + '\r')
+    nt_read(tn)
+
     tn.close() 
 
 

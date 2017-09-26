@@ -15,9 +15,9 @@ def do_telnet():
     tn.set_debuglevel(2)
 
     tn.write("mode human on" + '\n')
-    json_str = nt_read(tn)
+    nt_read(tn)
     tn.write("require blueriver_api 2.11.0" + '\n')
-    json_str = nt_read(tn)
+    nt_read(tn)
 
     tn.write("test ALL memory" + '\r')
     json_str = nt_read(tn)

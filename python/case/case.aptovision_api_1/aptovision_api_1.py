@@ -9,11 +9,11 @@ def nt_read(tn):
     
 def do_telnet():
     import telnetlib
-    host='127.0.0.1'
-    #host='192.168.2.7'
+    #host='127.0.0.1'
+    host='192.168.2.7'
     port=6970
     tn = telnetlib.Telnet(host, port, timeout=20)
-    tn.set_debuglevel(2)
+    tn.set_debuglevel(0)
 
     tn.write("mode human on" + '\n')
     nt_read(tn)
@@ -32,9 +32,11 @@ def do_telnet():
     device_test = json_parsed['result']['device_test']
     for i in range(len(device_test)):
         result = json_parsed['result']['device_test'][i]['memory']
-        device_id = json_parsed['result']['device_test'][i]['device_id']
+        device_id = str(json_parsed['result']['device_test'][i]['device_id'])
         if result == 'PASS':
             print device_id, " PASS"
+            tn.write('set ' + device_id +' property nodes[LED:0].configuration.function.value 1\r\n')
+            tn.read_very_eager()
         else:
             print device_id, " FAIL"
 

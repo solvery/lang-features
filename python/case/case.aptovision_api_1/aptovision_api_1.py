@@ -35,10 +35,12 @@ def do_telnet():
         device_id = str(json_parsed['result']['device_test'][i]['device_id'])
         if result == 'PASS':
             print device_id, " PASS"
-            tn.write('set ' + device_id +' property nodes[LED:0].configuration.function.value 1\r\n')
+            tn.write('set ' + device_id +' property nodes[LED:0].configuration.function.value 8\r\n')
             tn.read_very_eager()
         else:
             print device_id, " FAIL"
+            tn.write('set ' + device_id +' property nodes[LED:0].configuration.function.value 1\r\n')
+            tn.read_very_eager()
 
     tn.close() 
 

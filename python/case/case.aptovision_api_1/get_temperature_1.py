@@ -17,32 +17,25 @@ def do_telnet():
     tn = telnetlib.Telnet(host, port, timeout=20)
     tn.set_debuglevel(0)
 
-    tn.write("mode human on" + '\n')
+    tn.write("mode human on" + '\r\n')
     nt_read(tn)
-    tn.write("require blueriver_api 2.11.0" + '\n')
+    tn.write("require blueriver_api 2.11.0" + '\r\n')
     nt_read(tn)
 
-    tn.write("test ALL memory" + '\r')
+    tn.write("get ALL temperature" + '\r\n')
     json_str = nt_read(tn)
     json_parsed = json.loads(json_str)
     request_id = str(json_parsed['request_id'])
     
-    time.sleep(2)
+    time.sleep(1)
     tn.write('request ' + request_id + '\r\n')
     json_str = nt_read(tn)
     json_parsed = json.loads(json_str)
-    device_test = json_parsed['result']['device_test']
-    for i in range(len(device_test)):
-        result = json_parsed['result']['device_test'][i]['memory']
-        device_id = str(json_parsed['result']['device_test'][i]['device_id'])
-        if result == 'PASS':
-            print device_id, " PASS"
-            tn.write('set ' + device_id +' property nodes[LED:0].configuration.function.value 8\r\n')
-            tn.read_very_eager()
-        else:
-            print device_id, " FAIL"
-            tn.write('set ' + device_id +' property nodes[LED:0].configuration.function.value 1\r\n')
-            tn.read_very_eager()
+    devices = json_parsed['result']['devices']
+    for i in range(len(devices)):
+        result = json_parsed['result']['devices'][i]['status']['temperature']
+        device_id = str(json_parsed['result']['devices'][i]['device_id'])
+        print device_id, result
 
     tn.close() 
 

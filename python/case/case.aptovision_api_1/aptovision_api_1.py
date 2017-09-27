@@ -1,16 +1,18 @@
+import sys
 import time
 import json
 
 def nt_read(tn):
     s = tn.read_until('{')
     s += tn.read_very_eager()
-    print "read: \n" + s
+    #print "read: \n" + s
     return s
     
 def do_telnet():
     import telnetlib
     #host='127.0.0.1'
-    host='192.168.2.7'
+    ip_addr = sys.argv[1]
+    host=ip_addr
     port=6970
     tn = telnetlib.Telnet(host, port, timeout=20)
     tn.set_debuglevel(0)

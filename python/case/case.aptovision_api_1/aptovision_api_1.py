@@ -9,7 +9,8 @@ def nt_read(tn):
     
 def do_telnet():
     import telnetlib
-    host='192.168.2.7'
+    host='127.0.0.1'
+    #host='192.168.2.7'
     port=6970
     tn = telnetlib.Telnet(host, port, timeout=20)
     tn.set_debuglevel(2)
@@ -27,6 +28,15 @@ def do_telnet():
     time.sleep(2)
     tn.write('request ' + request_id + '\r\n')
     json_str = nt_read(tn)
+    json_parsed = json.loads(json_str)
+    device_test = json_parsed['result']['device_test']
+    for i in range(len(device_test)):
+        result = json_parsed['result']['device_test'][i]['memory']
+        device_id = json_parsed['result']['device_test'][i]['device_id']
+        if result == 'PASS':
+            print device_id, " PASS"
+        else:
+            print device_id, " FAIL"
 
     tn.close() 
 

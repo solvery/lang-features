@@ -17,7 +17,7 @@ def do_telnet():
     tn = telnetlib.Telnet(host, port, timeout=20)
     tn.set_debuglevel(0)
 
-    tn.write("mode human on" + '\n')
+    #tn.write("mode human on" + '\n')
     nt_read(tn)
     tn.write("require blueriver_api 2.11.0" + '\n')
     nt_read(tn)

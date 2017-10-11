@@ -11,3 +11,4 @@ data = json.loads(json_str)
 
 print json_str
 print data
+print data['name']

@@ -1,7 +1,7 @@
 import socket
 
 host='localhost'
-port=10000
+port=6969
 
 s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)

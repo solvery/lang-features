@@ -2,8 +2,8 @@ import socket
 import time
 
 ANY = "0.0.0.0"
-MCAST_ADDR = "224.168.2.9"
-MCAST_PORT = 1600
+MCAST_ADDR = '224.1.1.2'
+MCAST_PORT = ''
 
 #create a UDP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)

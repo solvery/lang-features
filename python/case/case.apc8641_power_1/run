@@ -1,0 +1,5 @@
+
+for i in `seq 1 24`; do
+	python apc8641_power_1.py  $i 1 1 & 
+	sleep 3
+done

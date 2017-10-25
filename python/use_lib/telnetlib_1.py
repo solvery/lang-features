@@ -15,10 +15,10 @@ def do_telnet(Host, username, password, finish, commands):
       
     tn.read_until(finish)
     while True:
-        tn.write('%s\r' % 'olOn 1')
+        tn.write('%s\r' % 'olOn 2')
         tn.read_until(finish)
         time.sleep(2)
-        tn.write('%s\r' % 'olOff 1')
+        tn.write('%s\r' % 'olOff 2')
         tn.read_until(finish)
         time.sleep(2)
     

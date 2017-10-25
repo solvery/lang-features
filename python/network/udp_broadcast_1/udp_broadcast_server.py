@@ -1,4 +1,5 @@
 import socket
+import struct
 
 host=''
 port=5556
@@ -12,7 +13,7 @@ while 1:
     try:
         data,addr=s.recvfrom(1024)
         print "got data from",addr
-        print data
+        print " ".join(("%02x" % struct.unpack('B', n)) for n in data)
         #s.sendto("broadcasting",addr)
     except KeyboardInterrupt:
         raise

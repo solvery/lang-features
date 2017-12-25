@@ -3,7 +3,8 @@ import struct
 import sys
 import os
 
-num=4
+production_num=3
+box_num=12
 
 def gen_mac_head(mac_p1, mac_p2):
     mac_addr = [0x01, 0xd8, 0x80, 0x30, mac_p1, 0x00, mac_p2]
@@ -15,14 +16,14 @@ def gen_mac_head(mac_p1, mac_p2):
 
 fn_tx_body=open("icron_demo_tx_body.bin",'rb').read()
 fn_rx_body=open("icron_demo_rx_body.bin",'rb').read()
-for i in range(1,num+1):
+for i in range(1,box_num+1):
     fn = "icron_eeprom_tx_mac_" + str(i) + ".bin"
-    data_tx = gen_mac_head(0xA2, i) + fn_tx_body
+    data_tx = gen_mac_head(0xA0+production_num, i) + fn_tx_body
     with open(fn,'wb') as fd:
         fd.write(data_tx)
 
     fn = "icron_eeprom_rx_mac_" + str(i) + ".bin"
-    data_rx = gen_mac_head(0xB2, i) + fn_tx_body
+    data_rx = gen_mac_head(0xB0+production_num, i) + fn_tx_body
     with open(fn,'wb') as fd:
         fd.write(data_rx)
 

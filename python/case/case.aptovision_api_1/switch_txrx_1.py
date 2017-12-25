@@ -37,11 +37,12 @@ def do_telnet():
 
     cmd_t1r1 = 'join d8803012ca01:HDMI:0 d8803022ca02:HDMI:0'
     cmd_t2r1 = 'join d8803012ca02:HDMI:0 d8803022ca02:HDMI:0'
+    cmd_t3r1 = 'join d8803032ca02:HDMI:0 d8803022ca02:HDMI:0'
+    cmd_list = [cmd_t1r1, cmd_t2r1, cmd_t3r1]
     while True:
-        cmd_send(cmd_t1r1)
-        time.sleep(5)
-        cmd_send(cmd_t2r1)
-        time.sleep(5)
+        for cmd in cmd_list:
+            cmd_send(cmd)
+            time.sleep(5)
     tn.close() 
 
 if __name__=='__main__':

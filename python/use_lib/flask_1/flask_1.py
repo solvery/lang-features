@@ -9,6 +9,6 @@ def hello_world():
 if __name__ == '__main__':
     app.run(
         debug=False,
-        host=app.config.get("HOST", "192.168.2.9"),
+        host=app.config.get("HOST", "0.0.0.0"),
         port=app.config.get("PORT", 5000)
     )

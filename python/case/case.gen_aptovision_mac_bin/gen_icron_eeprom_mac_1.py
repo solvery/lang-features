@@ -7,7 +7,11 @@ production_num=3
 box_num=12
 
 def gen_mac_head(mac_p1, mac_p2):
-    mac_addr = [0x01, 0xd8, 0x80, 0x30, mac_p1, 0x00, mac_p2]
+    a = mac_p2/1000%10
+    b = mac_p2/100%10
+    c = mac_p2/10%10
+    d = mac_p2/1%10
+    mac_addr = [0x01, 0xd8, 0x80, 0x30, mac_p1, a*16+b, c*16+d]
     data_bin_array=''
     for data in mac_addr:
         data_bin = struct.pack('B', data) 

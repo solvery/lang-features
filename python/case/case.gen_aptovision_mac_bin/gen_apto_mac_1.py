@@ -14,17 +14,18 @@ def gen_mac(type_id, mac_id):
     for data in mac_addr:
         data_bin = struct.pack('B', data) 
         data_bin_array = data_bin_array + data_bin[0];
-    return data_bin_array
+    mac_str = "-".join(("%02x" % n) for n in mac_addr)
+    return data_bin_array, mac_str
 
 
 for i in range(1,box_num+1):
-    fn = "apto_mac_fiber_tx_" + str(i) + ".bin"
-    data_bin_array = gen_mac(0x10+production_num, i)
+    data_bin_array, mac_str = gen_mac(0x10+production_num, i)
+    fn = "apto_mac_fiber_tx_" + mac_str + ".bin"
     with open(fn,'wb') as fd:
         fd.write(data_bin_array)
 
-    fn = "apto_mac_fiber_rx_" + str(i) + ".bin"
-    data_bin_array = gen_mac(0x20+production_num, i)
+    data_bin_array, mac_str = gen_mac(0x20+production_num, i)
+    fn = "apto_mac_fiber_rx_" + mac_str + ".bin"
     with open(fn,'wb') as fd:
         fd.write(data_bin_array)
 

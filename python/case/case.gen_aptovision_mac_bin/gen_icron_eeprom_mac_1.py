@@ -12,20 +12,21 @@ def gen_mac_head(mac_p1, mac_p2):
     for data in mac_addr:
         data_bin = struct.pack('B', data) 
         data_bin_array = data_bin_array + data_bin[0];
-    return data_bin_array
+    mac_str = "-".join(("%02x" % n) for n in mac_addr)
+    return data_bin_array, mac_str
 
 fn_tx_body=open("icron_demo_tx_body.bin",'rb').read()
 fn_rx_body=open("icron_demo_rx_body.bin",'rb').read()
 for i in range(1,box_num+1):
-    fn = "icron_eeprom_tx_mac_" + str(i) + ".bin"
-    data_tx = gen_mac_head(0xA0+production_num, i) + fn_tx_body
+    data_tx, mac_str = gen_mac_head(0xA0+production_num, i) 
+    fn = "icron_eeprom_tx_mac_" + mac_str + ".bin"
     with open(fn,'wb') as fd:
-        fd.write(data_tx)
+        fd.write(data_tx + fn_tx_body)
 
-    fn = "icron_eeprom_rx_mac_" + str(i) + ".bin"
-    data_rx = gen_mac_head(0xB0+production_num, i) + fn_tx_body
+    data_rx, mac_str = gen_mac_head(0xB0+production_num, i)
+    fn = "icron_eeprom_rx_mac_" + mac_str + ".bin"
     with open(fn,'wb') as fd:
-        fd.write(data_rx)
+        fd.write(data_rx + fn_rx_body)
 
 
 

@@ -3,8 +3,8 @@ import struct
 import sys
 import os
 
-production_num=3
-box_num=12
+production_num=int(sys.argv[1])
+box_num=int(sys.argv[2])
 
 def gen_mac_head(mac_p1, mac_p2):
     a = mac_p2/1000%10

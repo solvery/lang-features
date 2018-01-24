@@ -1,8 +1,9 @@
 
+import sys
 import struct
 
-production_num=3
-box_num=12
+production_num=int(sys.argv[1])
+box_num=int(sys.argv[2])
 
 def gen_mac(type_id, mac_id):
     a = mac_id/1000%10

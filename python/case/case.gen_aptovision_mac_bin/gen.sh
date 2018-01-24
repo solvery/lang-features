@@ -1,5 +1,5 @@
-python gen_apto_mac_1.py  
-python gen_icron_eeprom_mac_1.py
+python gen_apto_mac_1.py 4 5
+python gen_icron_eeprom_mac_1.py 4 5
 
 mkdir -p apto_mac_address
 mkdir -p icron_mac_address

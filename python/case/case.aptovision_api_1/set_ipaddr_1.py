@@ -31,6 +31,10 @@ def do_telnet():
         device_id = str(json_parsed['result']['devices'][i]['device_id'])
         if status == True:
             print device_id, status
+            ipaddr = '169.254.' + str(int(device_id[6] + device_id[7])) + '.' + str(int(device_id[10] + device_id[11]))
+            set_ipaddr_cmd = 'set ' + device_id + ' ip mode MANUAL address ' + ipaddr + ' mask 255.255.0.0 gateway 0.0.0.0'
+            print set_ipaddr_cmd
+            tn.write(set_ipaddr_cmd + '\r\n')
 
     tn.close() 
 

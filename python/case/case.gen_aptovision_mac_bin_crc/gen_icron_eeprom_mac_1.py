@@ -86,8 +86,11 @@ def gen_mac_head(mac_p1, mac_p2):
 for i in range(1,box_num+1):
     mac_addr, mac_str = gen_mac_head(0xA0+production_num, i) 
     r0 = [0x01] + mac_addr + [0x00, 0x00, 0x00]
-    r1 = "%04x" % crc16("".join(chr(i) for i in r0))
-    mac_addr_crc = [ord(c) for c in icron_crc_result(r1)]
+    r00 = [0x01,0xd8,0x80,0x30,0xa4,0x00,0x01,0x00,0x00,0x00]
+    r1 = "".join(chr(i) for i in r00)
+    r2 = "%04x" % crc16(r1)
+    r3 = icron_crc_result(r2)
+    mac_addr_crc = list(bytearray.fromhex(r3))
 
     icron_data1 = r0 + mac_addr_crc + [0xFF, 0xFF, 0xFF, 0xFF]
     icron_data2 = [0x01, 0xA9, 0xFE, 0x04, 0x01, 0x00, 0x00, 0x00, 0x00, 0x0A, 0x91, 0x32, 0x00, 0x00, 0x00, 0x00]

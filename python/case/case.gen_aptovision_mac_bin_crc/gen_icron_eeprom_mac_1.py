@@ -64,11 +64,13 @@ def byte_bit_reverse(n):
     return tab[n]
 
 def icron_crc_result(s):
-    a=byte_bit_reverse(s[0])
-    b=byte_bit_reverse(s[1])
-    c=byte_bit_reverse(s[2])
-    d=byte_bit_reverse(s[3])
-    return d+c+b+a
+    r1 = "".join(chr(i) for i in s)
+    r2 = "%04x" % crc16(r1)
+    a=byte_bit_reverse(r2[0])
+    b=byte_bit_reverse(r2[1])
+    c=byte_bit_reverse(r2[2])
+    d=byte_bit_reverse(r2[3])
+    return list(bytearray.fromhex(d+c+b+a))
 
 
 def gen_mac_head(mac_p1, mac_p2):
@@ -86,14 +88,12 @@ def gen_mac_head(mac_p1, mac_p2):
 for i in range(1,box_num+1):
     mac_addr, mac_str = gen_mac_head(0xA0+production_num, i) 
     r0 = [0x01] + mac_addr + [0x00, 0x00, 0x00]
-    r00 = [0x01,0xd8,0x80,0x30,0xa4,0x00,0x01,0x00,0x00,0x00]
-    r1 = "".join(chr(i) for i in r00)
-    r2 = "%04x" % crc16(r1)
-    r3 = icron_crc_result(r2)
-    mac_addr_crc = list(bytearray.fromhex(r3))
+    mac_addr_crc = icron_crc_result(r0)
 
     icron_data1 = r0 + mac_addr_crc + [0xFF, 0xFF, 0xFF, 0xFF]
-    icron_data2 = [0x01, 0xA9, 0xFE, 0x04, 0x01, 0x00, 0x00, 0x00, 0x00, 0x0A, 0x91, 0x32, 0x00, 0x00, 0x00, 0x00]
+    ip_addr = [0x01, 0xa9, 0xfe, 0x04, i, 0x00, 0x00, 0x00, 0x00, 0x0a]
+    ip_addr_crc = icron_crc_result(ip_addr)
+    icron_data2 = ip_addr + ip_addr_crc + [0x00, 0x00, 0x00, 0x00]
     icron_data = icron_data1 + icron_config_table1 + icron_data2 + icron_config_table2
     icron_data_bin = "".join(chr(i) for i in icron_data)
 

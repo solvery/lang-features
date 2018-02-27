@@ -101,3 +101,18 @@ for i in range(1,box_num+1):
     with open(fn,'wb') as fd:
         fd.write(icron_data_bin)
 
+    mac_addr, mac_str = gen_mac_head(0xB0+production_num, i) 
+    r0 = [0x01] + mac_addr + [0x00, 0x00, 0x00]
+    mac_addr_crc = icron_crc_result(r0)
+
+    icron_data1 = r0 + mac_addr_crc + [0xFF, 0xFF, 0xFF, 0xFF]
+    ip_addr = [0x01, 0xa9, 0xfe, 0x04, i, 0x00, 0x00, 0x00, 0x00, 0x0a]
+    ip_addr_crc = icron_crc_result(ip_addr)
+    icron_data2 = ip_addr + ip_addr_crc + [0x00, 0x00, 0x00, 0x00]
+    icron_data = icron_data1 + icron_config_table1 + icron_data2 + icron_config_table2
+    icron_data_bin = "".join(chr(i) for i in icron_data)
+
+    fn = "icron_eeprom_rx_mac_" + mac_str + ".bin"
+    with open(fn,'wb') as fd:
+        fd.write(icron_data_bin)
+

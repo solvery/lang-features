@@ -9,7 +9,12 @@ def nt_read(tn):
     
 def do_telnet():
     import telnetlib
-    host='192.168.2.7'
+
+    if len(sys.argv) <= 1:
+        ip_addr='127.0.0.1'
+    else:
+        ip_addr = sys.argv[1]
+    host=ip_addr
     port=6970
     tn = telnetlib.Telnet(host, port, timeout=20)
     tn.set_debuglevel(2)

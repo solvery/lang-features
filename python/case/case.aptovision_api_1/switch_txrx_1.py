@@ -1,10 +1,15 @@
 import sys
 import time
+import random
 import json
 
 import telnetlib
 #host='127.0.0.1'
-ip_addr = sys.argv[1]
+
+if len(sys.argv) <= 1:
+    ip_addr='127.0.0.1'
+else:
+    ip_addr = sys.argv[1]
 host=ip_addr
 port=6970
 tn = telnetlib.Telnet(host, port, timeout=20)
@@ -35,14 +40,14 @@ def do_telnet():
     tn.write("require blueriver_api 2.11.0" + '\n')
     nt_read(tn)
 
-    cmd_t1r1 = 'join d8803012ca01:HDMI:0 d8803022ca02:HDMI:0'
-    cmd_t2r1 = 'join d8803012ca02:HDMI:0 d8803022ca02:HDMI:0'
-    cmd_t3r1 = 'join d8803032ca02:HDMI:0 d8803022ca02:HDMI:0'
-    cmd_list = [cmd_t1r1, cmd_t2r1, cmd_t3r1]
+    tx_list = ['d8803012ca01', 'd8803012ca02','d8803032ca02','d88039a1ca75']
+    rx_list = ['d8803022ca02', 'd88039a1d77f']
     while True:
-        for cmd in cmd_list:
+        tx_id = random.choice(tx_list)
+        for rx_id in rx_list:
+            cmd = 'join ' + tx_id +':HDMI:0 ' + rx_id + ':HDMI:0'
             cmd_send(cmd)
-            time.sleep(5)
+        time.sleep(5)
     tn.close() 
 
 if __name__=='__main__':

@@ -25,7 +25,7 @@ def cmd_flash_erase(addr):
     a3 = addr/0x10000%0x100
     cmd = [0x1b, 0x3c, 0x55, 0x00, a1, a2, a3] 
     cmd = cmd + gen_sum(cmd)
-    print_hex(cmd)
+    #print_hex(cmd)
     return cmd
 
 def cmd_flash_write(addr, data):
@@ -40,8 +40,8 @@ def cmd_flash_write(addr, data):
     cmd = [0x1b, 0x3c, 0x55, 0x01, a1, a2, a3] + data
 
     cmd = cmd + gen_sum(cmd)
-    print "data len: %d" % len(data)
-    print_hex(cmd)
+    #print "data len: %d" % len(data)
+    #print_hex(cmd)
     return cmd
 
 def partition(lst, partition_size):
@@ -69,6 +69,7 @@ def main():
     for i in range(0x100):
         cmd  = cmd_flash_erase(0x10000 * i)
         ser.write(cmd)
+        print "processing %0.2f " % (1.0*i/0x100)
         time.sleep(0.2)  
 
     data_in = get_file_data("ten_gig_eth_pcs_pma_0_example_design.bin")
@@ -78,8 +79,9 @@ def main():
         data = data_in[i*0x100:(i+1)*0x100]
         data_hex = [struct.unpack('B', n)[0] for n in data]
         cmd  = cmd_flash_write(0x100 * i, data_hex)
+        print "processing %0.2f " % (1.0*i/pkg_size)
         ser.write(cmd)
-        time.sleep(0.1)  
+        #time.sleep(0.1)  
     exit()
     while True:  
         count = ser.inWaiting()  

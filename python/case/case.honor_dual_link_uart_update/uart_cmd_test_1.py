@@ -69,7 +69,7 @@ def main():
     for i in range(0x100):
         cmd  = cmd_flash_erase(0x10000 * i)
         ser.write(cmd)
-        print "processing %0.3f %%" % (100.0*i/0x100)
+        print "processing %0.1f %%" % (100.0*i/0x100)
         time.sleep(0.2)  
 
     data_in = get_file_data("system_top_flash.bin")
@@ -80,7 +80,7 @@ def main():
         data = data_in[i*0x100:(i+1)*0x100]
         data_hex = [struct.unpack('B', n)[0] for n in data]
         cmd  = cmd_flash_write(0x100 * i, data_hex)
-        print "processing %0.3f %%" % (100.0*i/pkg_size)
+        print "processing %0.1f %%" % (100.0*i/pkg_size)
         ser.write(cmd)
         #time.sleep(0.1)  
     exit()

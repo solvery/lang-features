@@ -72,8 +72,8 @@ def main():
         print "processing %0.1f %%" % (100.0*i/0x100)
         time.sleep(0.2)  
 
-    data_in = get_file_data("system_top_flash.bin")
-    #data_in = get_file_data("ten_gig_eth_pcs_pma_0_example_design.bin")
+    #data_in = get_file_data("system_top_flash.bin")
+    data_in = get_file_data("ten_gig_eth_pcs_pma_0_example_design.bin")
     #data_matrix = get_file_data("data.bin")
     pkg_size = len(data_in)/0x100
     for i in range(pkg_size):

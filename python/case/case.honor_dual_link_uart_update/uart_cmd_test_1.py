@@ -73,6 +73,7 @@ def main():
 
     data_matrix = get_file_data("ten_gig_eth_pcs_pma_0_example_design.bin")
     #data_matrix = get_file_data("data.bin")
+    print "data package len: %d" % len(data_matrix)
     for i in range(len(data_matrix)):
         cmd  = cmd_flash_write(0x10000 * i, data_matrix[i])
         ser.write(cmd)

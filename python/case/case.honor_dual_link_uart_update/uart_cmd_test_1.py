@@ -7,6 +7,9 @@ import time
 serial_port = sys.argv[1]
 ser = serial.Serial(serial_port, 115200)
 
+def print_hex(data):
+    print (" ".join(("%02x" % n) for n in data))
+
 def gen_sum(data):
     data_sum = 0
     for d in data:
@@ -21,11 +24,13 @@ def cmd_flash_erase(addr):
     a3 = addr/0x10000%0x100
     cmd = [0x1b, 0x3c, 0x55, 0x00, a1, a2, a3] 
     cmd = cmd + gen_sum(cmd)
+    print_hex(cmd)
     return cmd
 
 def main():  
     cmd  = cmd_flash_erase(0x10000 * 0)
     ser.write(cmd)
+    exit()
     while True:  
         count = ser.inWaiting()  
         if count != 0:  

@@ -66,18 +66,16 @@ def get_file_data(fn):
 
 def main():  
 
-    #flash_start_addr = 0x0
+    flash_start_addr = 0x0
     #flash_start_addr = 0x10000
-    flash_start_addr = 0x400000
-    for i in range(0x3f):
+    #flash_start_addr = 0x400000
+    for i in range(0x100):
         cmd  = cmd_flash_erase(flash_start_addr + (0x10000 * i))
         ser.write(cmd)
         print "processing %0.1f %%" % (100.0*i/0x100)
         time.sleep(0.2)  
 
-    #data_in = get_file_data("system_top_flash.bin")
-    data_in = get_file_data("ten_gig_eth_pcs_pma_0_example_design.bin")
-    #data_matrix = get_file_data("data.bin")
+    data_in = get_file_data("system_top_initial.bin")
     pkg_size = len(data_in)/0x100
     for i in range(pkg_size):
         data = data_in[i*0x100:(i+1)*0x100]

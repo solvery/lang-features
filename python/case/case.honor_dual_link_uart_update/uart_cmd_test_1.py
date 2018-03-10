@@ -79,7 +79,7 @@ def main():
         data = data_in[i*0x100:(i+1)*0x100]
         data_hex = [struct.unpack('B', n)[0] for n in data]
         cmd  = cmd_flash_write(0x100 * i, data_hex)
-        print "processing %0.2f " % (1.0*i/pkg_size)
+        print "processing %0.3f " % (1.0*i/pkg_size)
         ser.write(cmd)
         #time.sleep(0.1)  
     exit()

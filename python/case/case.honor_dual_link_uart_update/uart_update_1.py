@@ -7,15 +7,6 @@ import time
 serial_port = sys.argv[1]
 ser = serial.Serial(serial_port, 115200)
 
-def uart_recv():
-    while True:
-        ser.flushInput()
-        count = ser.inWaiting()
-        if count != 0:
-            recv = ser.read(count)
-            return recv
-        time.sleep(0.1)
-
 def print_hex(data):
     print (" ".join(("%02x" % n) for n in data))
 
@@ -75,14 +66,24 @@ def get_file_data(fn):
 
 def main():  
 
+    #flash_start_addr = 0x0
     #flash_start_addr = 0x10000
     flash_start_addr = 0x400000
-    for i in range(0x10):
-        cmd  = cmd_flash_erase(flash_start_addr + 0x10000 * i)
-        #cmd  = cmd_flash_erase(0x400000 + 0x10000 * i)
+    for i in range(0x80):
+        cmd  = cmd_flash_erase(flash_start_addr + (0x10000 * i))
         ser.write(cmd)
-        print "processing %0.3f %%" % (100.0*i/0x100)
-        time.sleep(0.3)  
+        print "processing %0.1f %%" % (100.0*i/0x100)
+        time.sleep(0.2)  
+
+    data_in = get_file_data("system_top.bin")
+    pkg_size = len(data_in)/0x100
+    for i in range(pkg_size):
+        data = data_in[i*0x100:(i+1)*0x100]
+        data_hex = [struct.unpack('B', n)[0] for n in data]
+        cmd  = cmd_flash_write(flash_start_addr + (0x100 * i), data_hex)
+        print "processing %0.1f %%" % (100.0*i/pkg_size)
+        ser.write(cmd)
+        #time.sleep(0.1)  
     exit()
     while True:  
         count = ser.inWaiting()  

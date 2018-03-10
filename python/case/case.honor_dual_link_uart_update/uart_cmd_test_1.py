@@ -27,8 +27,21 @@ def cmd_flash_erase(addr):
     print_hex(cmd)
     return cmd
 
+def cmd_flash_write(addr, data):
+
+    data_test = range(0x0,0x100)
+    a1 = addr%0x100
+    a2 = addr/0x100%0x100
+    a3 = addr/0x10000%0x100
+    cmd = [0x1b, 0x3c, 0x55, 0x01, a1, a2, a3] + data_test
+    cmd = cmd + gen_sum(cmd)
+    print_hex(cmd)
+    return cmd
+
 def main():  
-    cmd  = cmd_flash_erase(0x10000 * 0)
+    #cmd  = cmd_flash_erase(0x10000 * 0)
+    #ser.write(cmd)
+    cmd  = cmd_flash_write(0x10000 * 0, [0x0])
     ser.write(cmd)
     exit()
     while True:  

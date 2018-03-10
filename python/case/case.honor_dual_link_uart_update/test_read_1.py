@@ -106,8 +106,9 @@ def bin2hex(data_bin):
 
 def main():  
 
+    flash_start_addr = 0x0
     #flash_start_addr = 0x10000
-    flash_start_addr = 0x400000
+    #flash_start_addr = 0x400000
     #cmd = cmd_get_version()
     #ser.write(cmd)
     #recv = uart_recv()
@@ -115,12 +116,19 @@ def main():
     #print_hex(recv_bytes)
     #time.sleep(0.5)  
 
+    data_out = ''
     for i in range(0x40):
         cmd = cmd_get_data(flash_start_addr + 0x10000 * i)
         ser.write(cmd)
         recv = uart_recv()
+        data_out = data_out + recv[4:]
         recv_bytes = bin2hex(recv)
         print_hex(recv_bytes)
+        time.sleep(0.3)  
+
+    with open("data_out.bin",'wb') as fd_in:
+        fd_in.write(data_out)
+    
 
     i = 0
     cmd  = cmd_flash_erase(flash_start_addr + 0x10000 * i)

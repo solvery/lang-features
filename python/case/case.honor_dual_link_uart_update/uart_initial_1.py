@@ -75,7 +75,8 @@ def main():
         print "processing %0.1f %%" % (100.0*i/0x100)
         time.sleep(0.2)  
 
-    data_in = get_file_data("system_top_initial.bin")
+    data_in = get_file_data("system_top.bin")
+    #data_in = get_file_data("system_top_initial.bin")
     pkg_size = len(data_in)/0x100
     for i in range(pkg_size):
         data = data_in[i*0x100:(i+1)*0x100]
@@ -83,7 +84,7 @@ def main():
         cmd  = cmd_flash_write(flash_start_addr + (0x100 * i), data_hex)
         print "processing %0.1f %%" % (100.0*i/pkg_size)
         ser.write(cmd)
-        #time.sleep(0.1)  
+        time.sleep(0.1)  
     exit()
     while True:  
         count = ser.inWaiting()  

@@ -53,16 +53,16 @@ def partition(lst, partition_size):
     ]
 
 def get_file_data(fn):
+    print sys._getframe().f_code.co_name
+
     with open(fn,'rb') as fd_in:
         data_in = fd_in.read()
-    data = []
-    for d in data_in:
-        d_hex = struct.unpack('B', d)
-	data = data + [d_hex[0]]
-    data_append = [0]*(0x100 - len(data)%0x100)
-    data = data + data_append
-    data_matrix = partition(data, 0x100)
-    return data_matrix
+    print "data package len: 0x%x" % len(data_in)
+
+    data_append = '\0'*(0x100 - len(data_in)%0x100)
+    data = data_in + data_append
+    print "data append  len: 0x%x" % len(data)
+    return data
 
 def main():  
 
@@ -71,11 +71,13 @@ def main():
         ser.write(cmd)
         time.sleep(0.2)  
 
-    data_matrix = get_file_data("ten_gig_eth_pcs_pma_0_example_design.bin")
+    data_in = get_file_data("ten_gig_eth_pcs_pma_0_example_design.bin")
     #data_matrix = get_file_data("data.bin")
-    print "data package len: %d" % len(data_matrix)
-    for i in range(len(data_matrix)):
-        cmd  = cmd_flash_write(0x10000 * i, data_matrix[i])
+    pkg_size = len(data_in)/0x100
+    for i in range(pkg_size):
+        data = data_in[i*0x100:(i+1)*0x100]
+        data_hex = [struct.unpack('B', n)[0] for n in data]
+        cmd  = cmd_flash_write(0x100 * i, data_hex)
         ser.write(cmd)
         time.sleep(0.1)  
     exit()

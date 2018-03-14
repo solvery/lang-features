@@ -7,6 +7,30 @@ import time
 serial_port = sys.argv[1]
 ser = serial.Serial(serial_port, 115200)
 
+def uart_recv():
+    data = ''
+    #for i in range(1,10):
+    while True:
+        time.sleep(0.05)
+        count = ser.inWaiting()
+        if count != 0:
+            buf = ser.read(count)
+            data += buf
+        else:
+            if data != '':
+                return data
+            else:
+                return '\b0'
+
+def bin2hex(data_bin):
+    data_hex_array = []
+    for d in data_bin:
+        data_hex = struct.unpack('B', d)
+        data_hex_array = data_hex_array + [data_hex[0]]
+    return data_hex_array
+
+
+
 def print_hex(data):
     print (" ".join(("%02x" % n) for n in data))
 
@@ -84,7 +108,11 @@ def main():
         cmd  = cmd_flash_write(flash_start_addr + (0x100 * i), data_hex)
         print "processing %0.1f %%" % (100.0*i/pkg_size)
         ser.write(cmd)
-        time.sleep(0.1)  
+
+        recv = uart_recv()
+        recv_bytes = bin2hex(recv)
+        print_hex(recv_bytes)
+        #time.sleep(0.1)  
     exit()
     while True:  
         count = ser.inWaiting()  

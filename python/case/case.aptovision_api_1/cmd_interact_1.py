@@ -1,6 +1,7 @@
 import sys
 import time
 import json
+import IPython
 
 import telnetlib
 
@@ -37,9 +38,8 @@ def do_telnet():
     nt_read(tn)
     tn.write("require blueriver_api 2.11.0" + '\n')
     nt_read(tn)
+    IPython.embed()
 
-    cmd = 'reboot ALL'
-    cmd_send(cmd)
     tn.close() 
 
 if __name__=='__main__':

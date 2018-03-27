@@ -105,7 +105,7 @@ def gen_mac_head(mac_p1, mac_p2):
     mac_addr = [0xd8, 0x80, 0x30, mac_p1, a*16+b, c*16+d]
     for data in mac_addr:
         data_bin = struct.pack('B', data) 
-    mac_str = "-".join(("%02x" % n) for n in mac_addr)
+    mac_str = "".join(("%02x" % n) for n in mac_addr)
     return mac_addr, mac_str
 
 

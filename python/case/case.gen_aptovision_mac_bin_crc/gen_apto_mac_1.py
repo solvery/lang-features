@@ -1,6 +1,7 @@
 
 import sys
 import struct
+import random
 
 production_num=int(sys.argv[1])
 box_num=int(sys.argv[2])
@@ -13,13 +14,13 @@ def gen_mac(type_id, mac_id):
     mac_addr = [0xd8, 0x80, 0x30, type_id, a*16+b, c*16+d]
     data_bin_array=''
     for data in range(0x0,0x100-6):
-        data_bin = struct.pack('B', 0x0) 
+        data_bin = struct.pack('B', random.randint(0,255)) 
         data_bin_array = data_bin_array + data_bin[0];
     
     for data in mac_addr:
         data_bin = struct.pack('B', data) 
         data_bin_array = data_bin_array + data_bin[0];
-    mac_str = "-".join(("%02x" % n) for n in mac_addr)
+    mac_str = "".join(("%02x" % n) for n in mac_addr)
     return data_bin_array, mac_str
 
 

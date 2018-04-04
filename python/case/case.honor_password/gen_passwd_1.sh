@@ -12,6 +12,7 @@ python honor_password_1.py 810003+root
 python honor_password_1.py 910001+admin 
 python honor_password_1.py 910002+admin
 python honor_password_1.py 910003+admin
+python honor_password_1.py 910004+admin
 
 # two of control box in RD
 python honor_password_1.py 810004+bios 

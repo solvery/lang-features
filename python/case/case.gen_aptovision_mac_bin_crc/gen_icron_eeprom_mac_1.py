@@ -4,7 +4,7 @@ import sys
 import os
 
 production_num=int(sys.argv[1])
-box_num=int(sys.argv[2])
+box_num=int(int(sys.argv[2])/2)
 crc16 = crcmod.predefined.mkCrcFun('crc-16')
 
 icron_config_table1 = [\

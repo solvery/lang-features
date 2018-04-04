@@ -4,7 +4,7 @@ import struct
 import random
 
 production_num=int(sys.argv[1])
-box_num=int(sys.argv[2])
+box_num=int(int(sys.argv[2])/2)
 
 def gen_mac(type_id, mac_id):
     a = mac_id/1000%10

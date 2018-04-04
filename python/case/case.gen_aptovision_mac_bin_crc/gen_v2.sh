@@ -1,5 +1,5 @@
-pn=6
-num=10
+pn=$1
+num=$2
 python gen_apto_mac_1.py 		 $pn $num
 python gen_icron_eeprom_mac_1.py $pn $num
 
